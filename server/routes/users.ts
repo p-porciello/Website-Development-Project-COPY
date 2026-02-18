@@ -1,9 +1,9 @@
 import 'dotenv/config';
-import express from "express";
-import { ObjectId } from "mongodb";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import database from "../mongoConnect";
+import express from 'express';
+import { ObjectId } from 'mongodb';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import database from '../mongoConnect';
 
 const router = express();
 
@@ -11,104 +11,114 @@ const SALT_ROUNDS = 8;
 
 //Retrieves all users (for admin use only in frontend)
 router.get('/', async (req, res) => {
-    let db = database.getDb();
-    let userData = await db.collection("user").find({}).toArray();
-    if (userData.length > 0) {
-        res.json(userData);
-    } else {
-        throw new Error("Data not found or returned as an array correctly");
-    }
+  let db = database.getDb();
+  let userData = await db.collection('user').find({}).toArray();
+  if (userData.length > 0) {
+    res.json(userData);
+  } else {
+    throw new Error('Data not found or returned as an array correctly');
+  }
 });
 
 //Retrieve a specific user in user collection
 router.get('/:id', async (req, res) => {
-    let db = database.getDb();
-    let userData = await db.collection("user").findOne({ _id: new ObjectId(req.params.id)});
-    if (userData && Object.keys(userData).length > 0) {
-        res.json(userData);
-    } else {
-        throw new Error("Data not found or returned as an array correctly");
-    }
+  let db = database.getDb();
+  let userData = await db
+    .collection('user')
+    .findOne({ _id: new ObjectId(req.params.id) });
+  if (userData && Object.keys(userData).length > 0) {
+    res.json(userData);
+  } else {
+    throw new Error('Data not found or returned as an array correctly');
+  }
 });
 
 //Create a new object in user collection
 router.post('/', async (req, res) => {
-    let db = database.getDb();
+  let db = database.getDb();
 
-    const takenEmail = await db.collection("user").findOne({email: req.body.email});
+  const takenEmail = await db
+    .collection('user')
+    .findOne({ email: req.body.email });
 
-    if (takenEmail) {
-        res.json({message: "This email is taken."});
-    } else {
-        const hash = await bcrypt.hash(req.body.password, SALT_ROUNDS);
+  if (takenEmail) {
+    res.json({ message: 'This email is taken.' });
+  } else {
+    const hash = await bcrypt.hash(req.body.password, SALT_ROUNDS);
 
-        let newUser = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: hash,
-            school: req.body.school,
-            grade: req.body.grade,
-            bio: req.body.bio,
-            role: req.body.role,
-            joinDate: req.body.joinDate,
-            postedItems: req.body.postedItems
-        };
-        let userData = await db.collection("user").insertOne(newUser);
-        console.log(hash);
-        res.json(userData);
-    }
+    let newUser = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: hash,
+      school: req.body.school,
+      grade: req.body.grade,
+      bio: req.body.bio,
+      role: req.body.role,
+      joinDate: req.body.joinDate,
+      postedItems: req.body.postedItems,
+    };
+    let userData = await db.collection('user').insertOne(newUser);
+    console.log(hash);
+    res.json(userData);
+  }
 });
 
 //Update an existing object in user collection
 router.put('/:id', async (req, res) => {
-    let db = database.getDb();
-    let updatedUser = {
-        $set: {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: req.body.password,
-            school: req.body.school,
-            grade: req.body.grade,
-            bio: req.body.bio,
-            role: req.body.role,
-            joinDate: req.body.joinDate,
-            postedItems: req.body.postedItems
-        }
-    };
-    let userData = await db.collection("user").insertOne({ _id: new ObjectId(req.params.id) } as any, updatedUser as any);
-    res.json(userData);
+  let db = database.getDb();
+  let updatedUser = {
+    $set: {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      school: req.body.school,
+      grade: req.body.grade,
+      bio: req.body.bio,
+      role: req.body.role,
+      joinDate: req.body.joinDate,
+      postedItems: req.body.postedItems,
+    },
+  };
+  let userData = await db
+    .collection('user')
+    .insertOne({ _id: new ObjectId(req.params.id) } as any, updatedUser as any);
+  res.json(userData);
 });
 
 //Delete a specific user in users collection
 router.delete('/:id', async (req, res) => {
-    let db = database.getDb();
-    let userData = await db.collection("user").deleteOne({ _id: new ObjectId(req.params.id)});
-    if (Object.keys(userData).length > 0) {
-        res.json(userData);
-    } else {
-        throw new Error("Data not found or returned as an array correctly");
-    }
+  let db = database.getDb();
+  let userData = await db
+    .collection('user')
+    .deleteOne({ _id: new ObjectId(req.params.id) });
+  if (Object.keys(userData).length > 0) {
+    res.json(userData);
+  } else {
+    throw new Error('Data not found or returned as an array correctly');
+  }
 });
 
 //login route
 router.post('/login', async (req, res) => {
-    let db = database.getDb();
+  let db = database.getDb();
 
-    const user = await db.collection("user").findOne({email: req.body.email});
+  const user = await db.collection('user').findOne({ email: req.body.email });
 
-    if (user){
-        let confirmation = await bcrypt.compare(req.body.password, user.password);
-        if (confirmation) {
-            const token = jwt.sign(user as any, process.env.SECRETKEY as string, {expiresIn: "1h"});
-            res.json({ success: true, token });
-        } else {
-            res.json({ success: false, message: "Incorrect password" });
-        }
+  if (user) {
+    let confirmation = await bcrypt.compare(req.body.password, user.password);
+    if (confirmation) {
+      const token = jwt.sign(user as any, process.env.SECRETKEY as string, {
+        expiresIn: '1h',
+      });
+      res.json({ success: true, token });
     } else {
-        res.json({ success: false, message: "User not found" });
+      res.json({ success: false, message: 'Incorrect password' });
     }
+  } else {
+    res.json({ success: false, message: 'User not found' });
+  }
 });
 
 export default router;

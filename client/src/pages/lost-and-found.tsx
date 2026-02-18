@@ -1,40 +1,47 @@
-import { getQueriedItems, getApprovedItems } from "../api"
-import { useState, useEffect } from "react"
-import { LostItemCard } from "../components/lostItemCard";
-import type { LostItem } from "../types";
+import { getQueriedItems, getApprovedItems } from '../api';
+import { useState, useEffect } from 'react';
+import { LostItemCard } from '../components/lostItemCard';
+import type { LostItem } from '../types';
 
 export function LostAndFound() {
+  const URL = 'http://localhost:8080';
 
-    const URL = "http://localhost:8080"
+  const [searchTerm, setSearchTerm] = useState('');
+  const [items, setItems] = useState<LostItem[]>([]);
 
-    const [searchTerm, setSearchTerm] = useState("");
-    const [items, setItems] = useState<LostItem[]>([]);
+  useEffect(() => {
+    async function loadAllItems() {
+      const itemData = await getApprovedItems();
+      if (!itemData) return;
+      itemData.sort(
+        (d1, d2) =>
+          new Date(d2.dateUploaded).getTime() -
+          new Date(d1.dateUploaded).getTime(),
+      ); //Orders items by posting date
+      setItems(itemData);
+    }
+    loadAllItems();
+  }, []);
 
-    useEffect(() => {
-        async function loadAllItems() {
-            const itemData = await getApprovedItems();
-            if (!itemData) return;
-            itemData.sort((d1, d2) => new Date(d2.dateUploaded).getTime() - new Date(d1.dateUploaded).getTime());  //Orders items by posting date
-            setItems(itemData)
-        }
-        loadAllItems()
-    }, [])
-
-    const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(e.target.value);
-        let endpoint = `${URL}/lost-items/admin-approved`
-        if (e.target.value) {
-            endpoint = `${URL}/lost-items/search/${e.target.value}`
-        }
-
-        const response = await fetch(endpoint);
-        const itemData: LostItem[] = await response.json();
-        itemData.sort((d1, d2) => new Date(d2.dateUploaded).getTime() - new Date(d1.dateUploaded).getTime());  //Orders items by posting date
-
-        setItems(itemData);
+  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    let endpoint = `${URL}/lost-items/admin-approved`;
+    if (e.target.value) {
+      endpoint = `${URL}/lost-items/search/${e.target.value}`;
     }
 
-    /*useEffect(() => {
+    const response = await fetch(endpoint);
+    const itemData: LostItem[] = await response.json();
+    itemData.sort(
+      (d1, d2) =>
+        new Date(d2.dateUploaded).getTime() -
+        new Date(d1.dateUploaded).getTime(),
+    ); //Orders items by posting date
+
+    setItems(itemData);
+  };
+
+  /*useEffect(() => {
         async function loadAllItems() {
             const defaultQuery = { query: "" };
             const itemData = await getQueriedItems(defaultQuery);
@@ -45,21 +52,24 @@ export function LostAndFound() {
     }, [])
     */
 
-    return (
-        <>
-            <h1 className = "barofcolor">Lost items catalog page</h1>
-            <input type="text" placeholder="Search for an item..." value={searchTerm} onChange={handleSearch}/>
-            <div className="homepageRecentlyLost">
-            {items.map((item) => {
-                    /*
+  return (
+    <>
+      <h1 className="barofcolor">Lost items catalog page</h1>
+      <input
+        type="text"
+        placeholder="Search for an item..."
+        value={searchTerm}
+        onChange={handleSearch}
+      />
+      <div className="homepageRecentlyLost">
+        {items.map((item) => {
+          /*
                     let date = new Date(item.dateUploaded);
                     let stringDate = date.toString();
                     */
-                    return (
-                        <LostItemCard item={item}/>
-                    )
-                })}
-            </div>
-        </>
-    )
+          return <LostItemCard item={item} />;
+        })}
+      </div>
+    </>
+  );
 }

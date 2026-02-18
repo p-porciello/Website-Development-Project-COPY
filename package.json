@@ -1,0 +1,27 @@
+{
+  "name": "website-development-project-copy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --build",
+    "dev": "npm run dev --prefix client & npm run dev --prefix server & wait"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p-porciello/Website-Development-Project-COPY.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/p-porciello/Website-Development-Project-COPY/issues"
+  },
+  "homepage": "https://github.com/p-porciello/Website-Development-Project-COPY#readme",
+  "description": "",
+  "devDependencies": {
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
+  }
+}

@@ -6,18 +6,18 @@ const client = new MongoClient(process.env.DATABASE_URI as string, {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
-  }
+  },
 });
 
 if (process.env.DATABASE_URI) {
-    console.log("Connected to MongoDB successfully");
+  console.log('Connected to MongoDB successfully');
 }
 
 let database: Db;
 
 export default {
-    getDb: (): Db => {
-        database = client.db("ucvts-lost-and-found");
-        return database;
-    },
+  getDb: (): Db => {
+    database = client.db('ucvts-lost-and-found');
+    return database;
+  },
 };

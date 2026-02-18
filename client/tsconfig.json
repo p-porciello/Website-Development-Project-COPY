@@ -1,6 +1,6 @@
 {
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    // Environment Settings
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -9,22 +9,9 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-
-    // Other Outputs
-    "sourceMap": true,
-
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    //"exactOptionalPropertyTypes": true,
-
-    // Recommended Options
-    "strict": true,
     "jsx": "react-jsx",
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-    "skipLibCheck": true,
-    "esModuleInterop": true
+    "composite": true
   },
   "include": ["src"]
 }

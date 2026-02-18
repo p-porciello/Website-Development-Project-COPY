@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 /*@custom-variant dark (&:is(.dark *));*/
 #root {
@@ -65,7 +65,6 @@
   border-bottom: 3px solid #001524;
   border-right: 3px solid #001524;
   border-left: 3px solid #001524;
-
 }
 
 .item:hover {
@@ -124,7 +123,7 @@
 .tags {
   grid-area: tags;
 }
- 
+
 .reportItem {
   grid-area: submit;
 }
@@ -140,13 +139,13 @@
   grid-template-rows: 1fr 1fr 1fr 1fr 3fr 1fr 1fr;
   gap: 1em;
   grid-template-areas:
-  "image name"
-  "image tags"
-  "image tagsSelect"
-  "image locationInfo"
-  "image description"
-  "image generateText"
-  "submit submit"
+    'image name'
+    'image tags'
+    'image tagsSelect'
+    'image locationInfo'
+    'image description'
+    'image generateText'
+    'submit submit';
 }
 
 #dropZone {
