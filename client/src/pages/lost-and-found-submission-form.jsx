@@ -2,29 +2,10 @@ import { useState, useEffect } from "react";
 import { createNewItem } from "../api";
 import { Input } from "@/components/ui/input";
 import { jwtDecode } from "jwt-decode";
-//import ReactDOM from 'react-dom'
 import { generateUploadDropzone } from "@uploadthing/react";
 const UploadDropzone = generateUploadDropzone("http:/localhost:8080/api/uploadthing");
 
-//import { imgPathEdit } from "@/imgPathEdit";
-
-/*import { FilePond, registerPlugin } from 'react-filepond';
-
-import 'filepond/dist/filepond.min.css';
-
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
-*/
-
 export function SubmitLostItem() {
-    /*
-    function handleInit() {
-        console.log('FilePond instance has initialised', this.pond);
-    }
-    */
     const [user, setUser] = useState({});
 
     const [image, setImage] = useState("../public/goose.jpg");

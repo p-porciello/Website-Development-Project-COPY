@@ -3,19 +3,6 @@ import './App.css'
 import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
-//imports for filepond stuff
-
-import { FilePond, registerPlugin } from 'react-filepond';
-
-import 'filepond/dist/filepond.min.css';
-
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
-
-
 //page imports
 import { Landing } from './pages/landing'
 import { Home } from './pages/homepage'
