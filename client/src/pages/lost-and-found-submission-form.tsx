@@ -3,10 +3,11 @@ import { createNewItem } from "../api";
 import { Input } from "@/components/ui/input";
 import { jwtDecode } from "jwt-decode";
 import { generateUploadDropzone } from "@uploadthing/react";
-const UploadDropzone = generateUploadDropzone("http:/localhost:8080/api/uploadthing");
+import type { User } from "../types";
+const UploadDropzone = generateUploadDropzone({ url: "http://localhost:8080/api/uploadthing" });
 
 export function SubmitLostItem() {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState<Partial<User>>({});
 
     const [image, setImage] = useState("../public/goose.jpg");
     const [lostItemName, setName] = useState("");
@@ -20,7 +21,8 @@ export function SubmitLostItem() {
     useEffect(() => {
         async function loadUserData() {
             const token = sessionStorage.getItem("User");
-            const decodedUser = jwtDecode(token);
+            if (!token) return;
+            const decodedUser = jwtDecode<User>(token);
             setUser(decodedUser);
 
         }
@@ -37,7 +39,7 @@ export function SubmitLostItem() {
             color: itemColor,
             brand: itemBrand,
             schoolFoundIn: schoolFound,
-            currentLocation: schoolIn, 
+            currentLocation: schoolIn,
             postedBy: user._id, //null --> temp value
             claimedBy: null,
             adminApproved: false
@@ -55,7 +57,7 @@ export function SubmitLostItem() {
                     {/*<h1>Report a Lost Item</h1>*/}
                     {/*<h2>Details</h2>*/}
                     <div className="itemImage">
-                        <UploadDropzone/>
+                        <UploadDropzone endpoint="imageUploader"/>
                     </div>
                     <div className="itemName">
                         <label>Item Name: </label>

@@ -1,10 +1,12 @@
 import { getSpecificItem, updateItem } from "../api"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import type { LostItem } from "../types"
 
 export function ViewItem() {
 
-    const [item, setItem] = useState({});
+    const [item, setItem] = useState<Partial<LostItem>>({});
+    const [moreInfo, setMoreInfo] = useState("");
 
     let params = useParams();
     let id = params.id;
@@ -12,6 +14,7 @@ export function ViewItem() {
     useEffect(() => {
         async function loadItem() {
             let data = await getSpecificItem(id);
+            if (!data) return;
             let date = new Date(data.dateUploaded);
             data.dateUploaded = date.toString();
             setItem(data);
@@ -19,7 +22,8 @@ export function ViewItem() {
         loadItem();
     }, [])
 
-    async function handleSubmit(item, id) {
+    async function handleClaim() {
+        if (!id) return;
         let submitObject = {
             itemName: item.itemName,
             description: item.description,
@@ -29,13 +33,13 @@ export function ViewItem() {
             color: item.color,
             brand: item.brand,
             schoolFoundIn: item.schoolFoundIn,
-            currentLocation: item.currentLocation, 
+            currentLocation: item.currentLocation,
             postedBy: item.postedBy,
             claimedBy: "tempUser",
             adminApproved: item.adminApproved
         }
 
-        await updateItem(submitObject, id)
+        await updateItem(id, submitObject)
     }
 
     return (
@@ -66,22 +70,22 @@ export function ViewItem() {
                 <p>{item.postedBy}</p>
             </div>
             <div>
-                {item.claimedBy !== ("N/A" || null || "N/A") && (
+                {item.claimedBy != null && item.claimedBy !== "N/A" && (
                     <div>
                         <h2>This item has already been claimed.</h2>
                     </div>
                 )}
             </div>
 
-            <form onSubmit={handleSubmit}>      
+            <form onSubmit={(e) => { e.preventDefault(); handleClaim(); }}>
             <button type="submit">Claim this Item</button>
             </form>
 
-            <form>  
+            <form>
                  <div>
                     <label>Ask any questions here: </label>
                     <textarea name="more info" onChange={(e) => setMoreInfo(e.target.value)} maxLength={250} required/>
-                </div>    
+                </div>
                 <button type="submit">Request More Info Submit</button>
             </form>
         </>

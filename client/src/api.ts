@@ -1,10 +1,11 @@
 import axios from 'axios';
+import type { LostItem } from './types';
 
 const URL = "http://localhost:8080"
 
 //item routes
 export async function getAllItems() {
-    const response = await axios.get(`${URL}/lost-items`);
+    const response = await axios.get<LostItem[]>(`${URL}/lost-items`);
 
     if (response.status === 200) {
         return response.data;
@@ -14,8 +15,8 @@ export async function getAllItems() {
     }
 }
 
-export async function getQueriedItems(query) {
-    const response = await axios.get(`${URL}/lost-items/search/${query}`);
+export async function getQueriedItems(query: string) {
+    const response = await axios.get<LostItem[]>(`${URL}/lost-items/search/${query}`);
 
     if (response.status === 200) {
         return response.data;
@@ -26,7 +27,7 @@ export async function getQueriedItems(query) {
 }
 
 export async function getApprovedItems() {
-    const response = await axios.get(`${URL}/lost-items/admin-approved`);
+    const response = await axios.get<LostItem[]>(`${URL}/lost-items/admin-approved`);
 
     if (response.status === 200) {
         return response.data;
@@ -36,9 +37,9 @@ export async function getApprovedItems() {
     }
 }
 
-export async function getSpecificItem(id) {
-    const response = await axios.get(`${URL}/lost-items/${id}`);
-    
+export async function getSpecificItem(id: string | undefined) {
+    const response = await axios.get<LostItem>(`${URL}/lost-items/${id}`);
+
     if (response.status === 200) {
         return response.data;
     } else {
@@ -47,9 +48,9 @@ export async function getSpecificItem(id) {
     }
 }
 
-export async function createNewItem(item) {
+export async function createNewItem(item: Record<string, unknown>) {
     const response = await axios.post(`${URL}/lost-items`, item);
-    
+
     /*
     if (response.status === 200) {
         return response.data;
@@ -61,7 +62,7 @@ export async function createNewItem(item) {
     return response;
 }
 
-export async function updateItem(id, item) {
+export async function updateItem(id: string, item: Record<string, unknown>) {
     const response = await axios.put(`${URL}/lost-items/${id}`, item);
 
     /*
@@ -75,7 +76,7 @@ export async function updateItem(id, item) {
     return response;
 }
 
-export async function deleteSpecificItem(id) {
+export async function deleteSpecificItem(id: string) {
     const response = await axios.delete(`${URL}/lost-items/${id}`);
 
     /*
@@ -102,7 +103,7 @@ export async function getAllUsers() {
     }
 }
 
-export async function getSpecificUser(id) {
+export async function getSpecificUser(id: string) {
     const response = await axios.get(`${URL}/user/${id}`);
 
     if (response.status === 200) {
@@ -113,9 +114,9 @@ export async function getSpecificUser(id) {
     }
 }
 
-export async function createNewUser(user) {
+export async function createNewUser(user: Record<string, unknown>) {
     const response = await axios.post(`${URL}/user`, user);
-    
+
     /*
     if (response.status === 200) {
         return response.data;
@@ -127,7 +128,7 @@ export async function createNewUser(user) {
     return response;
 }
 
-export async function updateUser(id, user) {
+export async function updateUser(id: string, user: Record<string, unknown>) {
     const response = await axios.put(`${URL}/user/${id}`, user);
 
     /*
@@ -141,7 +142,7 @@ export async function updateUser(id, user) {
     return response;
 }
 
-export async function deleteSpecificUser(id) {
+export async function deleteSpecificUser(id: string) {
     const response = await axios.delete(`${URL}/user/${id}`);
 
     /*
@@ -155,7 +156,7 @@ export async function deleteSpecificUser(id) {
     return response;
 }
 
-export async function verifyUser(user) {
+export async function verifyUser(user: { email: string; password: string }) {
     const response = await axios.post(`${URL}/user/login`, user)
     console.log(response)
     if (response.data.success) {

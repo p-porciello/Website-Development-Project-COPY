@@ -4,14 +4,16 @@ import { useState, useEffect } from "react"
 import { LostItemCard } from "../components/lostItemCard";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
+import type { LostItem } from "../types";
 
 export function Home() {
 
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState<LostItem[]>([]);
 
     useEffect(() => {
         async function loadAllItems() {
             const itemData = await getApprovedItems();
+            if (!itemData) return;
             itemData.sort((d1, d2) => new Date(d2.dateUploaded).getTime() - new Date(d1.dateUploaded).getTime());  //Orders items by posting date
             setItems(itemData)
             console.log(itemData);

@@ -29,8 +29,7 @@ function App() {
     }
   }, [])
 
-  const [count, setCount] = useState(0)
-  const [data, setData] = useState()
+  const [data, setData] = useState<unknown>()
 
 
   const fetchAPI = async () => {
@@ -44,7 +43,7 @@ function App() {
     fetchAPI();
     },[]);
 
-    
+
 
   return (
     /* <> --> for testing purposes only, delete before final submission
@@ -70,7 +69,7 @@ function App() {
         <Route path="/login" element={<SignIn/>}/>
       </Routes>
     </Router>
-    
+
   )
 }
 

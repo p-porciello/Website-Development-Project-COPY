@@ -9,7 +9,7 @@ export function CreateAccount() {
     const [userSchool, setSchool] = useState("");
     const [userGrade, setGrade] = useState("");
 
-    async function handleSubmit(e) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         let newUser = {
             firstName: userFirstName,
@@ -17,7 +17,7 @@ export function CreateAccount() {
             email: userEmail,
             password: userPassword,
             school: userSchool,
-            grade: userGrade, 
+            grade: userGrade,
             bio: "",
             role: "user",
             joinDate: new Date(),
@@ -28,14 +28,14 @@ export function CreateAccount() {
             console.log(response);
             alert("User account could not be created :(");
         }
-        
+
     }
 
     return (
         <>
             <h1>Create Account</h1>
             <form onSubmit={handleSubmit}>
-                <div>   
+                <div>
                     <label>Email Address: </label>
                     <input name="emailAddress" onChange={(e) => setEmail(e.target.value)} required max={50}></input>
                 </div>
@@ -43,21 +43,21 @@ export function CreateAccount() {
                     <label>First Name: </label>
                     <input name="emailAddress" onChange={(e) => setFirstName(e.target.value)} required max={50}></input>
                 </div>
-                <div>   
+                <div>
                     <label>Last Name: </label>
                     <input name="lastName" onChange={(e) => setLastName(e.target.value)} required max={50}></input>
                 </div>
                 <div>
                     <label>Password: </label>
-                    <input name="password" type="password" onChange={(e) => setPassword(e.target.value)} required max={30}></input>      
+                    <input name="password" type="password" onChange={(e) => setPassword(e.target.value)} required max={30}></input>
                 </div>
                 <div>
                     <label>School: </label>
-                    <input name="school" onChange={(e) => setSchool(e.target.value)} required></input>      
+                    <input name="school" onChange={(e) => setSchool(e.target.value)} required></input>
                 </div>
                 <div>
                     <label>Grade: </label>
-                    <input name="grade" onChange={(e) => setGrade(e.target.value)} required></input>      
+                    <input name="grade" onChange={(e) => setGrade(e.target.value)} required></input>
                 </div>
                 <button type="submit">Create Account</button>
             </form>
