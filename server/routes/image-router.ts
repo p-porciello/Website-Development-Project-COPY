@@ -1,8 +1,8 @@
-//const express = require("express");
-//import { createUploadthing, FileRouter } from "uploadthing/express";
-const uploadThing = require("uploadthing/express");
-const f = uploadThing.createUploadthing();
-const uploadRouter = {
+import { createUploadthing } from "uploadthing/express";
+
+const f = createUploadthing();
+
+export const uploadRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
   imageUploader: f({
     image: {
@@ -16,6 +16,4 @@ const uploadRouter = {
   }).onUploadComplete((data) => {
     console.log("upload completed", data);
   }),
-}
-
-module.exports = uploadRouter;
+};

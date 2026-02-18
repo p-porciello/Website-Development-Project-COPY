@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const lostItemSchema = new mongoose.Schema({
     name: {
@@ -20,7 +20,7 @@ const lostItemSchema = new mongoose.Schema({
     dateUploaded: {
         type: Date,
         required: true,
-        default: Date.now //automatically sets this value to current date
+        default: Date.now
     },
     itemType: {
         type: String,
@@ -36,26 +36,22 @@ const lostItemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    currentLocation: { //which school's lost & found the item's currently in
+    currentLocation: {
         type: String,
         required: true
     },
     postedBy: {
         type: String
-        //required: true,
-        //default: User.email
     },
     claimedBy: {
         type: String
     }
-
-})
+});
 
 lostItemSchema.virtual('imageFilePath').get(function() {
   if (this.imageFile != null && this.imageType != null) {
-    return `data:${this.imageType};charset=utf-8;base64,${this.imageFile.toString('base64')}`
+    return `data:${this.imageType};charset=utf-8;base64,${this.imageFile.toString('base64')}`;
   }
-})
+});
 
-
-module.exports = mongoose.model('LostItem', lostItemSchema);
+export default mongoose.model('LostItem', lostItemSchema);

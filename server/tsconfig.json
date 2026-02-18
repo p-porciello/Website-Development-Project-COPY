@@ -2,8 +2,6 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2022",
-    "allowJs": true,
-    "checkJs": true,
     "noEmit": true,
     "strict": false,
     "esModuleInterop": true,
@@ -11,6 +9,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true
   },
-  "include": ["./**/*.js"],
+  "include": ["./**/*.ts"],
   "exclude": ["node_modules"]
 }

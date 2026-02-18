@@ -1,34 +1,35 @@
-require('dotenv').config();
+import 'dotenv/config';
+import express from "express";
+import { ObjectId } from "mongodb";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import database from "../mongoConnect";
 
-const express = require("express");
 const router = express();
-const database = require("../mongoConnect");
-const ObjectId = require("mongodb").ObjectId;
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
-const  SALT_ROUNDS = 8;
+const SALT_ROUNDS = 8;
 
 //Retrieves all users (for admin use only in frontend)
 router.get('/', async (req, res) => {
     let db = database.getDb();
     let userData = await db.collection("user").find({}).toArray();
     if (userData.length > 0) {
-        res.json(userData); //sends retreived data to frontend
+        res.json(userData);
     } else {
-        throw new Error("Data not found or returned as an array correctly"); //will be changed once we start getting ready to deploy our website
+        throw new Error("Data not found or returned as an array correctly");
     }
-})
+});
+
 //Retrieve a specific user in user collection
 router.get('/:id', async (req, res) => {
     let db = database.getDb();
     let userData = await db.collection("user").findOne({ _id: new ObjectId(req.params.id)});
-    if (Object.keys(userData).length > 0) {
-        res.json(userData); //sends retreived data to frontend
+    if (userData && Object.keys(userData).length > 0) {
+        res.json(userData);
     } else {
-        throw new Error("Data not found or returned as an array correctly"); //will be changed once we start getting ready to deploy our website
+        throw new Error("Data not found or returned as an array correctly");
     }
-})
+});
 
 //Create a new object in user collection
 router.post('/', async (req, res) => {
@@ -37,7 +38,7 @@ router.post('/', async (req, res) => {
     const takenEmail = await db.collection("user").findOne({email: req.body.email});
 
     if (takenEmail) {
-        res.json({message: "This email is taken."})
+        res.json({message: "This email is taken."});
     } else {
         const hash = await bcrypt.hash(req.body.password, SALT_ROUNDS);
 
@@ -52,12 +53,13 @@ router.post('/', async (req, res) => {
             role: req.body.role,
             joinDate: req.body.joinDate,
             postedItems: req.body.postedItems
-        }
+        };
         let userData = await db.collection("user").insertOne(newUser);
         console.log(hash);
         res.json(userData);
     }
-})
+});
+
 //Update an existing object in user collection
 router.put('/:id', async (req, res) => {
     let db = database.getDb();
@@ -74,41 +76,39 @@ router.put('/:id', async (req, res) => {
             joinDate: req.body.joinDate,
             postedItems: req.body.postedItems
         }
-    }
-    let userData = await db.collection("user").insertOne({ _id: new ObjectId(req.params.id) }, updatedUser);
+    };
+    let userData = await db.collection("user").insertOne({ _id: new ObjectId(req.params.id) } as any, updatedUser as any);
     res.json(userData);
-})
+});
+
 //Delete a specific user in users collection
 router.delete('/:id', async (req, res) => {
     let db = database.getDb();
     let userData = await db.collection("user").deleteOne({ _id: new ObjectId(req.params.id)});
     if (Object.keys(userData).length > 0) {
-        res.json(userData); //sends retreived data to frontend
+        res.json(userData);
     } else {
-        throw new Error("Data not found or returned as an array correctly"); //will be changed once we start getting ready to deploy our website
+        throw new Error("Data not found or returned as an array correctly");
     }
-})
+});
 
 //login route
-
 router.post('/login', async (req, res) => {
     let db = database.getDb();
 
     const user = await db.collection("user").findOne({email: req.body.email});
-    
+
     if (user){
-        //let confirmation = await bcrypt.compare(JSON.stringify(req.body.password), JSON.stringify(user.password));
         let confirmation = await bcrypt.compare(req.body.password, user.password);
         if (confirmation) {
-            const token = jwt.sign(user, process.env.SECRETKEY, {expiresIn: "1h"}); //creates an authentication token lasting 1 hour
-            res.json({ success: true, token })
+            const token = jwt.sign(user as any, process.env.SECRETKEY as string, {expiresIn: "1h"});
+            res.json({ success: true, token });
         } else {
-            res.json({ success: false, message: "Incorrect password" })
+            res.json({ success: false, message: "Incorrect password" });
         }
     } else {
-        res.json({ success: false, message: "User not found" })
+        res.json({ success: false, message: "User not found" });
     }
+});
 
-})
-
-module.exports = router; //App will break if this line is removed
+export default router;
