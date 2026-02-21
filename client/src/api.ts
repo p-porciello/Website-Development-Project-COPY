@@ -159,6 +159,70 @@ export async function deleteSpecificUser(id: string) {
   return response;
 }
 
+export async function getAllInquiries() {
+  const response = await axios.get(`${URL}/inquiries`);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    console.log(response.status); //remove if this causes issues, but i don't think it will
+    return;
+  }
+}
+
+export async function getSpecificInquiry(id: string | undefined) {
+  const response = await axios.get(`${URL}/inquiries/${id}`);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    console.log(response.status);
+    return;
+  }
+}
+
+export async function createNewInquiry(item: Record<string, unknown>) {
+  const response = await axios.post(`${URL}/inquiries`, item);
+
+  /*
+    if (response.status === 200) {
+        return response.data;
+    } else {
+        console.log(response.status);
+        return;
+    }
+    */
+  return response;
+}
+
+export async function updateInquiry(id: string, item: Record<string, unknown>) {
+  const response = await axios.put(`${URL}/inquiries/${id}`, item);
+
+  /*
+    if (response.status === 200) {
+        return response.data;
+    } else {
+        console.log(response.status);
+        return;
+    }
+    */
+  return response;
+}
+
+export async function deleteSpecificInquiry(id: string) {
+  const response = await axios.delete(`${URL}/inquiries/${id}`);
+
+  /*
+    if (response.status === 200) {
+        return response.data;
+    } else {
+        console.log(response.status);
+        return;
+    }
+    */
+  return response;
+}
+
 export async function verifyUser(user: { email: string; password: string }) {
   const response = await axios.post(`${URL}/user/login`, user);
   console.log(response);

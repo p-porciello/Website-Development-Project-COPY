@@ -9,18 +9,18 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 //Retrieve all items in lostItems collection
-router.get('/', verifyToken, async (req: Request, res: Response) => {
+router.get('/',  /*verifyToken,*/ async (req: Request, res: Response) => {
   let db = database.getDb();
   let lostItemData = await db.collection('lostItem').find({}).toArray();
   if (lostItemData.length > 0) {
     res.json(lostItemData);
   } else {
-    throw new Error('Data not found or returned as an array correctly');
+    throw new Error('Data not found');
   }
 });
 
 //Retrieves all items with names matching patterns user entered in search bar
-router.get('/search/:q', verifyToken, async (req: Request, res: Response) => {
+router.get('/search/:q', /*verifyToken,*/ async (req: Request, res: Response) => {
   let db = database.getDb();
   const query = req.params.q as string;
   console.log(query);
@@ -39,10 +39,7 @@ router.get('/search/:q', verifyToken, async (req: Request, res: Response) => {
 });
 
 //Retrieves all admin-approved items in lostItems collection
-router.get(
-  '/admin-approved',
-  verifyToken,
-  async (req: Request, res: Response) => {
+router.get('/admin-approved',  /*verifyToken,*/ async (req: Request, res: Response) => {
     let db = database.getDb();
     let lostItemData = await db
       .collection('lostItem')
@@ -57,7 +54,7 @@ router.get(
 );
 
 //Retrieve a specific item in lostItems collection
-router.get('/:id', verifyToken, async (req: Request, res: Response) => {
+router.get('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
   let db = database.getDb();
   let lostItemData = await db
     .collection('lostItem')
@@ -70,7 +67,7 @@ router.get('/:id', verifyToken, async (req: Request, res: Response) => {
 });
 
 //Create a new object in lostItems collection
-router.post('/', verifyToken, async (req: Request, res: Response) => {
+router.post('/', /*verifyToken,*/ async (req: Request, res: Response) => {
   let db = database.getDb();
   let newItem = {
     itemName: req.body.itemName,
@@ -92,7 +89,7 @@ router.post('/', verifyToken, async (req: Request, res: Response) => {
 });
 
 //Update an existing object in lostItems collection
-router.put('/:id', verifyToken, async (req: Request, res: Response) => {
+router.put('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
   let db = database.getDb();
   let newItem = {
     $set: {
@@ -117,7 +114,7 @@ router.put('/:id', verifyToken, async (req: Request, res: Response) => {
 });
 
 //Delete a specific item in lostItems collection
-router.delete('/:id', verifyToken, async (req: Request, res: Response) => {
+router.delete('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
   let db = database.getDb();
   let lostItemData = await db
     .collection('lostItem')

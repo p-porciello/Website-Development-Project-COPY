@@ -1,6 +1,14 @@
+import { UTApi } from "uploadthing/server"
 import { createUploadthing } from 'uploadthing/express';
 
 const f = createUploadthing();
+const utapi = new UTApi();
+
+async function uploadFiles(imgData: FormData) {
+  const img = imgData.getAll("files");
+  console.log(img);
+
+}
 
 export const uploadRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
@@ -14,6 +22,7 @@ export const uploadRouter = {
       maxFileCount: 1,
     },
   }).onUploadComplete((data) => {
+    //uploadFiles(data);
     console.log('upload completed', data);
   }),
 };
