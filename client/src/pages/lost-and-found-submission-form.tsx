@@ -30,7 +30,8 @@ export function SubmitLostItem() {
     loadUserData();
   }, []);
 
-  async function handleSubmit() {
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
     let submitObject = {
       itemName: lostItemName,
       description: description,
@@ -46,7 +47,13 @@ export function SubmitLostItem() {
       adminApproved: false,
     };
     console.log(submitObject);
-    await createNewItem(submitObject);
+    try {
+      await createNewItem(submitObject);
+      alert('Item reported successfully!');
+    } catch (error) {
+      console.error('Failed to submit item:', error);
+      alert('Failed to report item. Please try again.');
+    }
   }
 
   return (

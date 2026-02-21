@@ -53,17 +53,13 @@ export async function getSpecificItem(id: string | undefined) {
 }
 
 export async function createNewItem(item: Record<string, unknown>) {
-  const response = await axios.post(`${URL}/lost-items`, item);
-
-  /*
-    if (response.status === 200) {
-        return response.data;
-    } else {
-        console.log(response.status);
-        return;
-    }
-    */
-  return response;
+  try {
+    const response = await axios.post(`${URL}/lost-items`, item);
+    return response;
+  } catch (error) {
+    console.error('Error creating new item:', error);
+    throw error;
+  }
 }
 
 export async function updateItem(id: string, item: Record<string, unknown>) {

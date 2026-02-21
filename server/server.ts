@@ -6,6 +6,7 @@ import { uploadRouter } from './routes/image-router';
 import indexRouter from './routes/index';
 import lostItemsRouter from './routes/lost-items';
 import userRouter from './routes/users';
+import database from './mongoConnect';
 
 const app = express();
 
@@ -32,6 +33,8 @@ app.get('/api', (req, res) => {
   res.json({ lostInfo: ['lost items', 'poster'] });
 });
 
-app.listen(8080, () => {
-  console.log('Server has started on port 8080');
+database.connectToDb().then(() => {
+  app.listen(8080, () => {
+    console.log('Server has started on port 8080');
+  });
 });

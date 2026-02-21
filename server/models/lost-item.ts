@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const lostItemSchema = new mongoose.Schema({
-  name: {
+  itemName: {
     type: String,
     required: true,
   },
@@ -9,13 +9,8 @@ const lostItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  imageFile: {
-    type: Buffer,
-    required: true,
-  },
-  imageType: {
+  imgFileName: {
     type: String,
-    required: true,
   },
   dateUploaded: {
     type: Date,
@@ -46,12 +41,10 @@ const lostItemSchema = new mongoose.Schema({
   claimedBy: {
     type: String,
   },
-});
-
-lostItemSchema.virtual('imageFilePath').get(function () {
-  if (this.imageFile != null && this.imageType != null) {
-    return `data:${this.imageType};charset=utf-8;base64,${this.imageFile.toString('base64')}`;
-  }
+  adminApproved: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default mongoose.model('LostItem', lostItemSchema);

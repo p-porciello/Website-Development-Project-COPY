@@ -68,24 +68,29 @@ router.get('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
 
 //Create a new object in lostItems collection
 router.post('/', /*verifyToken,*/ async (req: Request, res: Response) => {
-  let db = database.getDb();
-  let newItem = {
-    itemName: req.body.itemName,
-    description: req.body.description,
-    imgFileName: req.body.imgFileName,
-    dateUploaded: req.body.dateUploaded,
-    itemType: req.body.itemType,
-    color: req.body.color,
-    brand: req.body.brand,
-    schoolFoundIn: req.body.schoolFoundIn,
-    currentLocation: req.body.currentLocation,
-    postedBy: req.body.postedBy,
-    claimedBy: req.body.claimedBy,
-    adminApproved: req.body.adminApproved,
-  };
+  try {
+    let db = database.getDb();
+    let newItem = {
+      itemName: req.body.itemName,
+      description: req.body.description,
+      imgFileName: req.body.imgFileName,
+      dateUploaded: req.body.dateUploaded,
+      itemType: req.body.itemType,
+      color: req.body.color,
+      brand: req.body.brand,
+      schoolFoundIn: req.body.schoolFoundIn,
+      currentLocation: req.body.currentLocation,
+      postedBy: req.body.postedBy,
+      claimedBy: req.body.claimedBy,
+      adminApproved: req.body.adminApproved,
+    };
 
-  let lostItemData = await db.collection('lostItem').insertOne(newItem);
-  res.json(lostItemData);
+    let lostItemData = await db.collection('lostItem').insertOne(newItem);
+    res.json(lostItemData);
+  } catch (error) {
+    console.error('Error creating lost item:', error);
+    res.status(500).json({ error: 'Failed to create lost item' });
+  }
 });
 
 //Update an existing object in lostItems collection

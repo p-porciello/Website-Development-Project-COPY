@@ -5,7 +5,8 @@
   "scripts": {
     "format": "prettier --write .",
     "typecheck": "tsc --build",
-    "dev": "npm run dev --prefix client & npm run dev --prefix server & wait"
+    "dev": "npm run dev --prefix client & npm run dev --prefix server & wait",
+    "db:studio": "npm run db:studio --prefix server"
   },
   "repository": {
     "type": "git",
