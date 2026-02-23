@@ -26,12 +26,22 @@ export function Profile() {
 
   return (
     <>
-      <h1 className="barofcolor">User Profile Page</h1>
+      <div style={{backgroundColor: '#11adc5'}}>
+      <h1>User Profile Page</h1>
+      </div>
+      <div style={{ textAlign: 'left', padding: '10px', width: '50%', float: 'left' }}>
+        <img 
+          src={'/goose.jpg'} 
+          style={{ height: '150px', width: '150px', borderRadius: '50%', border: '2px solid #001524', objectFit: 'cover' }}
+          />
+      </div>
+      <div style={{ textAlign: 'right', padding: '10px', width: '50%', float: 'right' }}>
       <h2>
         {user.firstName} {user.lastName}
       </h2>
+      </div>
 
-      <h3>Your Reported Items</h3>
+      <h3 style = {{textAlign: 'center'}}>Your Reported Items</h3>
       {postedItems.map((item) => {
         return <LostItemCard item={item} />;
       })}

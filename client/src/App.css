@@ -74,10 +74,7 @@
 
 .barofcolor {
   background-color: #11adc5;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  padding-block: 10px;
+  background-size: cover;
 }
 
 .blueBG {

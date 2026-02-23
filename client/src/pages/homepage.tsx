@@ -25,20 +25,16 @@ export function Home() {
   }, []);
 
   return (
-    <>
-      <header className="barofcolor">
+    <><div style={{backgroundColor: '#11adc5'}}>
+      <header>
         <h1> UCVTS Lost and Found </h1>
       </header>
       <div>
-        <h2
-          style={{
-            backgroundColor: '#11adc5',
-            marginRight: '200px',
-            marginLeft: '200px',
-          }}
-        >
+        <h2>
           Recently Lost
         </h2>
+      </div>
+      </div>
         <div className="homepageRecentlyLost">
           {items.map((item) => {
             /*
@@ -51,7 +47,6 @@ export function Home() {
         <Link to={'/lost-and-found'} id="seeAllButton">
           <button>See all</button>
         </Link>
-      </div>
       <div>
         <h2>Getting started?</h2>
         <p>[Youtube Video embed here]</p>
