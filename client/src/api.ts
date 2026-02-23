@@ -102,7 +102,7 @@ export async function getAllUsers() {
   }
 }
 
-export async function getSpecificUser(id: string) {
+export async function getSpecificUser(id: string | undefined) {
   const response = await axios.get(`${URL}/user/${id}`);
 
   if (response.status === 200) {

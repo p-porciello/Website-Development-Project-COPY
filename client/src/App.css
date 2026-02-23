@@ -161,6 +161,13 @@
   display: flex;
   flex-direction: column;
 }
+
+.modalChildren {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 6px;
+  
+}
 /*
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

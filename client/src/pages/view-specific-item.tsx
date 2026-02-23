@@ -1,25 +1,41 @@
-import { getSpecificItem, updateItem } from '../api';
+import { getSpecificItem, updateItem, getSpecificUser, createNewInquiry } from '../api';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import type { LostItem } from '../types';
+import { Modal } from '@/components/Modal';
+import { jwtDecode } from 'jwt-decode';
+import type { LostItem, User } from '../types';
 
 export function ViewItem() {
+  const [user, setUser] = useState<Partial<User>>({})
+
   const [item, setItem] = useState<Partial<LostItem>>({});
-  const [moreInfo, setMoreInfo] = useState('');
+  const [modalVis, setModalVis] = useState(false);
+  const [body, setBody] = useState('');
+  const [receiver, setReceiver] = useState<Partial<User>>({})
 
   let params = useParams();
   let id = params.id;
 
   useEffect(() => {
-    async function loadItem() {
+    async function loadData() {
       let data = await getSpecificItem(id);
       if (!data) return;
       let date = new Date(data.dateUploaded);
       data.dateUploaded = date.toString();
       setItem(data);
+
+      const token = sessionStorage.getItem('User');
+      if (!token) return;
+      const decodedUser = jwtDecode<User>(token);
+      setUser(decodedUser);
+
+      const finder = await getSpecificUser(item.postedBy);
+      if (!finder) return;
+      setReceiver(finder);
+
     }
-    loadItem();
-  }, []);
+    loadData();
+  }, []); 
 
   async function handleClaim() {
     if (!id) return;
@@ -39,6 +55,22 @@ export function ViewItem() {
     };
 
     await updateItem(id, submitObject);
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+      let newInquiry = {
+          inquirer: `${user.firstName} ${user.lastName}`,
+          receiver: `${receiver.firstName} ${receiver.lastName}`,
+          itemInquiring: item.itemName,
+          dateUploaded: new Date(),
+          content: body
+      };
+      let response = await createNewInquiry(newInquiry);
+      if (response.status !== 200) {
+          console.log(response);
+          alert('Inquiry could not be created :(');
+      }
   }
 
   return (
@@ -84,8 +116,24 @@ export function ViewItem() {
       >
         <button type="submit">Claim this Item</button>
       </form>
+        <button onClick={() => setModalVis(true)}>Request More Info</button>
+      <Modal open={modalVis} onClose={() => setModalVis(false)}>
+        <h2>Request More Information from Reporter</h2>
+            <form onSubmit={handleSubmit}>
+                <div className="content">
+                    <textarea
+                        name="content"
+                        placeholder="Write any questions or concerns regarding this item here."
+                        onChange={(e) => setBody(e.target.value)}
+                        maxLength={250}
+                        required
+                    />   
+                </div>   
+                <button type="submit">Send Inquiry</button>
+            </form>      
+      </Modal>
 
-      <form>
+      {/*<form>
         <div>
           <label>Ask any questions here: </label>
           <textarea
@@ -96,7 +144,7 @@ export function ViewItem() {
           />
         </div>
         <button type="submit">Request More Info Submit</button>
-      </form>
+      </form> */}
     </>
   );
 }
