@@ -1,7 +1,8 @@
 import { getQueriedItems, getApprovedItems } from '../api';
 import { useState, useEffect } from 'react';
-import { LostItemCard } from '../components/lostItemCard';
+import { HomepageCard } from '@/components/item-cards/HomepageCard';
 import type { LostItem } from '../types';
+import { CatalogueCard } from '@/components/item-cards/CatalogueCard';
 
 export function LostAndFound() {
   const URL = 'http://localhost:8080';
@@ -11,7 +12,7 @@ export function LostAndFound() {
 
   useEffect(() => {
     async function loadAllItems() {
-      const itemData = await getApprovedItems();
+      const itemData = await getApprovedItems("true");
       if (!itemData) return;
       itemData.sort(
         (d1, d2) =>
@@ -67,7 +68,7 @@ export function LostAndFound() {
                     let date = new Date(item.dateUploaded);
                     let stringDate = date.toString();
                     */
-          return <LostItemCard item={item} />;
+          return <CatalogueCard item={item} />;
         })}
       </div>
     </>

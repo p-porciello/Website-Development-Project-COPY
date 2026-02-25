@@ -1,4 +1,4 @@
-import { LostItemCard } from '@/components/lostItemCard';
+import { HomepageCard } from '@/components/item-cards/HomepageCard';
 import { useState, useEffect } from 'react';
 import { getAllItems } from '@/api';
 import { jwtDecode } from 'jwt-decode';
@@ -43,7 +43,7 @@ export function Profile() {
 
       <h3 style = {{textAlign: 'center'}}>Your Reported Items</h3>
       {postedItems.map((item) => {
-        return <LostItemCard item={item} />;
+        return <HomepageCard item={item} />;
       })}
     </>
   );

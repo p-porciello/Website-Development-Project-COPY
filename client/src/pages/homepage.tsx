@@ -1,7 +1,7 @@
 // import { Navbar } from '../components/Navbar'
 import { getApprovedItems } from '../api';
 import { useState, useEffect } from 'react';
-import { LostItemCard } from '../components/lostItemCard';
+import { HomepageCard } from '@/components/item-cards/HomepageCard';
 import { Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import type { LostItem } from '../types';
@@ -11,7 +11,7 @@ export function Home() {
 
   useEffect(() => {
     async function loadAllItems() {
-      const itemData = await getApprovedItems();
+      const itemData = await getApprovedItems("true");
       if (!itemData) return;
       itemData.sort(
         (d1, d2) =>
@@ -37,11 +37,7 @@ export function Home() {
       </div>
         <div className="homepageRecentlyLost">
           {items.map((item) => {
-            /*
-                            let date = new Date(item.dateUploaded);
-                            let stringDate = date.toString();
-                            */
-            return <LostItemCard item={item} />;
+            return <HomepageCard item={item} />;
           })}
         </div>
         <Link to={'/lost-and-found'} id="seeAllButton">

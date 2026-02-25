@@ -28,9 +28,9 @@ export async function getQueriedItems(query: string) {
   }
 }
 
-export async function getApprovedItems() {
+export async function getApprovedItems(query: string) {
   const response = await axios.get<LostItem[]>(
-    `${URL}/lost-items/admin-approved`,
+    `${URL}/lost-items/admin-approved/${query}`,
   );
 
   if (response.status === 200) {

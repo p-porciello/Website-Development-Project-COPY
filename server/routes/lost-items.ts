@@ -39,11 +39,13 @@ router.get('/search/:q', /*verifyToken,*/ async (req: Request, res: Response) =>
 });
 
 //Retrieves all admin-approved items in lostItems collection
-router.get('/admin-approved',  /*verifyToken,*/ async (req: Request, res: Response) => {
+router.get('/admin-approved/:q',  /*verifyToken,*/ async (req: Request, res: Response) => {
     let db = database.getDb();
+    const query = req.params.q as string;
+    let status: boolean = convertToBoolean(query);
     let lostItemData = await db
       .collection('lostItem')
-      .find({ adminApproved: true })
+      .find({ adminApproved: status })
       .toArray();
     if (lostItemData.length > 0) {
       res.json(lostItemData);
@@ -130,6 +132,14 @@ router.delete('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
     throw new Error('Data not found or returned as an array correctly');
   }
 });
+
+function convertToBoolean(query: string): boolean {
+  if (query === "true") {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 function verifyToken(req: Request, res: Response, next: NextFunction) {
   const authHeaders = req.headers['authorization'];
