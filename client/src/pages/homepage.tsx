@@ -25,7 +25,8 @@ export function Home() {
   }, []);
 
   return (
-    <><div style={{backgroundColor: '#11adc5'}}>
+    <>
+    <div style={{backgroundColor: '#11adc5'}}>
       <header>
         <h1> UCVTS Lost and Found </h1>
       </header>
@@ -37,7 +38,7 @@ export function Home() {
       </div>
         <div className="homepageRecentlyLost">
           {items.map((item) => {
-            return <HomepageCard item={item} />;
+            return <HomepageCard item={item} key={item.itemName}/>;
           })}
         </div>
         <Link to={'/lost-and-found'} id="seeAllButton">

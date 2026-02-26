@@ -1,5 +1,6 @@
 import { createNewUser } from '../api';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function CreateAccount() {
   const [userFirstName, setFirstName] = useState('');
@@ -8,6 +9,8 @@ export function CreateAccount() {
   const [userPassword, setPassword] = useState('');
   const [userSchool, setSchool] = useState('');
   const [userGrade, setGrade] = useState('');
+
+  const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,6 +30,8 @@ export function CreateAccount() {
     if (response.status !== 200) {
       console.log(response);
       alert('User account could not be created :(');
+    } else {
+      navigate('/');
     }
   }
 

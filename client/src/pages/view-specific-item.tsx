@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Modal } from '@/components/Modal';
 import { jwtDecode } from 'jwt-decode';
+import { SendClaimEmail } from '@/components/email';
 import type { LostItem, User } from '../types';
 
 export function ViewItem() {
@@ -111,6 +112,7 @@ export function ViewItem() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
           handleClaim();
         }}
       >
