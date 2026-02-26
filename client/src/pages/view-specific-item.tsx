@@ -29,10 +29,9 @@ export function ViewItem() {
       const decodedUser = jwtDecode<User>(token);
       setUser(decodedUser);
 
-      const finder = await getSpecificUser(item.postedBy);
+      const finder = await getSpecificUser(data?.postedBy);
       if (!finder) return;
       setReceiver(finder);
-
     }
     loadData();
   }, []); 
@@ -50,7 +49,7 @@ export function ViewItem() {
       schoolFoundIn: item.schoolFoundIn,
       currentLocation: item.currentLocation,
       postedBy: item.postedBy,
-      claimedBy: 'tempUser',
+      claimedBy: user._id,
       adminApproved: item.adminApproved,
     };
 
@@ -76,6 +75,7 @@ export function ViewItem() {
   return (
     <>
       <h1>{item.itemName}</h1>
+      <img src={item.imgFileName}/>
       <div id="dateUploadedBox">
         <h3>Date Uploaded:</h3>
         <p>{item.dateUploaded?.substring(4, 15)}</p>
@@ -98,7 +98,7 @@ export function ViewItem() {
       </div>
       <div id="postedByBox">
         <h3>Found by:</h3>
-        <p>{item.postedBy}</p>
+        <p>{`${receiver.firstName} ${receiver.lastName}`}</p>
       </div>
       <div>
         {item.claimedBy != null && item.claimedBy !== 'N/A' && (
