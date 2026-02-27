@@ -68,7 +68,7 @@ export function LostAndFound() {
                     let date = new Date(item.dateUploaded);
                     let stringDate = date.toString();
                     */
-          return <CatalogueCard item={item} />;
+          return <CatalogueCard item={item} key={item.itemName}/>;
         })}
       </div>
     </>
