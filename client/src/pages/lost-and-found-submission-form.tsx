@@ -3,7 +3,7 @@ import { createNewItem } from '../api';
 import { Input } from '@/components/ui/input';
 import { jwtDecode } from 'jwt-decode';
 import { generateUploadDropzone } from '@uploadthing/react';
-import type { User } from '../types';
+import type { User, Inquiry } from '../types';
 const UploadDropzone = generateUploadDropzone({
   url: 'http://localhost:8080/api/uploadthing',
 });
@@ -19,6 +19,7 @@ export function SubmitLostItem() {
   const [type, setItemType] = useState('');
   const [itemColor, setColor] = useState('');
   const [itemBrand, setBrand] = useState('');
+  const [itemInquiries, setInquiries] = useState<Inquiry[]>([])
 
   useEffect(() => {
     async function loadUserData() {
@@ -45,6 +46,7 @@ export function SubmitLostItem() {
       postedBy: user._id, //null --> temp value
       claimedBy: null,
       adminApproved: false,
+      //inquiries: itemInquiries
     };
     console.log(submitObject);
     try {

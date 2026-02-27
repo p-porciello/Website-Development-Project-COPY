@@ -85,6 +85,7 @@ router.post('/', /*verifyToken,*/ async (req: Request, res: Response) => {
       postedBy: req.body.postedBy,
       claimedBy: req.body.claimedBy,
       adminApproved: req.body.adminApproved,
+      //inquiries: req.body.inquiries
     };
 
     let lostItemData = await db.collection('lostItem').insertOne(newItem);
@@ -112,6 +113,7 @@ router.put('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
       postedBy: req.body.postedBy,
       claimedBy: req.body.claimedBy,
       adminApproved: req.body.adminApproved,
+      //inquiries: req.body.inquiries
     },
   };
   let lostItemData = await db

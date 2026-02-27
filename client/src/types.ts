@@ -12,6 +12,7 @@ export interface LostItem {
   postedBy: string;
   claimedBy: string | null;
   adminApproved: boolean;
+  inquiries: Inquiry[]
 }
 
 export interface User {
@@ -28,7 +29,8 @@ export interface User {
   postedItems: string[];
 }
 
-export interface PageInfo {
-  name: string;
-  path: string;
+export interface Inquiry {
+  inquirerName: string;
+  content: string;
+  dateSent: string;
 }

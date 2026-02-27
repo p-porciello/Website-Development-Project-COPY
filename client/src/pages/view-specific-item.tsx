@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Modal } from '@/components/Modal';
 import { jwtDecode } from 'jwt-decode';
 import { SendClaimEmail } from '@/components/email';
-import type { LostItem, User } from '../types';
+import type { LostItem, User, Inquiry } from '../types';
 
 export function ViewItem() {
   const [user, setUser] = useState<Partial<User>>({})
@@ -13,6 +13,7 @@ export function ViewItem() {
   const [modalVis, setModalVis] = useState(false);
   const [body, setBody] = useState('');
   const [receiver, setReceiver] = useState<Partial<User>>({})
+  const [itemInquiries, setInquiries] = useState<Inquiry[]>([])
 
   let params = useParams();
   let id = params.id;
@@ -53,6 +54,7 @@ export function ViewItem() {
       postedBy: item.postedBy,
       claimedBy: user._id,
       adminApproved: item.adminApproved,
+      //inquiries: item.inquiries
     };
 
     let response = await updateItem(id, submitObject);
@@ -115,6 +117,17 @@ export function ViewItem() {
           </div>
         )}
       </div>
+      <h2>Ask for More Information</h2>
+      {/*<div className="inquiriesContainer">
+        {itemInquiries.map((inquiry) => {
+            return (
+              <div className="inquiry">
+                <b>{inquiry.inquirerName}</b> <i>{inquiry.dateSent}</i>
+                <p>{inquiry.content}</p>
+              </div>
+            );
+        })}
+      </div>*/}
 
       {/*<form
         onSubmit={(e) => {
