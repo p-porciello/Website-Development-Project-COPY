@@ -27,3 +27,8 @@ export interface User {
   joinDate: string;
   postedItems: string[];
 }
+
+export interface PageInfo {
+  name: string;
+  path: string;
+}

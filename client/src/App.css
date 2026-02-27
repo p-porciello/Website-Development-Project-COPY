@@ -52,7 +52,14 @@
 }
 
 .homepageRecentlyLost {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5em;
+}
+
+.itemBox {
   display: flex;
+  flex-direction: column;
 }
 
 .item {
@@ -61,10 +68,7 @@
   padding: 4px;
   border-radius: 10px;
   border-color: #001524;
-  border-top: 3px solid #001524;
-  border-bottom: 3px solid #001524;
-  border-right: 3px solid #001524;
-  border-left: 3px solid #001524;
+  border-width: 3px;
 }
 
 .item:hover {

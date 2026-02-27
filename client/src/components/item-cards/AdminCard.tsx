@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import type { LostItem } from '../../types';
 import { getSpecificUser } from '@/api';
 import { useState, useEffect } from 'react';
+import { MouseEvent } from 'react';
 
 type AdminCardProps = {
     item: LostItem;
-	ifApproved?: () => void;
-	ifDenied?: () => void;
 }
-export function AdminCard({ item, ifApproved, ifDenied }: AdminCardProps) {
+
+export function AdminCard({ item }: AdminCardProps) {
+  
   let date = new Date(item.dateUploaded);
   let stringDate = date.toString();
 
@@ -41,8 +42,6 @@ export function AdminCard({ item, ifApproved, ifDenied }: AdminCardProps) {
         {finderName}
       </p>
       {/*may need e.stopPropagation() on buttons*/}
-      <button onClick={ifApproved}>Approve</button>
-      <button onClick={ifDenied}>Deny</button>
     </Link>
   );
 }

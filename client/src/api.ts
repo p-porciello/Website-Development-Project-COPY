@@ -76,7 +76,7 @@ export async function updateItem(id: string, item: Record<string, unknown>) {
   return response;
 }
 
-export async function deleteSpecificItem(id: string) {
+export async function deleteSpecificItem(id: string | undefined) {
   const response = await axios.delete(`${URL}/lost-items/${id}`);
 
   /*

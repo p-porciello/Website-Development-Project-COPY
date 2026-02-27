@@ -1,5 +1,5 @@
 import { getSpecificItem, updateItem, getSpecificUser, createNewInquiry } from '../api';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Modal } from '@/components/Modal';
 import { jwtDecode } from 'jwt-decode';
@@ -16,6 +16,7 @@ export function ViewItem() {
 
   let params = useParams();
   let id = params.id;
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadData() {
@@ -54,7 +55,13 @@ export function ViewItem() {
       adminApproved: item.adminApproved,
     };
 
-    await updateItem(id, submitObject);
+    let response = await updateItem(id, submitObject);
+    if (response.status !== 200) {
+        console.log(response);
+        alert('Item could not be claimed :(');
+    } else {
+      navigate('/map');
+    }
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -109,7 +116,7 @@ export function ViewItem() {
         )}
       </div>
 
-      <form
+      {/*<form
         onSubmit={(e) => {
           e.preventDefault();
           SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
@@ -117,7 +124,12 @@ export function ViewItem() {
         }}
       >
         <button type="submit">Claim this Item</button>
-      </form>
+      </form> */}
+      <button onClick={(e) => {
+        e.preventDefault();
+        SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
+        handleClaim();
+      }}>Claim this Item</button>
         <button onClick={() => setModalVis(true)}>Request More Info</button>
       <Modal open={modalVis} onClose={() => setModalVis(false)}>
         <h2>Request More Information from Reporter</h2>

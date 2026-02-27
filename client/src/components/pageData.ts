@@ -8,7 +8,7 @@ export const pageData = [
     path: '/lost-and-found',
   },
   {
-    name: 'Submit an item',
+    name: 'Submit an Item',
     path: '/submit-item',
   },
   {
