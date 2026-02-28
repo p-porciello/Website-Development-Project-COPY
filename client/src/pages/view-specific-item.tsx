@@ -14,7 +14,8 @@ export function ViewItem() {
   const [modalVis, setModalVis] = useState(false);
   const [body, setBody] = useState('');
   const [receiver, setReceiver] = useState<Partial<User>>({})
-  const [itemInquiries, setInquiries] = useState<Inquiry[]>([])
+  const [itemInquiries, setInquiries] = useState<Inquiry[] | undefined>([])
+  const [to, setTo] = useState('');
 
   let params = useParams();
   let id = params.id as string;
@@ -37,6 +38,7 @@ export function ViewItem() {
       const finder = await getSpecificUser(data?.postedBy);
       if (!finder) return;
       setReceiver(finder);
+      setInquiries(data.inquiries)
     }
     loadData();
   }, []); 
@@ -68,36 +70,30 @@ export function ViewItem() {
     }
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-      e.preventDefault();
-      let newInquiry = {
-          inquirer: `${user.firstName} ${user.lastName}`,
-          receiver: `${receiver.firstName} ${receiver.lastName}`,
-          itemInquiring: item.itemName,
-          dateUploaded: new Date(),
-          content: body
-      };
-      let response = await createNewInquiry(newInquiry);
-      if (response.status !== 200) {
-          console.log(response);
-          alert('Inquiry could not be created :(');
-      }
-  }
-
   async function updateInquiries() {
+    const date: Date = new Date()
+    const dateString: string = date.toDateString();
+    console.log(dateString)
     const newInquiry: Inquiry =  {
-      inquirerName: `${user.firstName} ${user.lastName}`,
-      dateSent: new Date(),
+      inquirerId: `${user._id}`,
+      receiverId: `${receiver._id}`,
+      dateSent: dateString,
       content: body
     }
     updateInquiriesArray(id, newInquiry)
     setBody('');
-    window.location.reload();
+    console.log(`inquiries = ${item.inquiries}`);
+    setInquiries(item.inquiries);
+  }
+
+  async function getName(id: string) {
+    const targetUser = await getSpecificUser(id);
+    return `${targetUser.firstName} ${targetUser.lastName}`
   }
 
   return (
     <>
-    {console.log(item.inquiries)}
+    {console.log(`item.inquiries: ${item.inquiries}\nitemInquiries: ${itemInquiries}`)}
       <h1>{item.itemName}</h1>
       <img src={item.imgFileName}/>
       <div id="dateUploadedBox">
@@ -131,20 +127,43 @@ export function ViewItem() {
           </div>
         )}
       </div>
+      
+        <button onClick={(e) => {
+          e.preventDefault();
+          SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
+          handleClaim();
+        }}>Claim this Item</button>
+
       <h2>Ask for More Information</h2>
       <p>All additional information you ask from this item's original poster can be found below.  This information will only be visible to you and the poster.</p>
       <div className="inquiriesContainer">
-        {itemInquiries.length > 0 ?
-        (itemInquiries.map((inquiry) => {
-            return (
-              <div className="inquiry">
-                <b>{inquiry.inquirerName}</b> <i>{inquiry.dateSent?.toString().substring(4,15)}</i>
+        {//@ts-ignore
+        itemInquiries?.length > 0 ?
+        (itemInquiries?.map((inquiry, index) => {
+          if (user._id === inquiry.inquirerId || user._id === inquiry.receiverId) {
+          return (
+              <div className="inquiry" key={index}>
+                <b>{inquiry.inquirerId}</b> <i>{inquiry.dateSent.substring(4)}</i>
+                <p>to: {inquiry.receiverId}</p>
                 <p>{inquiry.content}</p>
               </div>
             );
-        })): <p>You haven't written any inquiries about this item.</p>}
+        }})): <p>You haven't written any inquiries about this item.</p>}
       </div>
-      <form onSubmit={updateInquiries}>
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        updateInquiries()}}>
+        {/*}
+        {(user._id === receiver._id) ? (
+          <select onChange={(e) => {setTo(e.target.value)}}>
+            {itemInquiries?.map((inquiry, index) => {
+            return (
+                <option key={index}>{inquiry.inquirerId}</option>
+              );
+        })}
+          </select>
+        ): <p></p>}
+        */}
         <textarea
           name="inquiryForm"
           placeholder="Write any questions or concerns regarding this item here."
@@ -153,50 +172,6 @@ export function ViewItem() {
         />
         <button type="submit">Submit Inquiry</button>
       </form>
-
-      {/*<form
-        onSubmit={(e) => {
-          e.preventDefault();
-          SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
-          handleClaim();
-        }}
-      >
-        <button type="submit">Claim this Item</button>
-      </form>
-      <button onClick={(e) => {
-        e.preventDefault();
-        SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
-        handleClaim();
-      }}>Claim this Item</button>
-        <button onClick={() => setModalVis(true)}>Request More Info</button>
-      <Modal open={modalVis} onClose={() => setModalVis(false)}>
-        <h2>Request More Information from Reporter</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="content">
-                    <textarea
-                        name="content"
-                        placeholder="Write any questions or concerns regarding this item here."
-                        onChange={(e) => setBody(e.target.value)}
-                        maxLength={250}
-                        required
-                    />   
-                </div>   
-                <button type="submit">Send Inquiry</button>
-            </form>      
-      </Modal>
-
-      <form>
-        <div>
-          <label>Ask any questions here: </label>
-          <textarea
-            name="more info"
-            onChange={(e) => setMoreInfo(e.target.value)}
-            maxLength={250}
-            required
-          />
-        </div>
-        <button type="submit">Request More Info Submit</button>
-      </form> */}
     </>
   );
 }

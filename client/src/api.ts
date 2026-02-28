@@ -77,6 +77,7 @@ export async function updateItem(id: string, item: Record<string, unknown>) {
 }
 
 export async function updateInquiriesArray(id: string, newInquiry: Inquiry) {
+  console.log(`item id: ${id}\n newInquiry: ${newInquiry}`)
   const response = await axios.put(`${URL}/lost-items/updateInquiries/${id}`, newInquiry);
 
   /*
@@ -87,6 +88,8 @@ export async function updateInquiriesArray(id: string, newInquiry: Inquiry) {
         return;
     }
     */
+  let item = await getSpecificItem(id);
+  console.log(`item inquiries after updateItem: ${item?.inquiries}`)
   return response;
 }
 

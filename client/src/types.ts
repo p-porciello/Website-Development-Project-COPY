@@ -30,7 +30,8 @@ export interface User {
 }
 
 export interface Inquiry {
-  inquirerName: string;
-  dateSent: Date;
+  inquirerId: string;
+  receiverId: string;
+  dateSent: string;
   content: string;
 }

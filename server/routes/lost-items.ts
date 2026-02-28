@@ -9,9 +9,10 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 interface Inquiry {
-  inquirerName: string;
+  inquirerId: string;
+  receiverId: string;
   dateSent: string;
-  content: string
+  content: string;
 }
 
 //Retrieve all items in lostItems collection
@@ -130,13 +131,15 @@ router.put('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
 
 router.put('/updateInquiries/:id', async (req: Request, res: Response) => {
   let db = database.getDb();
+  console.log(req);
   let newInquiry: Inquiry = {
-    inquirerName: req.body.inquirerName,
+    inquirerId: req.body.inquirerId,
+    receiverId: req.body.receiverId,
     dateSent: req.body.dateSent,
     content: req.body.content
   }
   let lostItemData = await db
-    .collection('lostitem')
+    .collection('lostItem')
     //@ts-ignore
     .updateOne({ _id: new ObjectId(req.params.id as string) }, { $push: {inquiries: newInquiry}})
   res.json(lostItemData);
