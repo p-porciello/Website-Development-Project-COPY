@@ -1,10 +1,11 @@
-import { getSpecificItem, updateItem, getSpecificUser, createNewInquiry } from '../api';
+import { getSpecificItem, updateItem, getSpecificUser, createNewInquiry, updateInquiriesArray } from '../api';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Modal } from '@/components/Modal';
 import { jwtDecode } from 'jwt-decode';
 import { SendClaimEmail } from '@/components/email';
 import type { LostItem, User, Inquiry } from '../types';
+import { NewInquiry } from '@/CreateInquiry';
 
 export function ViewItem() {
   const [user, setUser] = useState<Partial<User>>({})
@@ -16,8 +17,9 @@ export function ViewItem() {
   const [itemInquiries, setInquiries] = useState<Inquiry[]>([])
 
   let params = useParams();
-  let id = params.id;
+  let id = params.id as string;
   const navigate = useNavigate();
+  const testInquiries: Inquiry[] | undefined = item.inquiries
 
   useEffect(() => {
     async function loadData() {
@@ -54,7 +56,7 @@ export function ViewItem() {
       postedBy: item.postedBy,
       claimedBy: user._id,
       adminApproved: item.adminApproved,
-      //inquiries: item.inquiries
+      inquiries: item.inquiries
     };
 
     let response = await updateItem(id, submitObject);
@@ -82,8 +84,20 @@ export function ViewItem() {
       }
   }
 
+  async function updateInquiries() {
+    const newInquiry: Inquiry =  {
+      inquirerName: `${user.firstName} ${user.lastName}`,
+      dateSent: new Date(),
+      content: body
+    }
+    updateInquiriesArray(id, newInquiry)
+    setBody('');
+    window.location.reload();
+  }
+
   return (
     <>
+    {console.log(item.inquiries)}
       <h1>{item.itemName}</h1>
       <img src={item.imgFileName}/>
       <div id="dateUploadedBox">
@@ -118,16 +132,27 @@ export function ViewItem() {
         )}
       </div>
       <h2>Ask for More Information</h2>
-      {/*<div className="inquiriesContainer">
-        {itemInquiries.map((inquiry) => {
+      <p>All additional information you ask from this item's original poster can be found below.  This information will only be visible to you and the poster.</p>
+      <div className="inquiriesContainer">
+        {itemInquiries.length > 0 ?
+        (itemInquiries.map((inquiry) => {
             return (
               <div className="inquiry">
-                <b>{inquiry.inquirerName}</b> <i>{inquiry.dateSent}</i>
+                <b>{inquiry.inquirerName}</b> <i>{inquiry.dateSent?.toString().substring(4,15)}</i>
                 <p>{inquiry.content}</p>
               </div>
             );
-        })}
-      </div>*/}
+        })): <p>You haven't written any inquiries about this item.</p>}
+      </div>
+      <form onSubmit={updateInquiries}>
+        <textarea
+          name="inquiryForm"
+          placeholder="Write any questions or concerns regarding this item here."
+          onChange={(e) => setBody(e.target.value)}
+          maxLength={500}
+        />
+        <button type="submit">Submit Inquiry</button>
+      </form>
 
       {/*<form
         onSubmit={(e) => {
@@ -137,7 +162,7 @@ export function ViewItem() {
         }}
       >
         <button type="submit">Claim this Item</button>
-      </form> */}
+      </form>
       <button onClick={(e) => {
         e.preventDefault();
         SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
@@ -160,7 +185,7 @@ export function ViewItem() {
             </form>      
       </Modal>
 
-      {/*<form>
+      <form>
         <div>
           <label>Ask any questions here: </label>
           <textarea

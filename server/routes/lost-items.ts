@@ -8,6 +8,12 @@ const router = express();
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
+interface Inquiry {
+  inquirerName: string;
+  dateSent: string;
+  content: string
+}
+
 //Retrieve all items in lostItems collection
 router.get('/',  /*verifyToken,*/ async (req: Request, res: Response) => {
   let db = database.getDb();
@@ -85,7 +91,7 @@ router.post('/', /*verifyToken,*/ async (req: Request, res: Response) => {
       postedBy: req.body.postedBy,
       claimedBy: req.body.claimedBy,
       adminApproved: req.body.adminApproved,
-      //inquiries: req.body.inquiries
+      inquiries: req.body.inquiries //as Inquiry[]
     };
 
     let lostItemData = await db.collection('lostItem').insertOne(newItem);
@@ -113,12 +119,26 @@ router.put('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
       postedBy: req.body.postedBy,
       claimedBy: req.body.claimedBy,
       adminApproved: req.body.adminApproved,
-      //inquiries: req.body.inquiries
+      inquiries: req.body.inquiries
     },
   };
   let lostItemData = await db
     .collection('lostItem')
     .updateOne({ _id: new ObjectId(req.params.id as string) }, newItem);
+  res.json(lostItemData);
+});
+
+router.put('/updateInquiries/:id', async (req: Request, res: Response) => {
+  let db = database.getDb();
+  let newInquiry: Inquiry = {
+    inquirerName: req.body.inquirerName,
+    dateSent: req.body.dateSent,
+    content: req.body.content
+  }
+  let lostItemData = await db
+    .collection('lostitem')
+    //@ts-ignore
+    .updateOne({ _id: new ObjectId(req.params.id as string) }, { $push: {inquiries: newInquiry}})
   res.json(lostItemData);
 });
 

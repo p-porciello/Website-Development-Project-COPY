@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { LostItem } from './types';
+import type { LostItem, Inquiry } from './types';
 
 const URL = 'http://localhost:8080';
 
@@ -64,6 +64,20 @@ export async function createNewItem(item: Record<string, unknown>) {
 
 export async function updateItem(id: string, item: Record<string, unknown>) {
   const response = await axios.put(`${URL}/lost-items/${id}`, item);
+
+  /*
+    if (response.status === 200) {
+        return response.data;
+    } else {
+        console.log(response.status);
+        return;
+    }
+    */
+  return response;
+}
+
+export async function updateInquiriesArray(id: string, newInquiry: Inquiry) {
+  const response = await axios.put(`${URL}/lost-items/updateInquiries/${id}`, newInquiry);
 
   /*
     if (response.status === 200) {

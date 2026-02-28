@@ -33,6 +33,7 @@ export function SubmitLostItem() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    console.log(itemInquiries);
     let submitObject = {
       itemName: lostItemName,
       description: description,
@@ -46,7 +47,7 @@ export function SubmitLostItem() {
       postedBy: user._id, //null --> temp value
       claimedBy: null,
       adminApproved: false,
-      //inquiries: itemInquiries
+      inquiries: itemInquiries
     };
     console.log(submitObject);
     try {
