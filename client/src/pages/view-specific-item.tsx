@@ -93,47 +93,59 @@ export function ViewItem() {
 
 
   return (
-    <>
+    <div id="view-specific-item">
     {/*console.log(`item.inquiries: ${item.inquiries}\nitemInquiries: ${itemInquiries}`)*/}
-      <h1>{item.itemName}</h1>
-      <img src={item.imgFileName}/>
-      <div id="dateUploadedBox">
-        <h3>Date Uploaded:</h3>
-        <p>{item.dateUploaded?.substring(4, 15)}</p>
-      </div>
-      <div id="descriptionBox">
-        <h3>Description:</h3>
-        <p>{item.description}</p>
-      </div>
-      <div id="itemTypeBox">
-        <h3>Item Type:</h3>
-        <p>{item.itemType}</p>
-      </div>
-      <div id="itemColorBox">
-        <h3>Color:</h3>
-        <p>{item.color}</p>
-      </div>
-      <div id="foundAtBox">
-        <h3>Found At:</h3>
-        <p>{item.schoolFoundIn}</p>
-      </div>
-      <div id="postedByBox">
-        <h3>Found by:</h3>
-        <p>{`${receiver.firstName} ${receiver.lastName}`}</p>
+        <h1>{item.itemName}</h1>
+        <div className="itemInfo">
+          <img id="vsi-image" src={item.imgFileName}/>
+          <div className="textInfo">
+            <div id="dateUploadedBox">
+              <h3>Date Uploaded:</h3>
+              <p>{item.dateUploaded?.substring(4, 15)}</p>
+            </div>
+            <div id="descriptionBox">
+              <h3>Description:</h3>
+              <p>{item.description}</p>
+            </div>
+            <div id="itemTypeBox">
+              <h3>Item Type:</h3>
+              <p>{item.itemType}</p>
+            </div>
+            <div id="itemColorBox">
+              <h3>Color:</h3>
+              <p>{item.color}</p>
+            </div>
+            <div id="foundAtBox">
+              <h3>Found At:</h3>
+              <p>{item.schoolFoundIn}</p>
+            </div>
+            <div id="postedByBox">
+              <h3>Found by:</h3>
+              <p>{`${receiver.firstName} ${receiver.lastName}`}</p>
+            </div>
+          </div>
       </div>
       <div>
-        {item.claimedBy != null && item.claimedBy !== 'N/A' && (
-          <div>
-            <h2>This item has already been claimed.</h2>
-          </div>
-        )}
-      </div>
-      
-        <button onClick={(e) => {
+        {(item.claimedBy) ? 
+        (<h2>This item has already been claimed.</h2>) 
+        : 
+        (<button onClick={(e) => {
           e.preventDefault();
           SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
           handleClaim();
-        }}>Claim this Item</button>
+        }}>Claim this Item</button>)}
+        {/* {item.claimedBy != null && item.claimedBy !== 'N/A' && (
+          <div>
+            <h2>This item has already been claimed.</h2>
+          </div>
+        )} */}
+      </div>
+      
+        {/*<button onClick={(e) => {
+          e.preventDefault();
+          SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
+          handleClaim();
+        }}>Claim this Item</button> */}
 
       <h2>Ask for More Information</h2>
       <p>All additional information you ask from this item's original poster can be found below.  This information will only be visible to you and the poster.</p>
@@ -189,7 +201,7 @@ export function ViewItem() {
             setPlaceholder("Write any questions or concerns regarding this item here.");
             setButtonText("Submit Inquiry")}}>Write an Inquiry</button>)
         }
-    </>
+    </div>
     
   );
 }
