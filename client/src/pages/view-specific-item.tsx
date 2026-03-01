@@ -88,7 +88,7 @@ export function ViewItem() {
     //console.log(`inquiries = ${newInquiry.receiverName}`);
     setInquiries(item.inquiries);
     setTo('');
-    //window.location.reload(); uncomment after debugging
+    window.location.reload();
   }
 
 
