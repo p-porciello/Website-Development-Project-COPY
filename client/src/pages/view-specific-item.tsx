@@ -1,26 +1,25 @@
-import { getSpecificItem, updateItem, getSpecificUser, createNewInquiry, updateInquiriesArray } from '../api';
+import { getSpecificItem, updateItem, getSpecificUser, updateInquiriesArray } from '../api';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Modal } from '@/components/Modal';
 import { jwtDecode } from 'jwt-decode';
 import { SendClaimEmail } from '@/components/email';
 import type { LostItem, User, Inquiry } from '../types';
-import { NewInquiry } from '@/CreateInquiry';
 
 export function ViewItem() {
   const [user, setUser] = useState<Partial<User>>({})
 
   const [item, setItem] = useState<Partial<LostItem>>({});
-  const [modalVis, setModalVis] = useState(false);
   const [body, setBody] = useState('');
   const [receiver, setReceiver] = useState<Partial<User>>({})
   const [itemInquiries, setInquiries] = useState<Inquiry[] | undefined>([])
-  const [to, setTo] = useState('');
+  const [toId, setTo] = useState<string | undefined | Promise<string>>('');
+  const [toName, setToName] = useState('');
+  const [buttonText, setButtonText] = useState<string>('')
+  const [placeholderText, setPlaceholder] = useState<string>('');
 
   let params = useParams();
   let id = params.id as string;
   const navigate = useNavigate();
-  const testInquiries: Inquiry[] | undefined = item.inquiries
 
   useEffect(() => {
     async function loadData() {
@@ -73,27 +72,29 @@ export function ViewItem() {
   async function updateInquiries() {
     const date: Date = new Date()
     const dateString: string = date.toDateString();
-    console.log(dateString)
+    //console.log(dateString)
     const newInquiry: Inquiry =  {
       inquirerId: `${user._id}`,
-      receiverId: `${receiver._id}`,
+      inquirerName: `${user.firstName} ${user.lastName}`,
+      //@ts-ignore
+      receiverId: toId,
+      receiverName: toName,
       dateSent: dateString,
       content: body
     }
+    //console.log(`name being passed to updateInquiries(): ${toName}`)
     updateInquiriesArray(id, newInquiry)
     setBody('');
-    console.log(`inquiries = ${item.inquiries}`);
+    //console.log(`inquiries = ${newInquiry.receiverName}`);
     setInquiries(item.inquiries);
+    setTo('');
+    //window.location.reload(); uncomment after debugging
   }
 
-  async function getName(id: string) {
-    const targetUser = await getSpecificUser(id);
-    return `${targetUser.firstName} ${targetUser.lastName}`
-  }
 
   return (
     <>
-    {console.log(`item.inquiries: ${item.inquiries}\nitemInquiries: ${itemInquiries}`)}
+    {/*console.log(`item.inquiries: ${item.inquiries}\nitemInquiries: ${itemInquiries}`)*/}
       <h1>{item.itemName}</h1>
       <img src={item.imgFileName}/>
       <div id="dateUploadedBox">
@@ -137,22 +138,27 @@ export function ViewItem() {
       <h2>Ask for More Information</h2>
       <p>All additional information you ask from this item's original poster can be found below.  This information will only be visible to you and the poster.</p>
       <div className="inquiriesContainer">
-        {//@ts-ignore
+        {
+        //@ts-ignore
         itemInquiries?.length > 0 ?
         (itemInquiries?.map((inquiry, index) => {
           if (user._id === inquiry.inquirerId || user._id === inquiry.receiverId) {
-          return (
+            return (
               <div className="inquiry" key={index}>
-                <b>{inquiry.inquirerId}</b> <i>{inquiry.dateSent.substring(4)}</i>
-                <p>to: {inquiry.receiverId}</p>
+                <b>{inquiry.inquirerName}</b> <i>{inquiry.dateSent.substring(4)}</i>
+                <p>to: {inquiry.receiverName}</p>
                 <p>{inquiry.content}</p>
+
+                <button className="replyButton" onClick={() => {
+                  setTo(inquiry.inquirerId);
+                  setToName(inquiry.inquirerName);
+                  setPlaceholder(`Write your reply to ${inquiry.inquirerName} here.`);
+                  setButtonText("Post Reply");
+                }}>Reply</button>
               </div>
             );
         }})): <p>You haven't written any inquiries about this item.</p>}
       </div>
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        updateInquiries()}}>
         {/*}
         {(user._id === receiver._id) ? (
           <select onChange={(e) => {setTo(e.target.value)}}>
@@ -164,14 +170,26 @@ export function ViewItem() {
           </select>
         ): <p></p>}
         */}
-        <textarea
-          name="inquiryForm"
-          placeholder="Write any questions or concerns regarding this item here."
-          onChange={(e) => setBody(e.target.value)}
-          maxLength={500}
-        />
-        <button type="submit">Submit Inquiry</button>
-      </form>
+        {
+          (toId !== '') ? 
+            <form onSubmit={(e) => {
+            e.preventDefault();
+            updateInquiries()}}>
+            <textarea
+              name="inquiryForm"
+              placeholder={placeholderText}
+              onChange={(e) => setBody(e.target.value)}
+              maxLength={500}
+            />
+            <button type="submit">{buttonText}</button>
+          </form>
+          : (<button onClick={() => {
+            setTo(receiver._id);
+            setToName(`${receiver.firstName} ${receiver.lastName}`)
+            setPlaceholder("Write any questions or concerns regarding this item here.");
+            setButtonText("Submit Inquiry")}}>Write an Inquiry</button>)
+        }
     </>
+    
   );
 }

@@ -10,7 +10,9 @@ router.use(express.json());
 
 interface Inquiry {
   inquirerId: string;
+  inquirerName: string;
   receiverId: string;
+  receiverName: string;
   dateSent: string;
   content: string;
 }
@@ -134,7 +136,9 @@ router.put('/updateInquiries/:id', async (req: Request, res: Response) => {
   console.log(req);
   let newInquiry: Inquiry = {
     inquirerId: req.body.inquirerId,
+    inquirerName: req.body.inquirerName,
     receiverId: req.body.receiverId,
+    receiverName: req.body.receiverName,
     dateSent: req.body.dateSent,
     content: req.body.content
   }

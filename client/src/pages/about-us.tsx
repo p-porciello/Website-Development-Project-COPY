@@ -17,7 +17,16 @@ export function AboutUs() {
         </p>
         <br></br> {/*here for spacing*/}
         <h2>Paige Porciello</h2>
-        <p>Filler text</p>
+        <p>Paige is an AIT junior in the school's IT track.  Her programming experience
+          comes from multiple years of formal schoolwork (AP CSP & AP CSA) along with
+          more informal activities such as coding a graphing calculator and solving Project
+          Euler problems.  Right now, she's familiar with Python, Java, R, HTML, CSS, 
+          and JavaScript.  She's currently learning how to use MongoDB, Node, and React JS
+          to build websites such as the one you're on right now!
+          In her free time, she does color guard with her town's marching band and Winterguard,
+          draws, plays Minecraft, and helps her friends with math and physics problems.  In her
+          future, Paige hopes to pursue a career in astrophysics.
+        </p>
       </div>
     </>
   );

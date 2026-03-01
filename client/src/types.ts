@@ -31,7 +31,9 @@ export interface User {
 
 export interface Inquiry {
   inquirerId: string;
+  inquirerName: string;
   receiverId: string;
+  receiverName: string;
   dateSent: string;
   content: string;
 }
