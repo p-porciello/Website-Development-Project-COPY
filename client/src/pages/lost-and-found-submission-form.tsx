@@ -12,6 +12,7 @@ export function SubmitLostItem() {
   const [user, setUser] = useState<Partial<User>>({});
 
   const [image, setImage] = useState<string | undefined>('');
+  const [mime, setMime] = useState<string | undefined>('');
   const [lostItemName, setName] = useState('');
   const [description, setDescription] = useState('');
   const [schoolFound, setSchoolFound] = useState('');
@@ -38,6 +39,7 @@ export function SubmitLostItem() {
       itemName: lostItemName,
       description: description,
       imgFileName: image,
+      imgMimeType: mime,
       dateUploaded: new Date(),
       itemType: type,
       color: itemColor,
@@ -73,7 +75,9 @@ export function SubmitLostItem() {
           onClientUploadComplete={(res) => {
             if (res && res.length > 0) {
               const url = res?.[0]?.url;
+              const mimeType = res?.[0]?.type;
               setImage(url);
+              setMime(mimeType)
               console.log("Completed upload of image with url ", image);
             }
           }}/>

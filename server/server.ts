@@ -6,6 +6,7 @@ import { uploadRouter } from './routes/image-router';
 import indexRouter from './routes/index';
 import lostItemsRouter from './routes/lost-items';
 import userRouter from './routes/users';
+import geminiAPIRouter from './routes/gemini-api'
 import database from './mongoConnect';
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/', indexRouter);
 app.use('/lost-items', lostItemsRouter);
 app.use('/user', userRouter);
+app.use('/gemini', geminiAPIRouter);
 app.use('/api/uploadthing', createRouteHandler({ router: uploadRouter }));
 
 /* alternate way of connecting to MongoDB (do this only if absolutely needed)

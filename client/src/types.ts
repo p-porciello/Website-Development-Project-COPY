@@ -3,6 +3,7 @@ export interface LostItem {
   itemName: string;
   description: string;
   imgFileName: string;
+  imgMimeType: string,
   dateUploaded: string;
   itemType: string;
   color: string;

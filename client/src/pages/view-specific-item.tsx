@@ -48,6 +48,7 @@ export function ViewItem() {
       itemName: item.itemName,
       description: item.description,
       imgFileName: item.imgFileName,
+      imgMimeType: item.imgMimeType,
       dateUploaded: item.dateUploaded,
       itemType: item.itemType,
       color: item.color,
