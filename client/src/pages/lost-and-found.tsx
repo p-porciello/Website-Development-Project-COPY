@@ -55,12 +55,13 @@ export function LostAndFound() {
 
   return (
     <>
-      <h1 className="barofcolor">Lost items catalog page</h1>
+      <h1>Lost items catalog page</h1>
       <input
         type="text"
         placeholder="Search for an item..."
         value={searchTerm}
         onChange={handleSearch}
+        style ={{ backgroundImage: 'src/assets/search-ui-icon.png.webp', backgroundPosition: 'right', width:'50%'}}
       />
       <div className="homepageRecentlyLost">
         {items.map((item) => {

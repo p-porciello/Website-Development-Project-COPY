@@ -26,7 +26,7 @@ export function Home() {
 
   return (
     <>
-    <div style={{backgroundColor: '#11adc5'}}>
+    <body>
       <header>
         <h1> UCVTS Lost and Found </h1>
       </header>
@@ -35,7 +35,8 @@ export function Home() {
           Recently Lost
         </h2>
       </div>
-      </div>
+      </body>
+      <body>
         <div className="homepageRecentlyLost">
           {items.map((item) => {
             return <HomepageCard item={item} key={item.itemName}/>;
@@ -48,6 +49,7 @@ export function Home() {
         <h2>Getting started?</h2>
         <p>[Youtube Video embed here]</p>
       </div>
+      </body>
     </>
   );
 }

@@ -6,7 +6,8 @@
 
   color-scheme: light dark;
   color: #001524;
-  background-color: #faf0de;
+  background-color: #fbfbfe;
+  padding:0;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,15 +17,16 @@
 
 a {
   font-weight: 500;
-  color: #001524;
+  color: #040316;
   text-decoration: inherit;
 }
 a:hover {
-  color: #001524;
+  color: #040316;
 }
 
 body {
-  margin: 0;
+  padding-left: 5%;
+  padding-right: 5%;
   display: flex;
   place-items: center;
   min-width: 100vw;
@@ -40,7 +42,8 @@ textarea {
 }
 
 h1 {
-  background-color: #11adc5;
+  background-color: #0e2a67;
+  color: #ffffff;
   font-size: 3.2em;
   line-height: 1.1;
 }

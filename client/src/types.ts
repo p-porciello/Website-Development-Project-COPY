@@ -27,6 +27,7 @@ export interface User {
   role: string;
   joinDate: string;
   postedItems: string[];
+  profileImageName: string;
 }
 
 export interface Inquiry {

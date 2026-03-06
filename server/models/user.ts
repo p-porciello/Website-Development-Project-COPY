@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { profile } from 'node:console';
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -32,6 +33,10 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     default: 'user',
+  },
+  profileImageName: {
+    type: String,
+    default: 'default-profile-pic.png.png',
   },
 });
 

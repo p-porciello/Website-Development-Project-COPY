@@ -57,6 +57,7 @@ router.post('/', async (req, res) => {
       role: req.body.role,
       joinDate: req.body.joinDate,
       postedItems: req.body.postedItems,
+      profileImageName: req.body.profileImageName,
     };
     let userData = await db.collection('user').insertOne(newUser);
     console.log(hash);
@@ -79,6 +80,7 @@ router.put('/:id', async (req, res) => {
       role: req.body.role,
       joinDate: req.body.joinDate,
       postedItems: req.body.postedItems,
+      profileImageName: req.body.profileImageName,
     },
   };
   let userData = await db

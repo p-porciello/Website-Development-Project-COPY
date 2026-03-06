@@ -1,12 +1,19 @@
 import { HomepageCard } from '@/components/item-cards/HomepageCard';
 import { useState, useEffect } from 'react';
-import { getAllItems } from '@/api';
+import { getAllItems, updateUser } from '@/api';
 import { jwtDecode } from 'jwt-decode';
 import type { LostItem, User } from '@/types';
+import { generateUploadDropzone } from '@uploadthing/react';
+
+
 
 export function Profile() {
+  const UploadDropzone = generateUploadDropzone({
+  url: 'http://localhost:8080/api/uploadthing',
+});
   const [postedItems, setPostedItems] = useState<LostItem[]>([]);
   const [user, setUser] = useState<Partial<User>>({});
+  const [image, setImage] = useState<string | undefined>('');
 
   useEffect(() => {
     async function loadUserData() {
@@ -24,17 +31,63 @@ export function Profile() {
     loadUserData();
   }, []);
 
+
+  async function handleProfileUpdate() {
+    const id = user._id;
+    if (!id) return;
+    let submitObject = {
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password,
+      school: user.school,
+      grade: user.grade,
+      bio: user.bio,
+      role: user.role,
+      joinDate: user.joinDate,
+      postedItems: user.postedItems,
+      profileImageName: image,
+    };
+
+    let response = await updateUser(id, submitObject);
+      if (response.status !== 200) {
+          console.log(response);
+          alert("Profile Picture Update Failed");
+      } 
+      else {
+        window.location.reload();
+    }
+  }
+
+
   return (
     <>
-      <div style={{backgroundColor: '#11adc5'}}>
       <h1>User Profile Page</h1>
-      </div>
       <div style={{ textAlign: 'left', padding: '10px', width: '50%', float: 'left' }}>
-        <img 
-          src={'/goose.jpg'} 
+        <img src={'src/assets/defaultProfilePicture.png'}
           style={{ height: '150px', width: '150px', borderRadius: '50%', border: '2px solid #001524', objectFit: 'cover' }}
           />
       </div>
+
+      <form onSubmit={handleProfileUpdate}>
+        <div className="profileImage">
+          <UploadDropzone 
+          endpoint="imageUploader" 
+          onClientUploadComplete={(res) => {
+            if (res && res.length > 0) {
+              const url = res?.[0]?.url;
+              setImage(url);
+              console.log("Completed upload of image with url ", image);
+            }
+          }}/>
+
+        </div>
+          <button type="submit" className="handleProfileUpdate">
+          Change Profile Picture
+        </button>
+        
+      </form>
       <div style={{ textAlign: 'right', padding: '10px', width: '50%', float: 'right' }}>
       <h2>
         {user.firstName} {user.lastName}

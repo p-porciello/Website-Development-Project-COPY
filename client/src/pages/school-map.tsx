@@ -1,7 +1,7 @@
 export function Map() {
   return (
     <>
-      <h1 className="barofcolor">School Map Page</h1>
+      <h1>School Map Page</h1>
     </>
   );
 }
