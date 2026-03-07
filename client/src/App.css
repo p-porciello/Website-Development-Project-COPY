@@ -11,7 +11,7 @@
 }
 
 body:has(#view-specific-item) {
-  background-color: rgb(0, 12, 184);
+  background-color: rgb(2, 2, 201);
 }
 
 img {
@@ -43,7 +43,7 @@ img {
 }
 
 .container {
-  background-color: blue;
+  background-color: rgb(2, 2, 201);
   width: 100vh;
   height: 100vh;
   display: flex;

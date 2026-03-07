@@ -68,15 +68,18 @@ export function SubmitLostItem() {
         {/*<h1>Report a Lost Item</h1>*/}
         {/*<h2>Details</h2>*/}
         <div className="itemImage">
-          <UploadDropzone 
-          endpoint="imageUploader" 
-          onClientUploadComplete={(res) => {
-            if (res && res.length > 0) {
-              const url = res?.[0]?.url;
-              setImage(url);
-              console.log("Completed upload of image with url ", image);
-            }
-          }}/>
+          {
+            image ? (<img className="imgPreview" src={image}/>) : (
+                <UploadDropzone 
+                endpoint="imageUploader" 
+                onClientUploadComplete={(res) => {
+                  if (res && res.length > 0) {
+                    const url = res?.[0]?.url;
+                    setImage(url);
+                    console.log("Completed upload of image with url ", image);
+                  }
+                }}/>
+            )}
         </div>
         <div className="itemName">
           <label>Item Name: </label>
