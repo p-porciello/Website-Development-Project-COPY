@@ -13,11 +13,18 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary: #102f67;
+  --secondary: #7e87ff;
+  --accent: #5058de;
+  --text-color: #020114;
+  --light-bg: #fcfdff;
+
 }
 
 a {
   font-weight: 500;
-  color: #040316;
+  color: var(--text-color);
   text-decoration: inherit;
 }
 a:hover {
