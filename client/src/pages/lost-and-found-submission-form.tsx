@@ -77,6 +77,7 @@ export function SubmitLostItem() {
             ) : (
                 <UploadDropzone 
                 endpoint="imageUploader" 
+                //dropzone={{uploadAfterDrop: true}}
                 onClientUploadComplete={(res) => {
                   if (res && res.length > 0) {
                     const url = res?.[0]?.url;
