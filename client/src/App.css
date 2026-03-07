@@ -24,6 +24,12 @@ img {
   height: 100%;
 }
 
+#preview {
+  width: 100%;
+  height: auto;
+}
+
+
 .card {
   padding: 2em;
 }

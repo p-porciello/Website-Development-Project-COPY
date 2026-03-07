@@ -69,7 +69,12 @@ export function SubmitLostItem() {
         {/*<h2>Details</h2>*/}
         <div className="itemImage">
           {
-            image ? (<img className="imgPreview" src={image}/>) : (
+            image ? (
+                    <div className="imgPreview">
+                        <img id="preview" src={image}/>
+                        <h4><i>Preview of your uploaded image</i></h4>
+                    </div>
+            ) : (
                 <UploadDropzone 
                 endpoint="imageUploader" 
                 onClientUploadComplete={(res) => {
