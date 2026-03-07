@@ -43,6 +43,8 @@ textarea {
 
 h1 {
   background-color: #0e2a67;
+  padding-top:10%;
+  padding-bottom:5%;
   color: #ffffff;
   font-size: 3.2em;
   line-height: 1.1;

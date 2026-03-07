@@ -30,6 +30,7 @@ export function SignIn() {
 
   return (
     <>
+      <div style={{ display:'fixed', top:0,width:'100%'}}>
       <h1>Sign In to Existing Account</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -53,6 +54,7 @@ export function SignIn() {
         </div>
         <button type="submit">Sign In</button>
       </form>
+      </div>
     </>
   );
 }

@@ -64,40 +64,47 @@ export function Profile() {
   return (
     <>
       <h1>User Profile Page</h1>
+      <body>
       <div style={{ textAlign: 'left', padding: '10px', width: '50%', float: 'left' }}>
         <img src={'src/assets/defaultProfilePicture.png'}
           style={{ height: '150px', width: '150px', borderRadius: '50%', border: '2px solid #001524', objectFit: 'cover' }}
           />
+       
       </div>
 
-      <form onSubmit={handleProfileUpdate}>
-        <div className="profileImage">
-          <UploadDropzone 
-          endpoint="imageUploader" 
-          onClientUploadComplete={(res) => {
-            if (res && res.length > 0) {
-              const url = res?.[0]?.url;
-              setImage(url);
-              console.log("Completed upload of image with url ", image);
-            }
-          }}/>
-
-        </div>
-          <button type="submit" className="handleProfileUpdate">
-          Change Profile Picture
-        </button>
-        
-      </form>
-      <div style={{ textAlign: 'right', padding: '10px', width: '50%', float: 'right' }}>
-      <h2>
-        {user.firstName} {user.lastName}
-      </h2>
+      <div style={{ textAlign: 'left', padding: '10px', width: '50%', float: 'right' }}>
+        <h2>
+          {user.firstName} {user.lastName}
+        </h2>
+        <p>{user.email}</p>
+        <p>{user.school}</p>
+        <p>{user.grade}</p>
+        <p>{user.bio}</p>
       </div>
 
       <h3 style = {{textAlign: 'center'}}>Your Reported Items</h3>
       {postedItems.map((item) => {
         return <HomepageCard item={item} />;
       })}
+
+      <h1>User Settings</h1>
+      <div className="profileImage" style={{width: '50%', float: 'left' }}>
+        <form onSubmit={handleProfileUpdate}>
+          <UploadDropzone 
+            endpoint="imageUploader" 
+            onClientUploadComplete={(res) => {
+            if (res && res.length > 0) {
+              const url = res?.[0]?.url;
+              setImage(url);
+              console.log("Completed upload of image with url ", image);
+            }
+            }}/>
+          <button type="submit" className="handleProfileUpdate">
+            Change Profile Picture
+          </button>
+        </form>
+      </div>
+      </body>
     </>
   );
 }
