@@ -18,8 +18,9 @@ export function Home() {
           new Date(d2.dateUploaded).getTime() -
           new Date(d1.dateUploaded).getTime(),
       ); //Orders items by posting date
-      setItems(itemData);
-      console.log(itemData);
+      const mostRecent = itemData.slice(0,5);
+      setItems(mostRecent);
+      console.log(mostRecent);
     }
     loadAllItems();
   }, []);

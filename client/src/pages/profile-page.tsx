@@ -83,10 +83,11 @@ export function Profile() {
       </div>
 
       <h3 style = {{textAlign: 'center'}}>Your Reported Items</h3>
-      {postedItems.map((item) => {
-        return <HomepageCard item={item} />;
-      })}
-
+      <div className="homepageRecentlyLost">
+        {postedItems.map((item) => {
+          return <HomepageCard item={item} />;
+        })}
+      </div>
       <h1>User Settings</h1>
       <div className="profileImage" style={{width: '50%', float: 'left' }}>
         <form onSubmit={handleProfileUpdate}>

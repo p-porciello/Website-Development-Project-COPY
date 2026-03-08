@@ -78,8 +78,10 @@ img {
 
 .homepageRecentlyLost {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, 350px);
   gap: 0.5em;
+  justify-content: center;
+  align-items: center;
 }
 
 .itemBox {
@@ -123,12 +125,16 @@ img {
   grid-area: tagsSelect;
   display: flex;
   justify-content: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
 }
 
 .locationInfo {
   grid-area: locationInfo;
   display: flex;
   justify-content: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
 }
 
 .itemInfo {
@@ -185,6 +191,13 @@ img {
   grid-area: submit;
 }
 
+.upload-dz {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .lostItemForm {
   background-color: white;
   border-radius: 10px;
@@ -203,6 +216,29 @@ img {
     'image description'
     'image generateText'
     'submit submit';
+}
+
+@media only screen and (max-width: 768px) {
+  .lostItemForm {
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    height: 80%;
+    padding: 3em;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3fr 1fr 1fr 1fr 1fr 2fr 1fr;
+    gap: 1em;
+    grid-template-areas:
+      'image'
+      'name'
+      'tags'
+      'tagsSelect'
+      'locationInfo'
+      'description'
+      'generateText'
+      'submit';
+  }
 }
 
 #dropZone {

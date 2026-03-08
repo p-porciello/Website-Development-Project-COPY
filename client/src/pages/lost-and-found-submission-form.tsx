@@ -75,7 +75,7 @@ export function SubmitLostItem() {
                         <h4><i>Preview of your uploaded image</i></h4>
                     </div>
             ) : (
-                <UploadDropzone 
+                <UploadDropzone className="upload-dz"
                 endpoint="imageUploader" 
                 //dropzone={{uploadAfterDrop: true}}
                 onClientUploadComplete={(res) => {
