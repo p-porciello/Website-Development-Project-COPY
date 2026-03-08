@@ -10,7 +10,17 @@
 }
 
 body:has(#view-specific-item) {
-  background-color: rgb(2, 2, 201);
+  background-color: var(--primary);
+}
+
+body:has(#create-account) {
+  background-color: var(--primary);
+  padding: 2.5em;
+}
+
+body:has(#sign-in) {
+  background-color: var(--primary);
+  padding: 2.5em;
 }
 
 img {
@@ -28,7 +38,6 @@ img {
   width: 100%;
   height: auto;
 }
-
 
 .card {
   padding: 2em;
@@ -48,7 +57,7 @@ img {
 }
 
 .container {
-  background-color: rgb(2, 2, 201);
+  background-color: var(--primary);
   width: 100vh;
   height: 100vh;
   display: flex;
@@ -65,9 +74,9 @@ img {
   top: 0;
   display: flex;
   justify-content: space-between;
-  background-color: #0e2a67;
+  background-color: var(--primary);
   padding-bottom: 0.5em;
-  border-bottom: #001524 solid 3px;
+  box-shadow: 0px 2px 3px black;
   width: 100%;
 }
 
@@ -78,7 +87,7 @@ img {
 
 .homepageRecentlyLost {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 350px);
+  grid-template-columns: repeat(auto-fit, 300px);
   gap: 0.5em;
   justify-content: center;
   align-items: center;
@@ -95,13 +104,61 @@ img {
   margin: 4px;
   padding: 4px;
   border-radius: 10px;
-  border-color: #5e50dc;
-  border-width: 4px;
+  border-color: var(--text-color);
+  border-width: 1px;
+  padding-bottom: 5px;
+  position: relative;
+}
+
+.recentUpload {
+  background-color: var(--accent);
+  border-radius: 5px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  position: absolute;
+  align-self: start;
+  justify-self: right;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.recentUpload i {
+  color: white;
+}
+
+.recentUpload p {
+  color: white;
+}
+
+.item img {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 .item:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
   transition: 0.1s;
+  box-shadow: 2px 2px 5px rgb(156, 156, 156)
+}
+
+.accountForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  background-color: white;
+  border-radius: 10px;
+  height: 80vh;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.new-acc-button {
+  width: 100%;
 }
 
 .barofcolor {
@@ -118,7 +175,45 @@ img {
 
 
 .blueBG {
-  background-color: rgb(0, 0, 107);
+  background-color: var(--primary);
+}
+
+.search {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
+  margin: 1em;
+  height: 2vh;
+}
+
+#searchBar {
+  border-color: var(--text-color);
+  border-radius: 5px;
+  border-width: 1px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  color: var(--text-color);
+}
+
+.tag {
+  background-color: gray;
+  border-radius: 100px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.05em;
+  padding-bottom: 0.05em;
+  border-color: var(--text-color);
+  border-width: 1px;
+
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
 }
 
 .tagsContent {
@@ -206,11 +301,10 @@ img {
   padding: 3em;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 3fr 1fr 1fr;
+  grid-template-rows: 1fr 3fr 2fr 4fr 2fr 2fr;
   gap: 1em;
   grid-template-areas:
     'image name'
-    'image tags'
     'image tagsSelect'
     'image locationInfo'
     'image description'

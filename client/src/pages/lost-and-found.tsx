@@ -26,10 +26,11 @@ export function LostAndFound() {
 
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-    let endpoint = `${URL}/lost-items/admin-approved`;
+    let endpoint = `${URL}/lost-items/admin-approved/true`;
     if (e.target.value) {
       endpoint = `${URL}/lost-items/search/${e.target.value}`;
     }
+    console.log(endpoint)
 
     const response = await fetch(endpoint);
     const itemData: LostItem[] = await response.json();
@@ -56,13 +57,16 @@ export function LostAndFound() {
   return (
     <>
       <h1>Lost items catalog page</h1>
-      <input
-        type="text"
-        placeholder="Search for an item..."
-        value={searchTerm}
-        onChange={handleSearch}
-        style ={{ backgroundImage: 'src/assets/search-ui-icon.png.webp', backgroundPosition: 'right', width:'50%'}}
-      />
+      <div className="search">
+        <i className="fas fa-search"></i>
+        <input id="searchBar"
+          type="text"
+          placeholder="Search for an item..."
+          value={searchTerm}
+          onChange={handleSearch}
+          style ={{ backgroundImage: 'src/assets/search-ui-icon.png.webp', backgroundPosition: 'right', width:'50%'}}
+        />
+      </div>
       <div className="homepageRecentlyLost">
         {items.map((item) => {
           /*

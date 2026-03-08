@@ -2,7 +2,7 @@
 import { getApprovedItems, updateItem, deleteSpecificItem, getSpecificUser } from '../api';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AdminCard } from '@/components/item-cards/AdminCard';
+import { HomepageCard } from '@/components/item-cards/HomepageCard';
 import { Modal } from '@/components/Modal'; //to use for denial feedback
 import { jwtDecode } from 'jwt-decode';
 import { SendAdminFeedbackEmail } from '@/components/email';
@@ -88,7 +88,7 @@ export function Admin() {
           {items.map((item) => {
             return (
             <div className="itemBox" key={item._id}>
-              <AdminCard item={item}/>
+              <HomepageCard item={item}/>
               <button onClick={() => handleApproval(item)}>Approve</button>
               <button onClick={() => {
                 setFeedback('');

@@ -37,9 +37,9 @@ export function CreateAccount() {
   }
 
   return (
-    <>
-      <h1>Create Account</h1>
-      <form onSubmit={handleSubmit}>
+    <div id="create-account">
+      <form className="accountForm" onSubmit={handleSubmit}>
+        <h2>Create Account</h2>
         <div>
           <label>Email Address: </label>
           <input
@@ -93,8 +93,8 @@ export function CreateAccount() {
             required
           ></input>
         </div>
-        <button type="submit">Create Account</button>
+        <button type="submit" className="new-acc-button">Create Account</button>
       </form>
-    </>
+    </div>
   );
 }

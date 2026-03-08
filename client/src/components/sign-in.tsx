@@ -29,10 +29,9 @@ export function SignIn() {
   }
 
   return (
-    <>
-      <div style={{ display:'fixed', top:0,width:'100%'}}>
-      <h1>Sign In to Existing Account</h1>
-      <form onSubmit={handleSubmit}>
+    <div id="sign-in">
+      <form className="accountForm" onSubmit={handleSubmit}>
+        <h2>Sign Into Your Account</h2>
         <div>
           <label>Email Address: </label>
           <input
@@ -52,9 +51,8 @@ export function SignIn() {
             max={30}
           ></input>
         </div>
-        <button type="submit">Sign In</button>
+        <button type="submit" className="new-acc-button">Sign In</button>
       </form>
-      </div>
-    </>
+    </div>
   );
 }

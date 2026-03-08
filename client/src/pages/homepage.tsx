@@ -36,8 +36,6 @@ export function Home() {
           Recently Lost
         </h2>
       </div>
-      </body>
-      <body>
         <div className="homepageRecentlyLost">
           {items.map((item) => {
             return <HomepageCard item={item} key={item.itemName}/>;

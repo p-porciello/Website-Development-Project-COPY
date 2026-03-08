@@ -34,12 +34,16 @@ export function CatalogueCard({ item }: { item: LostItem }) {
           //console.log(recentUpload)
   return (
     <Link to={`/view-item/${item._id}`} className="item">
+      {(recentUpload == true) ? 
+        <div className="recentUpload"><i className="fas fa-hourglass-start"></i><p>Recently Uploaded</p></div>: ""
+      }
       <img src={item.imgFileName} />
-      {(recentUpload == true) ? <div className="recentUpload"><i>STAR ICON HERE</i> Recently Uploaded</div>: ""}
       <h3><b>{item.itemName}</b></h3>
       <div className="tagsContainer">
         {tags.map((tag, index) => {
-            return <div className="tag" key={index}>{tag}</div>
+            if (tag && tag !== "N/A") {
+              return <div className="tag" key={index}>{tag}</div>
+            }
         })}
       </div>
       <p>

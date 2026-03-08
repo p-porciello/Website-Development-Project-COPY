@@ -127,7 +127,6 @@ export function SubmitLostItem() {
             />
           </div>
         </div>
-        <h2 className="tags"> Add Tags</h2>
         <div className="tagsContent">
           <div>
             <label>Item Type: </label>
