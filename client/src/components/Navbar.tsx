@@ -6,6 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 
 export function Navbar() {
   const [data, setData] = useState<{name: string, path: string}[]>([]);
+  const [clicked, setClicked] = useState<boolean>(false);
 
   useEffect(() => {
       async function loadUserData() {
@@ -38,6 +39,16 @@ export function Navbar() {
         );
       })}
       <button onClick={handleLogout}>Log Out</button>
+
+    {/*
+    <div id="mobile" onClick={() => setClicked(!clicked)}>
+      {clicked ? 
+      <i className="fas fa-bars"></i>
+      :
+      <i className='fas fa-times'></i>
+      }
+    </div>
+    */}
     </div>
   );
 }

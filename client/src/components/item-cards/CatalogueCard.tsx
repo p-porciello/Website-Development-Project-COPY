@@ -35,7 +35,7 @@ export function CatalogueCard({ item }: { item: LostItem }) {
   return (
     <Link to={`/view-item/${item._id}`} className="item">
       {(recentUpload == true) ? 
-        <div className="recentUpload"><i className="fas fa-hourglass-start"></i><p>Recently Uploaded</p></div>: ""
+        <div className="recentUpload"><i className="fas fa-hourglass-start"></i><p>Recently Reported</p></div>: ""
       }
       <img src={item.imgFileName} />
       <h3><b>{item.itemName}</b></h3>

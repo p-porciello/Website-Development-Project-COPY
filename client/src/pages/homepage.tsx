@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react';
 import { HomepageCard } from '@/components/item-cards/HomepageCard';
 import { Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
-import type { LostItem } from '../types';
+import { jwtDecode } from 'jwt-decode';
+import type { LostItem, User } from '../types';
 
 export function Home() {
   const [items, setItems] = useState<LostItem[]>([]);
+  const [user, setUser] = useState<Partial<User>>({});
 
   useEffect(() => {
     async function loadAllItems() {
@@ -21,6 +23,11 @@ export function Home() {
       const mostRecent = itemData.slice(0,5);
       setItems(mostRecent);
       console.log(mostRecent);
+
+      const token = sessionStorage.getItem('User');
+      if (!token) return;
+      const decodedUser = jwtDecode<User>(token);
+      setUser(decodedUser);
     }
     loadAllItems();
   }, []);
@@ -29,7 +36,7 @@ export function Home() {
     <>
     <body>
       <header>
-        <h1> UCVTS Lost and Found </h1>
+        <h1>Hi, {user.firstName}!</h1>
       </header>
       <div>
         <h2>

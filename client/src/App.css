@@ -31,13 +31,89 @@ img {
 #vsi-image {
   border-color: white;
   border-width: 3px;
-  width: 50%;
+  grid-area: vsi-img;
+  width: 100%;
+  height: auto;
+}
+
+#textInfo {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  width: 100%;
+  padding: 2em;
+  grid-area: vsi-text;
+  justify-content: space-evenly;
+}
+
+.vsi-info-box {
+  display: flex;
+  align-items: flex-start;
+}
+
+.description {
+  flex-direction: column;
+}
+
+.vsi-container {
+  padding-left: 3em;
+  padding-right: 3em;
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
+
+  grid-template-areas:
+    "vsi-img vsi-text"
+}
+
+@media only screen and (max-width: 768px) {
+  .vsi-container {
+    padding-left: 3em;
+    padding-right: 3em;
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+
+    grid-template-areas:
+      "vsi-img"
+      "vsi-text"
+  }
+}
+
+.vsi-misc {
+  background-color: var(--light-bg);
+  border-radius: 10px;
+  margin-left: 3em;
+  margin-right: 3em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
+
+.inquiriesContainer {
+  padding-left: 3em;
+  padding-right: 3em;
+  margin-bottom: 1em;
 }
 
 #preview {
   width: 100%;
   height: auto;
+}
+
+.itemImage {
+  position: relative;
 }
 
 .card {
@@ -106,7 +182,7 @@ img {
 }
 
 .item {
-  background-color: #fbfbfe;
+  background-color: var(--light-bg);
   margin: 4px;
   padding: 4px;
   border-radius: 10px;
@@ -114,6 +190,31 @@ img {
   border-width: 1px;
   padding-bottom: 5px;
   position: relative;
+}
+
+.previewText {
+  background-color: var(--accent);
+  border-radius: 5px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  gap: 5px;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  z-index: 10000;
+}
+
+.previewText i {
+  color: white;
+}
+
+.previewText p {
+  color: white;
 }
 
 .recentUpload {
@@ -124,7 +225,7 @@ img {
   position: absolute;
   align-self: start;
   justify-self: right;
-  width: 60%;
+  width: 67%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -250,17 +351,6 @@ img {
   height: 50vh;
 }
 
-.textInfo {
-  background-color: white;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 100%;
-  padding: 2em;
-  height: 100%;
-}
-
 .itemImage {
   grid-area: image;
 }
@@ -301,7 +391,7 @@ img {
 }
 
 .lostItemForm {
-  background-color: white;
+  background-color: var(--light-bg);
   border-radius: 10px;
   width: 100%;
   height: 80%;
@@ -321,7 +411,7 @@ img {
 
 @media only screen and (max-width: 768px) {
   .lostItemForm {
-    background-color: white;
+    background-color: var(--light-bg);
     border-radius: 10px;
     width: 100%;
     height: 80%;
@@ -349,7 +439,7 @@ img {
 }
 
 .form {
-  background-color: white;
+  background-color: var(--light-bg);
   border-radius: 10px;
   width: 100%;
   height: 80%;
@@ -360,7 +450,7 @@ img {
 }
 
 .modalChildren {
-  background: white;
+  background: var(--light-bg);
   border-radius: 10px;
   box-shadow: 6px;
 }
@@ -372,8 +462,42 @@ img {
 }
 
 .inquiry {
-  background-color: white;
+  background-color: var(--light-bg);
   border-radius: 10px;
+  padding: 0.5em;
+  padding-left: 1em;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.wide-button {
+  width: 100%;
+}
+
+.write-inquiry {
+  background-color: var(--light-bg);
+  margin-left: 3em;
+  margin-right: 3em;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.submit-inquiries-container {
+  background-color: var(--light-bg);
+  margin-left: 3em;
+  margin-right: 3em;
+  padding: 1em;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.buttonContainer {
+  padding-left: 3em;
+  padding-right: 3em;
 }
 /*
 @theme inline {

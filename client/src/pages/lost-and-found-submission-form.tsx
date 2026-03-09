@@ -3,6 +3,7 @@ import { createNewItem } from '../api';
 import { Input } from '@/components/ui/input';
 import { jwtDecode } from 'jwt-decode';
 import { generateUploadDropzone } from '@uploadthing/react';
+import { useNavigate } from 'react-router-dom';
 import type { User, Inquiry } from '../types';
 const UploadDropzone = generateUploadDropzone({
   url: 'http://localhost:8080/api/uploadthing',
@@ -20,6 +21,8 @@ export function SubmitLostItem() {
   const [itemColor, setColor] = useState('');
   const [itemBrand, setBrand] = useState('');
   const [itemInquiries, setInquiries] = useState<Inquiry[]>([])
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadUserData() {
@@ -52,7 +55,8 @@ export function SubmitLostItem() {
     console.log(submitObject);
     try {
       await createNewItem(submitObject);
-      alert('Item reported successfully!');
+      console.log('Item reported successfully!');
+      navigate('/home');
     } catch (error) {
       console.error('Failed to submit item:', error);
       alert('Failed to report item. Please try again.');
@@ -72,7 +76,7 @@ export function SubmitLostItem() {
             image ? (
                     <div className="imgPreview">
                         <img id="preview" src={image}/>
-                        <h4><i>Preview of your uploaded image</i></h4>
+                        <div className="previewText"><i className="fas fa-image"></i><p>Preview</p></div>
                     </div>
             ) : (
                 <UploadDropzone className="upload-dz"

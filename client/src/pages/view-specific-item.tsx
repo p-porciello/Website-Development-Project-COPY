@@ -17,6 +17,9 @@ export function ViewItem() {
   const [buttonText, setButtonText] = useState<string>('')
   const [placeholderText, setPlaceholder] = useState<string>('');
 
+  const [update, setUpdate] = useState<number>(0);
+  const [tags, setTags] = useState<string[]>([]);
+
   let params = useParams();
   let id = params.id as string;
   const navigate = useNavigate();
@@ -38,9 +41,11 @@ export function ViewItem() {
       if (!finder) return;
       setReceiver(finder);
       setInquiries(data.inquiries)
+      setTags([data.color, data.itemType, data.brand])
+
     }
     loadData();
-  }, []); 
+  }, [update]); 
 
   async function handleClaim() {
     if (!id) return;
@@ -88,7 +93,7 @@ export function ViewItem() {
     //console.log(`inquiries = ${newInquiry.receiverName}`);
     setInquiries(item.inquiries);
     setTo('');
-    window.location.reload();
+    setUpdate(update + 1);
   }
 
 
@@ -96,59 +101,50 @@ export function ViewItem() {
     <div id="view-specific-item">
     {/*console.log(`item.inquiries: ${item.inquiries}\nitemInquiries: ${itemInquiries}`)*/}
         <h1>{item.itemName}</h1>
-        <div className="itemInfo">
+        <div className="vsi-container">
           <img id="vsi-image" src={item.imgFileName}/>
-          <div className="textInfo">
-            <div id="dateUploadedBox">
-              <h3>Date Uploaded:</h3>
-              <p>{item.dateUploaded?.substring(4, 15)}</p>
+          <div id="textInfo">
+            <div className="vsi-info-box">
+              <h3><b>Date Uploaded:</b> {item.dateUploaded?.substring(4, 15)}</h3>
             </div>
-            <div id="descriptionBox">
-              <h3>Description:</h3>
+            <div className="vsi-info-box description">
+              <h3><b>Description:</b></h3>
               <p>{item.description}</p>
             </div>
-            <div id="itemTypeBox">
-              <h3>Item Type:</h3>
-              <p>{item.itemType}</p>
+            <div className="vsi-info-box">
+              <h3><b>Found At:</b> {item.schoolFoundIn}</h3>
             </div>
-            <div id="itemColorBox">
-              <h3>Color:</h3>
-              <p>{item.color}</p>
+            <div className="vsi-info-box">
+              <h3><b>Found By:</b> {`${receiver.firstName} ${receiver.lastName}`}</h3>
             </div>
-            <div id="foundAtBox">
-              <h3>Found At:</h3>
-              <p>{item.schoolFoundIn}</p>
-            </div>
-            <div id="postedByBox">
-              <h3>Found by:</h3>
-              <p>{`${receiver.firstName} ${receiver.lastName}`}</p>
+            <div className="tagsContainer">
+              {tags.map((tag, index) => {
+                  if (tag && tag !== "N/A") {
+                    return <div className="tag" key={index}>{tag}</div>
+                  }
+              })}
             </div>
           </div>
       </div>
-      <div>
-        {(item.claimedBy) ? 
-        (<h2>This item has already been claimed.</h2>) 
-        : 
-        (<button onClick={(e) => {
-          e.preventDefault();
-          SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
-          handleClaim();
-        }}>Claim this Item</button>)}
-        {/* {item.claimedBy != null && item.claimedBy !== 'N/A' && (
-          <div>
-            <h2>This item has already been claimed.</h2>
-          </div>
-        )} */}
-      </div>
-      
-        {/*<button onClick={(e) => {
-          e.preventDefault();
-          SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
-          handleClaim();
-        }}>Claim this Item</button> */}
 
-      <h2>Ask for More Information</h2>
-      <p>All additional information you ask from this item's original poster can be found below.  This information will only be visible to you and the poster.</p>
+        {(item.claimedBy) ? 
+        (
+        <div className="vsi-misc">
+        <h2><i><b>This item has already been claimed.</b></i></h2>
+        </div>)
+        : 
+        (<div className="buttonContainer">
+        <button className="wide-button" onClick={(e) => {
+          e.preventDefault();
+          SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
+          handleClaim();
+        }}>Claim this Item</button></div>)}
+
+      <div className="vsi-misc">
+        <h2>Ask for More Information</h2>
+        <p>All additional information you ask from this item's original poster can be found below.  This information will only be visible to you and the poster.</p>
+      </div>
+
       <div className="inquiriesContainer">
         {
         //@ts-ignore
@@ -157,7 +153,7 @@ export function ViewItem() {
           if (user._id === inquiry.inquirerId || user._id === inquiry.receiverId) {
             return (
               <div className="inquiry" key={index}>
-                <b>{inquiry.inquirerName}</b> <i>{inquiry.dateSent.substring(4)}</i>
+                <p><b>{inquiry.inquirerName}</b> <i>{inquiry.dateSent.substring(4)}</i></p>
                 <p>to: {inquiry.receiverName}</p>
                 <p>{inquiry.content}</p>
 
@@ -169,37 +165,31 @@ export function ViewItem() {
                 }}>Reply</button>
               </div>
             );
-        }})): <p>You haven't written any inquiries about this item.</p>}
+        }})): <div className="vsi-misc no-inquiries-ms"><p>You haven't written any inquiries about this item.</p></div>}
       </div>
-        {/*}
-        {(user._id === receiver._id) ? (
-          <select onChange={(e) => {setTo(e.target.value)}}>
-            {itemInquiries?.map((inquiry, index) => {
-            return (
-                <option key={index}>{inquiry.inquirerId}</option>
-              );
-        })}
-          </select>
-        ): <p></p>}
-        */}
         {
           (toId !== '') ? 
-            <form onSubmit={(e) => {
-            e.preventDefault();
-            updateInquiries()}}>
-            <textarea
-              name="inquiryForm"
-              placeholder={placeholderText}
-              onChange={(e) => setBody(e.target.value)}
-              maxLength={500}
-            />
-            <button type="submit">{buttonText}</button>
-          </form>
-          : (<button onClick={() => {
-            setTo(receiver._id);
-            setToName(`${receiver.firstName} ${receiver.lastName}`)
-            setPlaceholder("Write any questions or concerns regarding this item here.");
-            setButtonText("Submit Inquiry")}}>Write an Inquiry</button>)
+            (<div className="submit-inquiries-container">
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                updateInquiries()}}>
+                <textarea
+                  name="inquiryForm"
+                  placeholder={placeholderText}
+                  onChange={(e) => setBody(e.target.value)}
+                  maxLength={500}
+                />
+                <button type="submit">{buttonText}</button>
+              </form>
+            </div>)
+          : (<div className="buttonContainer">
+          <button className="wide-button" 
+            onClick={() => {
+              setTo(receiver._id);
+              setToName(`${receiver.firstName} ${receiver.lastName}`)
+              setPlaceholder("Write any questions or concerns regarding this item here.");
+              setButtonText("Submit Inquiry")
+            }}>Write an Inquiry</button></div>)
         }
     </div>
     

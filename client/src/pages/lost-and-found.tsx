@@ -43,20 +43,9 @@ export function LostAndFound() {
     setItems(itemData);
   };
 
-  /*useEffect(() => {
-        async function loadAllItems() {
-            const defaultQuery = { query: "" };
-            const itemData = await getQueriedItems(defaultQuery);
-            itemData.sort((d1, d2) => new Date(d2.dateUploaded).getTime() - new Date(d1.dateUploaded).getTime());  //Orders items by posting date
-            setItems(itemData)
-        }
-        loadAllItems()
-    }, [])
-    */
-
   return (
     <>
-      <h1>Lost items catalog page</h1>
+      <h1>All Lost Items</h1>
       <div className="search">
         <i className="fas fa-search"></i>
         <input id="searchBar"
@@ -69,10 +58,6 @@ export function LostAndFound() {
       </div>
       <div className="homepageRecentlyLost">
         {items.map((item) => {
-          /*
-                    let date = new Date(item.dateUploaded);
-                    let stringDate = date.toString();
-                    */
           return <CatalogueCard item={item} key={item.itemName}/>;
         })}
       </div>

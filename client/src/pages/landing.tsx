@@ -19,10 +19,3 @@ export function Landing() {
     </>
   );
 }
-/*
-                    <Link to={page.path} className="navItem">
-                        <button>
-                            {page.name}
-                        </button>
-                    </Link>
-                    */

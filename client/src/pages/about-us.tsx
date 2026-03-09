@@ -15,7 +15,7 @@ export function AboutUs() {
           Caitlin enjoys solving rubiks cubes and learning about sharks in her
           free time, and is planning on getting her scuba certification.
         </p>
-        <br></br> {/*here for spacing*/}
+        <br></br>
         <h2>Paige Porciello</h2>
         <p>Paige is an AIT junior in the school's IT track.  Her programming experience
           comes from multiple years of formal schoolwork (AP CSP & AP CSA) along with

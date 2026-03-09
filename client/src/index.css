@@ -14,7 +14,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --primary: #102f67;
+  --primary: #001448;
   --secondary: #7e87ff;
   --accent: #5058de;
   --text-color: #020114;
@@ -49,7 +49,7 @@ textarea {
 }
 
 h1 {
-  background-color: #0e2a67;
+  background-color: var(--primary);
   padding-top:20vh;
   padding-bottom:5vh;
   color: #ffffff;

@@ -122,7 +122,7 @@ router.put('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
       postedBy: req.body.postedBy,
       claimedBy: req.body.claimedBy,
       adminApproved: req.body.adminApproved,
-      inquiries: req.body.inquiries
+      inquiries: []
     },
   };
   let lostItemData = await db

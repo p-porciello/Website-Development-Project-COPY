@@ -12,21 +12,13 @@ export const pageData = [
     path: '/submit-item',
   },
   {
-    name: 'UCVTS Map',
-    path: '/map',
-  },
-  {
     name: 'About Us',
     path: '/about-us',
   },
   {
     name: 'FAQ',
     path: '/faq',
-  },
-  {
-    name: 'Your Profile',
-    path: '/profile',
-  },
+  }
 ];
 
 export const adminPageData = [
@@ -47,19 +39,11 @@ export const adminPageData = [
     path: '/submit-item',
   },
   {
-    name: 'UCVTS Map',
-    path: '/map',
-  },
-  {
     name: 'About Us',
     path: '/about-us',
   },
   {
     name: 'FAQ',
     path: '/faq',
-  },
-  {
-    name: 'Your Profile',
-    path: '/profile',
-  },
+  }
 ];
