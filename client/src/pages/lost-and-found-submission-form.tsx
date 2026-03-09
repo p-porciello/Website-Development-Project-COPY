@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { createNewItem } from '../api';
+import { createNewItem, generateAltText } from '../api';
 import { Input } from '@/components/ui/input';
 import { jwtDecode } from 'jwt-decode';
 import { generateUploadDropzone } from '@uploadthing/react';
-import type { User, Inquiry } from '../types';
+import type { User, Inquiry, ImageInfo } from '../types';
 const UploadDropzone = generateUploadDropzone({
   url: 'http://localhost:8080/api/uploadthing',
 });
@@ -11,6 +11,7 @@ const UploadDropzone = generateUploadDropzone({
 export function SubmitLostItem() {
   const [user, setUser] = useState<Partial<User>>({});
 
+  const [alt, setAlt] = useState('');
   const [image, setImage] = useState<string | undefined>('');
   const [mime, setMime] = useState<string | undefined>('');
   const [lostItemName, setName] = useState('');
@@ -31,6 +32,11 @@ export function SubmitLostItem() {
     }
     loadUserData();
   }, []);
+
+  async function callGemini(img: ImageInfo) {
+    const res = await generateAltText(img);
+    return res;
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -78,6 +84,11 @@ export function SubmitLostItem() {
               const mimeType = res?.[0]?.type;
               setImage(url);
               setMime(mimeType)
+              let analyzeObject: ImageInfo = {
+                url: url,
+                mime: mime
+              }
+              const geminiResponse = callGemini(analyzeObject);
               console.log("Completed upload of image with url ", image);
             }
           }}/>

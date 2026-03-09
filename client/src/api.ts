@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { LostItem, Inquiry } from './types';
+import type { LostItem, Inquiry, ImageInfo } from './types';
 
 const URL = 'http://localhost:8080';
 
@@ -171,6 +171,16 @@ export async function deleteSpecificUser(id: string) {
     }
     */
   return response;
+}
+
+export async function generateAltText(image: ImageInfo) {
+  const response = await axios(`${URL}/gemini`, image)
+  console.log(response)
+  if (response) {
+    return response;
+  } else {
+    alert("generation unsuccessful")
+  }
 }
 
 export async function verifyUser(user: { email: string; password: string }) {

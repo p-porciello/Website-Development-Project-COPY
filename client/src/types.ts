@@ -38,3 +38,8 @@ export interface Inquiry {
   dateSent: string;
   content: string;
 }
+
+export interface ImageInfo {
+  url: string | undefined,
+  mime: string | undefined
+}
