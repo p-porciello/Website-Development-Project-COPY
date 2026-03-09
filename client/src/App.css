@@ -60,6 +60,11 @@ button.landing-button:hover {
 #landing-header {
   background-color: transparent;
   padding-top: 0.1em;
+  color: white;
+}
+
+#landing-subtext {
+  color: white;
 }
 
 #landing-text-container {
