@@ -34,6 +34,14 @@ a:hover {
   color: var(--text-color);
 }
 
+input {
+  border-color: var(--text-color);
+  border-width: 1px;
+  color: var(--text-color);
+  padding: 0.5em;
+  border-radius: 7px;
+}
+
 body {
   padding-left: 5%;
   padding-right: 5%;
@@ -74,21 +82,28 @@ select {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
+  border-color: var(--text-color);
   padding: 0.6em 1.2em;
-  color: var(--light-bg);
+  color: var(--text-color);
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--text-color);
   cursor: pointer;
+  background-color: var(--primary);
   transition: border-color 0.25s;
+  color: white;
 }
+
 button:hover {
-  border-color: var(--accent);
+  background-color: transparent;
+  border-width: 1px;
+  border-color: var(--text-color);
+  color: var(--text-color)
 }
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  color: rgb(193, 230, 255);
 }
 
 @media (prefers-color-scheme: light) {

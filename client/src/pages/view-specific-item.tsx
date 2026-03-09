@@ -134,7 +134,7 @@ export function ViewItem() {
         </div>)
         : 
         (<div className="buttonContainer">
-        <button className="wide-button" onClick={(e) => {
+        <button className="wide-button vsi-button" onClick={(e) => {
           e.preventDefault();
           SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
           handleClaim();
@@ -157,7 +157,7 @@ export function ViewItem() {
                 <p>to: {inquiry.receiverName}</p>
                 <p>{inquiry.content}</p>
 
-                <button className="replyButton" onClick={() => {
+                <button className="transparent-button" onClick={() => {
                   setTo(inquiry.inquirerId);
                   setToName(inquiry.inquirerName);
                   setPlaceholder(`Write your reply to ${inquiry.inquirerName} here.`);
@@ -183,7 +183,7 @@ export function ViewItem() {
               </form>
             </div>)
           : (<div className="buttonContainer">
-          <button className="wide-button" 
+          <button className="wide-button vsi-button" 
             onClick={() => {
               setTo(receiver._id);
               setToName(`${receiver.firstName} ${receiver.lastName}`)

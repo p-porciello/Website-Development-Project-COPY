@@ -29,7 +29,7 @@ export function SignIn() {
   }
 
   return (
-    <div id="sign-in">
+    <div id="sign-in" className="flex items-center justify-center">
       <form className="accountForm" onSubmit={handleSubmit}>
         <h2>Sign Into Your Account</h2>
         <div>

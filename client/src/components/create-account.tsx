@@ -37,7 +37,7 @@ export function CreateAccount() {
   }
 
   return (
-    <div id="create-account">
+    <div id="create-account" className="flex items-center justify-center">
       <form className="accountForm" onSubmit={handleSubmit}>
         <h2>Create Account</h2>
         <div>

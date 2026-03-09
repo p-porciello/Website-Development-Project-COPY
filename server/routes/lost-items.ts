@@ -59,7 +59,8 @@ router.get('/admin-approved/:q',  /*verifyToken,*/ async (req: Request, res: Res
     if (lostItemData.length > 0) {
       res.json(lostItemData);
     } else {
-      throw new Error('Data not found or returned as an array correctly');
+      const empty: never[] = []
+      res.json(empty);
     }
   },
 );

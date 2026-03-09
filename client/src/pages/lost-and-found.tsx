@@ -57,8 +57,8 @@ export function LostAndFound() {
         />
       </div>
       <div className="homepageRecentlyLost">
-        {items.map((item) => {
-          return <CatalogueCard item={item} key={item.itemName}/>;
+        {items.map((item, index) => {
+          return <CatalogueCard item={item} key={index}/>;
         })}
       </div>
     </>

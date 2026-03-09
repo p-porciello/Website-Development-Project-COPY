@@ -28,9 +28,9 @@ export function Settings() {
 
   function changeButtonText() {
     if (colorMode) {
-      setButtonText('Enable light mode')
-    } else {
       setButtonText('Enable dark mode')
+    } else {
+      setButtonText('Enable light mode')
     }
   }
 
@@ -41,10 +41,11 @@ export function Settings() {
 
   return (
     <div className="settings-container">
-      <button onClick={() => {
+      <h2>Settings</h2>
+      <button className="settings-button" onClick={() => {
         changeColorScheme(!colorMode);
         changeButtonText()}}>{buttonText}</button>
-      <button onClick={handleLogout}>Log Out</button>
+      <button className="settings-button" onClick={handleLogout}>Log Out</button>
     </div>
   )
 }

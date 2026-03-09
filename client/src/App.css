@@ -24,8 +24,55 @@ body:has(#sign-in) {
   padding: 2.5em;
 }
 
+body:has(#landing) {
+  background-image: url('/src/assets/AIT.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 2.5em;
+}
+
+#landing nav {
+  background-color: rgb(12, 3, 63);
+}
+
+#landing #nav-buttons {
+  background-color: transparent;
+}
+
+#landing #nav-buttons.active {
+  background-color: rgb(12, 3, 63);
+}
+
 img {
   border-radius: 10px;
+}
+
+button.landing-button {
+  background-color: rgb(12, 3, 63);
+  border-color: transparent;
+  color: white;
+}
+
+button.landing-button:hover {
+  color: rgb(191, 211, 255);
+}
+
+#landing-header {
+  background-color: transparent;
+  padding-top: 0.1em;
+}
+
+#landing-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+#landing #mobile i {
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
 }
 
 #vsi-image {
@@ -190,6 +237,63 @@ img {
   
 }
 
+button.vsi-button {
+  background-color: var(--light-bg);
+}
+
+button.vsi-button:hover {
+  background-color: transparent;
+}
+
+button.navbar-button {
+  background-color: transparent;
+  color: white;
+  border-color: transparent;
+}
+button.navbar-button i {
+  color: white;
+}
+
+button.navbar-button:hover {
+  color: rgb(193, 230, 255);
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+
+button.transparent-button {
+  background-color: transparent;
+  color: var(--text-color);
+  border-color: transparent;
+  font-weight: bold;
+}
+
+button.transparent-button:hover {
+  background-color: transparent;
+  color: var(--secondary);
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  border-color: transparent;
+  font-weight: bold;
+}
+
+button.settings-button:focus {
+  color: white;
+}
+
+button.settings-button:hover {
+  color: var(--text-color);
+}
+
+#see-all {
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  align-self: start;
+}
+
+#see-all-container {
+  display: flex;
+  padding-left: 3.5em;
+}
 
 .navbar {
   position: fixed;
@@ -278,11 +382,11 @@ img {
 }
 
 .previewText i {
-  color: var(--light-bg);
+  color: white;
 }
 
 .previewText p {
-  color: var(--light-bg);
+  color: white;
 }
 
 .recentUpload {
@@ -301,11 +405,11 @@ img {
 }
 
 .recentUpload i {
-  color: var(--light-bg);
+  color: white;
 }
 
 .recentUpload p {
-  color: var(--light-bg);
+  color: white;
 }
 
 .item img {
@@ -323,14 +427,15 @@ img {
 .accountForm {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
   padding: 1em;
   background-color: var(--light-bg);
   border-radius: 10px;
-  height: 80vh;
-
+  padding-top: 3em;
+  padding-bottom: 3em;
   align-items: center;
   justify-content: center;
+  width: 60%;
 }
 
 .new-acc-button {
@@ -373,7 +478,7 @@ img {
 }
 
 .tag {
-  background-color: gray;
+  background-color: var(--accent);
   border-radius: 100px;
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -530,17 +635,24 @@ img {
   position: relative;
 }
 
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
 .close-button {
   position: absolute;
   right: 5%;
   top: 5%;
   color: var(--text-color);
-  background: none;
+  background: transparent;
+  border-color: transparent;
 }
 
 .close-button:hover {
   color: red;
-  border-color: none;
+  border-color: transparent;
 } 
 
 .inquiriesContainer {

@@ -24,15 +24,17 @@ export function Admin() {
   useEffect(() => {
     async function loadData() {
       const itemData = await getApprovedItems("false");
-      if (!itemData) return;
-      itemData.sort(
-        (d1, d2) =>
-          new Date(d2.dateUploaded).getTime() -
-          new Date(d1.dateUploaded).getTime(),
-      ); //Orders items by posting date
+      if (!itemData) {
+        return;
+      } else {
+      //itemData.sort(
+       // (d1, d2) =>
+        //  new Date(d2.dateUploaded).getTime() -
+        //  new Date(d1.dateUploaded).getTime(),
+      //); //Orders items by posting date
       setItems(itemData);
       console.log(itemData);
-
+    }
       const token = sessionStorage.getItem('User');
       if (!token) return;
       const decodedUser = jwtDecode<User>(token);
@@ -88,9 +90,9 @@ export function Admin() {
         </header>
         </div>
         <div className="homepageRecentlyLost">
-          {items.map((item) => {
+          {items.map((item, index) => {
             return (
-            <div className="itemBox" key={item._id}>
+            <div className="itemBox" key={index}>
               <HomepageCard item={item}/>
               <button onClick={() => handleApproval(item)}>Approve</button>
               <button onClick={() => {

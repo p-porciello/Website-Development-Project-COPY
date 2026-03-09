@@ -3,10 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { pageData, adminPageData } from './pageData';
 import { User } from '@/types';
 import { jwtDecode } from 'jwt-decode';
+import { Settings } from './Settings';
+import { Modal } from './Modal';
 
 export function Navbar() {
   const [data, setData] = useState<{name: string, path: string}[]>([]);
   const [clicked, setClicked] = useState<boolean>(false);
+  const [modalVis, setModalVis] = useState(false);
 
   useEffect(() => {
       async function loadUserData() {
@@ -22,31 +25,8 @@ export function Navbar() {
       loadUserData();
     }, []);
 
-  const navigate = useNavigate();
-
-  function handleLogout() {
-    sessionStorage.removeItem('User');
-    navigate('/');
-  }
-
-  function changeColorScheme(darkMode: boolean) {
-    const root = document.documentElement;
-    if (darkMode) {
-      root.style.setProperty('--light-bg', "#140929");
-      root.style.setProperty('--text-color', "#fcfdff");
-      root.style.setProperty('--primary', "#1932A1");
-      root.style.setProperty('--secondary', "#4D59FF");
-      root.style.setProperty('--accent', "#2002BA");
-    } else {
-      root.style.setProperty('--text-color', "#020114");
-      root.style.setProperty('--primary', "#001448");
-      root.style.setProperty('--secondary', "#7e87ff");
-      root.style.setProperty('--accent', "#5058de");
-      root.style.setProperty('--light-bg', '#fcfdff');
-    }
-  }
-
     return (
+    <>
     <nav className="navbar">
 
       <div id="nav-buttons" className={clicked ? "#nav-buttons active": "#nav-buttons"
@@ -54,11 +34,11 @@ export function Navbar() {
         {data.map((page) => {
           return (
             <Link to={page.path} className="navItem" key={page.name}>
-              <button>{page.name}</button>
+              <button className="navbar-button">{page.name}</button>
             </Link> 
           );
         })}
-        <button onClick={handleLogout}>Log Out</button>
+        <button className="navbar-button" onClick={() => setModalVis(true)}><i className="fas fa-gear"></i></button>
       </div>
     
       
@@ -72,5 +52,10 @@ export function Navbar() {
       
     
     </nav>
+
+    <Modal open={modalVis} onClose={() => setModalVis(false)}>
+      <Settings/>
+    </Modal>
+    </>
   );
 }

@@ -48,9 +48,11 @@ export function Home() {
             return <HomepageCard item={item} key={item.itemName}/>;
           })}
         </div>
+      <div id="see-all-container">
         <Link to={'/lost-and-found'} id="seeAllButton">
-          <button>See all</button>
+          <button className="transparent-button" id="see-all">See all <i className="fas fa-chevron-right"></i></button>
         </Link>
+      </div>
       <div>
         <h2>Getting started?</h2>
         <p>[Youtube Video embed here]</p>

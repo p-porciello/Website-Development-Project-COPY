@@ -1,21 +1,16 @@
 import { CreateAccount } from '../components/create-account';
 import { Link } from 'react-router-dom';
+import { LandingNav } from '@/components/LandingNav';
 
 export function Landing() {
   return (
-    <>
-      <div>
-        <h2>Welcome to</h2>
-        <h1>UCVTS Lost and Found</h1>
-        <h2>New?</h2>
-        <Link to={'/create-account'} id="createAccountButton">
-          <button>Create An Account</button>
-        </Link>
-        <h2>Returning user?</h2>
-        <Link to={'/login'} id="loginButton">
-          <button>Sign in</button>
-        </Link>
+    <div id="landing">
+          <LandingNav/>
+
+      <div id="landing-text-container">
+        <h2 id="landing-subtext">Welcome to</h2>
+        <h1 id="landing-header">UCVTS Lost and Found</h1>
       </div>
-    </>
+    </div>
   );
 }
