@@ -60,6 +60,10 @@ h1 {
   line-height: 1.1;
 }
 
+h2 {
+  font-weight:bold;
+}
+
 select {
   border-color: var(--text-color);
   border-width: 1px;

@@ -64,9 +64,9 @@ export function Navbar() {
       
       <div id="mobile" onClick={() => setClicked(!clicked)}>
         {clicked ? 
-        <i className="fas fa-bars"></i>
+        <i className="fas fa-times"></i>
         :
-        <i className='fas fa-times'></i>
+        <i className='fas fa-bars'></i>
         }
       </div>
       

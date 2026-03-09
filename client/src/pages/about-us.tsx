@@ -3,7 +3,7 @@ export function AboutUs() {
     <>
       <h1>About the Developers</h1>
 
-      <div style={{ float: 'left', width: '50%' }}>
+      <div style={{ float: 'left', width: '65%',  paddingLeft: '10vh' }}>
         <h2>Caitlin Sayah</h2>
         <p>
           Caitlin is an AIT junior who is in the IT track. She is also on the
@@ -15,6 +15,11 @@ export function AboutUs() {
           Caitlin enjoys solving rubiks cubes and learning about sharks in her
           free time, and is planning on getting her scuba certification.
         </p>
+         </div>
+         <div style={{width:'30%', float:'left', padding:'1vh',display:'fixed', maxHeight:'400px' }}>
+          <img src={'src/assets/CaitlinBanquetPic.jpg'}/>
+         </div>
+        <div style={{float:'right', width: '65%', paddingRight: '10vh'}}>
         <br></br>
         <h2>Paige Porciello</h2>
         <p>Paige is an AIT junior in the school's IT track.  Her programming experience
@@ -28,6 +33,9 @@ export function AboutUs() {
           future, Paige hopes to pursue a career in astrophysics.
         </p>
       </div>
+        <div style={{width:'30%', float:'left', padding:'1vh',display:'fixed',  paddingLeft: '10vh' }}>
+        <img src={'src/assets/PaigeReal.jpeg'}/>
+        </div>
     </>
   );
 }
