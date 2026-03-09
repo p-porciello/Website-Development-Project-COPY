@@ -40,6 +40,7 @@ export function Navbar() {
       })}
       <button onClick={handleLogout}>Log Out</button>
 
+    
     {/*
     <div id="mobile" onClick={() => setClicked(!clicked)}>
       {clicked ? 
@@ -49,6 +50,7 @@ export function Navbar() {
       }
     </div>
     */}
+    
     </div>
   );
 }
