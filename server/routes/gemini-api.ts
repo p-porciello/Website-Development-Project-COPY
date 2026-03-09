@@ -21,8 +21,7 @@ router.get('/',  /*verifyToken,*/ async (req: Request, res: Response) => {
   let testResponses: GenerateContentResponse[] = [];
   let itemImages = await db.collection('lostItem').find({ adminApproved: true }).project({ imgFileName: 1, imgMimeType: 1, _id: 0 }).toArray();
 
-  itemImages.map(async (image) => {
-    const imageUrl = await fetch(image.imgFileName)
+    const imageUrl = await fetch(itemImages?.[0]?.imgFileName)
     const imageArrayBuffer = await imageUrl.arrayBuffer();
     const base64ImageData = Buffer.from(imageArrayBuffer).toString('base64');
     const result = await ai.models.generateContent({
@@ -30,7 +29,7 @@ router.get('/',  /*verifyToken,*/ async (req: Request, res: Response) => {
         contents: [
             {
                 inlineData: {
-                    mimeType: image.imgMimeType,
+                    mimeType: itemImages?.[0]?.imgMimeType,
                     data: base64ImageData,
                 },
             },
@@ -39,13 +38,7 @@ router.get('/',  /*verifyToken,*/ async (req: Request, res: Response) => {
     });
     console.log(result)
     testResponses.push(result)
-  })
-
-  if (itemImages) {
-    res.json({imageinfo: itemImages, responses: testResponses});
-  } else {
-    res.json({message: "images couldn't be found :("})
-  }
+    res.json(result)
 });
 
 export default router;
