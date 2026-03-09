@@ -5,6 +5,7 @@ export function Settings() {
 
   const navigate = useNavigate();
   const [colorMode, setMode] = useState<boolean>(false)
+  const [buttonText, setButtonText] = useState<string>('Enable dark mode');
 
   function changeColorScheme(darkMode: boolean) {
     const root = document.documentElement;
@@ -21,6 +22,16 @@ export function Settings() {
       root.style.setProperty('--accent', "#5058de");
       root.style.setProperty('--light-bg', '#fcfdff');
     }
+
+    setMode(darkMode);
+  }
+
+  function changeButtonText() {
+    if (colorMode) {
+      setButtonText('Enable light mode')
+    } else {
+      setButtonText('Enable dark mode')
+    }
   }
 
   function handleLogout() {
@@ -30,7 +41,9 @@ export function Settings() {
 
   return (
     <div className="settings-container">
-      <button onClick={() => changeColorScheme(!colorMode)}>Change Color Scheme</button>
+      <button onClick={() => {
+        changeColorScheme(!colorMode);
+        changeButtonText()}}>{buttonText}</button>
       <button onClick={handleLogout}>Log Out</button>
     </div>
   )
