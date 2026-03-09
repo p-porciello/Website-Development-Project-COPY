@@ -37,7 +37,7 @@ export function CatalogueCard({ item }: { item: LostItem }) {
       {(recentUpload == true) ? 
         <div className="recentUpload"><i className="fas fa-hourglass-start"></i><p>Recently Reported</p></div>: ""
       }
-      <img src={item.imgFileName} />
+      <img src={item.imgFileName} alt={item.description}/>
       <h3 className="card-item-name"><b>{item.itemName}</b></h3>
       <div className="tagsContainer">
         {tags.map((tag, index) => {

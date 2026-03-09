@@ -21,7 +21,7 @@ export function HomepageCard({ item }: { item: LostItem }) {
 
   return (
     <Link to={`/view-item/${item._id}`} className="item">
-      <img src={item.imgFileName} />
+      <img src={item.imgFileName} alt={item.description}/>
       <h3 className="card-item-name"><b>{item.itemName}</b></h3>
       <div className="item-card-info">
         <p><i className="fas fa-user-circle"></i>
