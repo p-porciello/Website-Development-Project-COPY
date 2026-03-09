@@ -1,7 +1,7 @@
 export function FAQ() {
   return (
     <>
-      <h1>FAQ Page</h1>
+      <h1>Frequently Asked Questions</h1>
       <div style={{ textAlign: 'left' }}>
         <h2>What is the UCVTS Lost & Found?</h2>
       </div>

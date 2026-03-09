@@ -66,7 +66,7 @@ export function Profile() {
       <h1>User Profile Page</h1>
       <body>
       <div style={{ textAlign: 'left', padding: '10px', width: '50%', float: 'left' }}>
-        <img src={'src/assets/defaultProfilePicture.png'}
+        <img src={user.profileImageName} alt="Profile Image"
           style={{ height: '150px', width: '150px', borderRadius: '50%', border: '2px solid #001524', objectFit: 'cover' }}
           />
        
@@ -88,18 +88,27 @@ export function Profile() {
           return <HomepageCard item={item} />;
         })}
       </div>
-      <h1>User Settings</h1>
+     <h1 style={{padding:'2%', marginTop:'2%', marginBottom:'2%'}}>User Settings</h1>
       <div className="profileImage" style={{width: '50%', float: 'left' }}>
         <form onSubmit={handleProfileUpdate}>
-          <UploadDropzone 
-            endpoint="imageUploader" 
-            onClientUploadComplete={(res) => {
-            if (res && res.length > 0) {
-              const url = res?.[0]?.url;
-              setImage(url);
-              console.log("Completed upload of image with url ", image);
-            }
-            }}/>
+           {
+            image ? (
+                    <div className="imgPreview">
+                        <img id="preview" src={image}/>
+                        <h4><i>Preview of your uploaded image</i></h4>
+                    </div>
+            ) : (
+                <UploadDropzone className="upload-dz"
+                endpoint="imageUploader" 
+                //dropzone={{uploadAfterDrop: true}}
+                onClientUploadComplete={(res) => {
+                  if (res && res.length > 0) {
+                    const url = res?.[0]?.url;
+                    setImage(url);
+                    console.log("Completed upload of image with url ", image);
+                  }
+                }}/>
+            )}
           <button type="submit" className="handleProfileUpdate">
             Change Profile Picture
           </button>

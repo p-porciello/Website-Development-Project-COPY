@@ -1,11 +1,6 @@
 export function Map() {
   return (
      <>
-      <div style={{ display:'fixed', top:0,width:'100%'}}>
-      <header>
-        <h1>School Map Page</h1>
-      </header>
-      </div>
       <div className="mapContent"
       style={{
         display: "flex",

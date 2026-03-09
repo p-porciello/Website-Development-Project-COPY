@@ -7,6 +7,7 @@
   margin: auto;
   padding: 0;
   text-align: center;
+  font-family: verdana;
 }
 
 body:has(#view-specific-item) {
@@ -71,14 +72,19 @@ img {
 
 .navbar {
   position: fixed;
+  z-index: 100;
   top: 0;
-  display: flex;
+  display: fixed;
+  
   justify-content: space-between;
   background-color: var(--primary);
   padding-bottom: 0.5em;
   box-shadow: 0px 2px 3px black;
   width: 100%;
+  
 }
+
+
 
 .navItem {
   padding-left: 1%;
@@ -139,6 +145,7 @@ img {
 }
 
 .item:hover {
+  z-index: 10;
   transform: scale(1.01);
   transition: 0.1s;
   box-shadow: 2px 2px 5px rgb(156, 156, 156)
