@@ -112,7 +112,9 @@ export function SubmitLostItem() {
             required
           />
         </div>
+        {/*
         <button className="generateText">Generate Description</button>
+        */}
         <div className="locationInfo">
           <div className="buildingFound">
             <label>Building Item was Found In: </label>

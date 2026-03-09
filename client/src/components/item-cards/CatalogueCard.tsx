@@ -38,7 +38,7 @@ export function CatalogueCard({ item }: { item: LostItem }) {
         <div className="recentUpload"><i className="fas fa-hourglass-start"></i><p>Recently Reported</p></div>: ""
       }
       <img src={item.imgFileName} />
-      <h3><b>{item.itemName}</b></h3>
+      <h3 className="card-item-name"><b>{item.itemName}</b></h3>
       <div className="tagsContainer">
         {tags.map((tag, index) => {
             if (tag && tag !== "N/A") {
@@ -46,18 +46,20 @@ export function CatalogueCard({ item }: { item: LostItem }) {
             }
         })}
       </div>
-      <p>
-        <b>Date Found: </b>
-        {stringDate.substring(4, 15)}
-      </p>
-      <p>
-        <b>Location Found: </b>
-        {item.schoolFoundIn}
-      </p>
-      <p>
-        <b>Found By: </b>
-        {finderName}
-      </p>
+      <div className="item-card-info">
+        <p><i className="fas fa-user-circle"></i>
+          <b> Found By: </b>
+          {finderName}
+        </p>
+        <p><i className="fas fa-calendar"></i>
+          <b> Date Found: </b>
+          {stringDate.substring(4, 15)}
+        </p>
+        <p><i className="fas fa-map-marker-alt"></i>
+          <b> Location Found: </b>
+          {item.schoolFoundIn}
+        </p>
+      </div>
     </Link>
   );
 }

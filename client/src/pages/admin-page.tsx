@@ -8,6 +8,8 @@ import { jwtDecode } from 'jwt-decode';
 import { SendAdminFeedbackEmail } from '@/components/email';
 import type { LostItem, User } from '../types';
 
+import { ApprovalButton } from '@/components/AdminButtons';
+
 export function Admin() {
   const [user, setUser] = useState<Partial<User>>({});
   const [items, setItems] = useState<LostItem[]>([]);
@@ -15,6 +17,7 @@ export function Admin() {
   const [feedback, setFeedback] = useState('');
   const [reason, setReason] = useState('');
   const [specificItem, setSpecificItem] = useState<Partial<LostItem>>({});
+  const [update, setUpdate] = useState<number>(0);
 
   const navigate = useNavigate();
 
@@ -39,7 +42,7 @@ export function Admin() {
       }
     }
     loadData();
-  }, []);
+  }, [update]);
 
   async function handleApproval(item: LostItem) {
     const id = item._id;
@@ -64,7 +67,7 @@ export function Admin() {
         console.log(response);
         alert("Item approval didn't go through :(");
     } else {
-      window.location.reload(); //reloads window (updates items seen on admin's end)
+      setUpdate(update + 1); //reloads items seen on admin's end
     }
   }
 
@@ -118,7 +121,7 @@ export function Admin() {
                 </div>
                 <h3>Feedback for Original Reporter</h3>
                 <div className="feedbackContainer">
-                    <textarea
+                    <textarea id="feedback-box"
                         name="feedback"
                         value={feedback}
                         placeholder="Write any questions or concerns regarding this item here."

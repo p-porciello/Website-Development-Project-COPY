@@ -12,7 +12,7 @@ export function Modal({ open, onClose, children }: modalProps) {
         <div onClick={onClose} className={`fixed inset-0 flex justify-center items-center transition-colors ${open ? "visible bg-black/20" : "invisible"}`}>
             <div onClick={(e) => e.stopPropagation()} className="modalChildren">
                 {children}
-                <button onClick={onClose}>x</button>
+                <button onClick={onClose} className="close-button"><i className="fas fa-times"></i></button>
             </div>
         </div>
     )

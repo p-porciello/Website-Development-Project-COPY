@@ -22,19 +22,21 @@ export function HomepageCard({ item }: { item: LostItem }) {
   return (
     <Link to={`/view-item/${item._id}`} className="item">
       <img src={item.imgFileName} />
-      <h3><b>{item.itemName}</b></h3>
-      <p>
-        <b>Date Found: </b>
-        {stringDate.substring(4, 15)}
-      </p>
-      <p>
-        <b>Location Found: </b>
-        {item.schoolFoundIn}
-      </p>
-      <p>
-        <b>Found By: </b>
-        {finderName}
-      </p>
+      <h3 className="card-item-name"><b>{item.itemName}</b></h3>
+      <div className="item-card-info">
+        <p><i className="fas fa-user-circle"></i>
+          <b> Found By: </b>
+          {finderName}
+        </p>
+        <p><i className="fas fa-calendar"></i>
+          <b> Date Found: </b>
+          {stringDate.substring(4, 15)}
+        </p>
+        <p><i className="fas fa-map-marker-alt"></i>
+          <b> Location Found: </b>
+          {item.schoolFoundIn}
+        </p>
+      </div>
     </Link>
   );
 }

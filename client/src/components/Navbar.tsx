@@ -29,28 +29,48 @@ export function Navbar() {
     navigate('/');
   }
 
-    return (
-    <div className="navbar">
-      {data.map((page) => {
-        return (
-          <Link to={page.path} className="navItem" key={page.name}>
-            <button>{page.name}</button>
-          </Link> 
-        );
-      })}
-      <button onClick={handleLogout}>Log Out</button>
+  function changeColorScheme(darkMode: boolean) {
+    const root = document.documentElement;
+    if (darkMode) {
+      root.style.setProperty('--light-bg', "#140929");
+      root.style.setProperty('--text-color', "#fcfdff");
+      root.style.setProperty('--primary', "#1932A1");
+      root.style.setProperty('--secondary', "#4D59FF");
+      root.style.setProperty('--accent', "#2002BA");
+    } else {
+      root.style.setProperty('--text-color', "#020114");
+      root.style.setProperty('--primary', "#001448");
+      root.style.setProperty('--secondary', "#7e87ff");
+      root.style.setProperty('--accent', "#5058de");
+      root.style.setProperty('--light-bg', '#fcfdff');
+    }
+  }
 
+    return (
+    <nav className="navbar">
+
+      <div id="nav-buttons" className={clicked ? "#nav-buttons active": "#nav-buttons"
+      }>
+        {data.map((page) => {
+          return (
+            <Link to={page.path} className="navItem" key={page.name}>
+              <button>{page.name}</button>
+            </Link> 
+          );
+        })}
+        <button onClick={handleLogout}>Log Out</button>
+      </div>
     
-    {/*
-    <div id="mobile" onClick={() => setClicked(!clicked)}>
-      {clicked ? 
-      <i className="fas fa-bars"></i>
-      :
-      <i className='fas fa-times'></i>
-      }
-    </div>
-    */}
+      
+      <div id="mobile" onClick={() => setClicked(!clicked)}>
+        {clicked ? 
+        <i className="fas fa-bars"></i>
+        :
+        <i className='fas fa-times'></i>
+        }
+      </div>
+      
     
-    </div>
+    </nav>
   );
 }

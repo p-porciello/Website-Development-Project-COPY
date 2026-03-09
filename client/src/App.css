@@ -29,7 +29,7 @@ img {
 }
 
 #vsi-image {
-  border-color: white;
+  border-color: var(--light-bg);
   border-width: 3px;
   grid-area: vsi-img;
   width: 100%;
@@ -37,7 +37,7 @@ img {
 }
 
 #textInfo {
-  background-color: white;
+  background-color: var(--light-bg);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -146,18 +146,74 @@ img {
   color: #888;
 }
 
+#mobile {
+  display: none;
+}
+
+@media screen and (max-width: 925px) {
+  #nav-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0px;
+    right: -300px;
+    height: 100vh;
+    width: 300px;
+    transition: 0.3s ease-in-out;
+
+  }
+
+  #nav-buttons.active {
+    right: 0px;
+    background-color: var(--primary);
+  }
+
+  #mobile {
+    display: block;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10000;
+  }
+
+  #mobile i {
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  .navbar {
+    height:50px;
+    z-index: 1000;
+  }
+  
+}
+
+
 .navbar {
   position: fixed;
   z-index: 100;
   top: 0;
-  display: fixed;
+  display: flex;
   
+  align-items: center;
   justify-content: space-between;
   background-color: var(--primary);
   padding-bottom: 0.5em;
   box-shadow: 0px 2px 3px black;
   width: 100%;
   
+}
+
+.navbar i {
+  color: var(--light-bg);
+}
+
+#nav-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 
@@ -179,6 +235,14 @@ img {
   display: flex;
   flex-direction: column;
   padding: 0.5em;
+  gap: 0.6em;
+}
+
+.item-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 15px;
 }
 
 .item {
@@ -190,6 +254,10 @@ img {
   border-width: 1px;
   padding-bottom: 5px;
   position: relative;
+}
+
+.card-item-name {
+  font-size: 24px;
 }
 
 .previewText {
@@ -210,11 +278,11 @@ img {
 }
 
 .previewText i {
-  color: white;
+  color: var(--light-bg);
 }
 
 .previewText p {
-  color: white;
+  color: var(--light-bg);
 }
 
 .recentUpload {
@@ -233,11 +301,11 @@ img {
 }
 
 .recentUpload i {
-  color: white;
+  color: var(--light-bg);
 }
 
 .recentUpload p {
-  color: white;
+  color: var(--light-bg);
 }
 
 .item img {
@@ -257,7 +325,7 @@ img {
   flex-direction: column;
   gap: 1em;
   padding: 1em;
-  background-color: white;
+  background-color: var(--light-bg);
   border-radius: 10px;
   height: 80vh;
 
@@ -270,7 +338,7 @@ img {
 }
 
 .barofcolor {
-  background-color: #b89dfb;
+  background-color: var(--secondary);
   background-size: cover;
 }
 
@@ -320,6 +388,8 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
+  margin-top: 0.15em;
+  margin-bottom: 0.15em;
   align-items: center;
   justify-content: center;
 }
@@ -329,7 +399,6 @@ img {
   display: flex;
   justify-content: center;
   gap: 0.5em;
-  flex-wrap: wrap;
 }
 
 .locationInfo {
@@ -398,14 +467,13 @@ img {
   padding: 3em;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 3fr 2fr 4fr 2fr 2fr;
+  grid-template-rows: 1fr 3fr 2fr 4fr 2fr;
   gap: 1em;
   grid-template-areas:
     'image name'
     'image tagsSelect'
     'image locationInfo'
     'image description'
-    'image generateText'
     'submit submit';
 }
 
@@ -418,23 +486,21 @@ img {
     padding: 3em;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 3fr 1fr 1fr 1fr 1fr 2fr 1fr;
+    grid-template-rows: 3fr 1fr 1fr 1fr 1fr;
     gap: 1em;
     grid-template-areas:
       'image'
       'name'
-      'tags'
       'tagsSelect'
       'locationInfo'
       'description'
-      'generateText'
       'submit';
   }
 }
 
 #dropZone {
   border-radius: 10px;
-  border-color: #001524;
+  border-color: var(--text-color);
   border-width: 1px;
 }
 
@@ -453,7 +519,29 @@ img {
   background: var(--light-bg);
   border-radius: 10px;
   box-shadow: 6px;
+  width: 70%;
+  height: 50%;
+  padding: 0.5em;
+  padding-top: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  position: relative;
 }
+
+.close-button {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  color: var(--text-color);
+  background: none;
+}
+
+.close-button:hover {
+  color: red;
+  border-color: none;
+} 
 
 .inquiriesContainer {
   display: flex;
