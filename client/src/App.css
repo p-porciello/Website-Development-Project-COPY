@@ -104,10 +104,37 @@ button.landing-button:hover {
 .vsi-info-box {
   display: flex;
   align-items: flex-start;
+  font-size: 1.5em;
 }
 
 .description {
   flex-direction: column;
+}
+
+.homepage-header {
+  display: flex;
+  align-items: flex-start;
+  padding-left: 1em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.faq-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-top: 1em;
+}
+
+.faq-container {
+  padding: 2em;
+}
+
+.mapContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .vsi-container {
@@ -437,18 +464,23 @@ button.settings-button:hover {
   display: flex;
   flex-direction: column;
   gap: 2em;
-  padding: 1em;
+  padding: 3em;
   background-color: var(--light-bg);
   border-radius: 10px;
   padding-top: 3em;
   padding-bottom: 3em;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 60%;
+  box-shadow: 8px 8px 5px black;
 }
 
 .new-acc-button {
   width: 100%;
+}
+
+.account-form-header {
+  align-self: center;
 }
 
 .barofcolor {

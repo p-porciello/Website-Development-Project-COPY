@@ -38,7 +38,7 @@ export function Home() {
       <header>
         <h1>Hi, {user.firstName}!</h1>
       </header>
-      <div>
+      <div className="homepage-header">
         <h2>
           Recently Lost
         </h2>
@@ -53,8 +53,10 @@ export function Home() {
           <button className="transparent-button" id="see-all">See all <i className="fas fa-chevron-right"></i></button>
         </Link>
       </div>
-      <div>
+      <div className="homepage-header">
         <h2>Getting started?</h2>
+      </div>
+      <div>
         <p>[Youtube Video embed here]</p>
       </div>
       </body>

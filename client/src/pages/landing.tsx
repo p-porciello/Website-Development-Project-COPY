@@ -12,7 +12,7 @@ export function Landing() {
       </div>
 
       <div style={{bottom:'0px', position:'fixed', width:'100%'}}>
-      {Footer()}
+      <Footer/>
       </div>
 
     </div>

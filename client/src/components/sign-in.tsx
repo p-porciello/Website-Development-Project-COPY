@@ -31,7 +31,7 @@ export function SignIn() {
   return (
     <div id="sign-in" className="flex items-center justify-center">
       <form className="accountForm" onSubmit={handleSubmit}>
-        <h2>Sign Into Your Account</h2>
+        <h2 className="account-form-header">Sign Into Your Account</h2>
         <div>
           <label>Email Address: </label>
           <input

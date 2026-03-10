@@ -3,21 +3,21 @@ export function FAQ() {
     <>
       
       <h1>Frequently Asked Questions</h1>
-      <div style={{ paddingRight:'20vh'}}>
-      <div style={{width:'50vh', float: 'right'}}>
+      <div className="faq-container">
+      <div className="faq-item">
         <h2>What is the UCVTS Lost & Found?</h2>
         <p>
           The UCVTS Lost and Found is a website where you can post items you have found and search for items you have lost.
           This website is intended for use by UCVTS students and teachers to help locate lost items. 
         </p>
       </div>
-      <div style={{width:'50vh', float: 'right'}}>
+      <div className="faq-item">
         <h2>Is the UCVTS Lost & Found affiliated with UCVTS schools?</h2>
         <p>
           Currently, the UCVTS Lost and Found is not affiliated with the UCVTS school district.
         </p>
       </div>
-      <div style={{width:'50vh', float: 'right'}}>
+      <div className="faq-item">
         <h2>How do I post an item?</h2>
         <p>
           To post an item click the submit item button on the navigation bar. 
@@ -27,7 +27,7 @@ export function FAQ() {
           Once the item post is admin approved it will appear in the lost items catalouge for everyone to see.
         </p>
       </div>
-      <div style={{width:'50vh', float: 'right'}}>
+      <div className="faq-item">
       <h2>How do I claim an item?</h2>
       <p>
         To claim an item search for the item you wish to claim. Then scroll to
@@ -37,7 +37,7 @@ export function FAQ() {
         admin to unclaim the item for you.
       </p>
       </div>
-      <div style={{width:'50vh', float: 'right'}}>
+      <div className="faq-item">
       <h2>When should I claim an item?</h2>
       <p>
         You should claim an item when you are certain it is yours and collect it as soon as possible. 

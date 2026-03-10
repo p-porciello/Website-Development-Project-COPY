@@ -3,7 +3,7 @@ export function AboutUs() {
     <>
       <h1>About the Developers</h1>
 
-      <div style={{ float: 'left', width: '65%',  paddingLeft: '10vh' }}>
+      <div style={{ float: 'left', textAlign: "right", width: '65%',  paddingLeft: '10vh' }}>
         <h2>Caitlin Sayah</h2>
         <p>
           Caitlin is an AIT junior who is in the IT track. She is also on the
@@ -19,8 +19,7 @@ export function AboutUs() {
          <div style={{width:'30%', float:'left', padding:'1vh',display:'fixed', maxHeight:'400px' }}>
           <img src={'src/assets/CaitlinBanquetPic.jpg'}/>
          </div>
-        <div style={{float:'right', width: '65%', paddingRight: '10vh'}}>
-        <br></br>
+        <div style={{float:'right', textAlign: "left", width: '65%', paddingRight: '10vh', marginTop: "1em"}}>
         <h2>Paige Porciello</h2>
         <p>Paige is an AIT junior in the school's IT track.  Her programming experience
           comes from multiple years of formal schoolwork (AP CSP & AP CSA) along with
@@ -33,7 +32,7 @@ export function AboutUs() {
           future, Paige hopes to pursue a career in astrophysics.
         </p>
       </div>
-        <div style={{width:'30%', float:'left', padding:'1vh',display:'fixed',  paddingLeft: '10vh' }}>
+        <div style={{marginTop: "1em", width:'30%', float:'left', padding:'1vh',display:'fixed',  paddingLeft: '10vh' }}>
         <img src={'src/assets/PaigeReal.jpeg'}/>
         </div>
     </>
