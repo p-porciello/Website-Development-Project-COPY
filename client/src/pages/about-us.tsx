@@ -17,7 +17,7 @@ export function AboutUs() {
         </p>
          </div>
          <div style={{width:'30%', float:'left', padding:'1vh',display:'fixed', maxHeight:'400px' }}>
-          <img src={'src/assets/CaitlinBanquetPic.jpg'}/>
+          <img src={'src/assets/CaitlinBanquetPic.jpg'} alt="An image of Caitlin standing in a meadow.  Caitlin is wearing a dress and has short, curly black hair.  She has brown eyes."/>
          </div>
         <div style={{float:'right', textAlign: "left", width: '65%', paddingRight: '10vh', marginTop: "1em"}}>
         <h2>Paige Porciello</h2>
@@ -33,7 +33,7 @@ export function AboutUs() {
         </p>
       </div>
         <div style={{marginTop: "1em", width:'30%', float:'left', padding:'1vh',display:'fixed',  paddingLeft: '10vh' }}>
-        <img src={'src/assets/PaigeReal.jpeg'}/>
+        <img src={'src/assets/PaigeReal.jpeg'} alt="An image of Paige sitting in a park taken in selfie view.  Paige is wearing a white t-shirt and has long, wavy red hair.  She has blue eyes"/>
         </div>
     </>
   );

@@ -61,10 +61,13 @@ button.landing-button:hover {
   background-color: transparent;
   padding-top: 0.1em;
   color: white;
+  text-align: left;
 }
 
 #landing-subtext {
   color: white;
+  text-align: left;
+  font-weight: normal;
 }
 
 #landing-text-container {
@@ -247,6 +250,7 @@ button.landing-button:hover {
 
   #nav-buttons.active {
     right: 0px;
+    font-size: 1.75em;
     background-color: var(--primary);
   }
 
@@ -270,9 +274,15 @@ button.landing-button:hover {
   
 }
 
+#already-claimed {
+  color: rgb(206, 0, 0);
+}
+
 button.vsi-button {
   background-color: var(--light-bg);
   color: var(--text-color);
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 button.vsi-button:hover {
@@ -310,6 +320,19 @@ button.transparent-button:hover {
   text-underline-offset: 8px;
   border-color: transparent;
   font-weight: bold;
+}
+
+#feedback-box {
+  width: 100%;
+  
+}
+
+#settings-header {
+  font-size: 3em;
+}
+
+button.settings-button {
+  font-size: 2em;
 }
 
 button.settings-button:focus {

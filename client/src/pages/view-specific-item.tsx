@@ -130,11 +130,11 @@ export function ViewItem() {
         {(item.claimedBy) ? 
         (
         <div className="vsi-misc">
-        <h2><i><b>This item has already been claimed.</b></i></h2>
+        <h2 id="already-claimed"><i><b>This item has already been claimed.</b></i></h2>
         </div>)
         : 
         (<div className="buttonContainer">
-        <button className="wide-button vsi-button" onClick={(e) => {
+        <button className="wide-button vsi-button" aria-label="Claims an item" onClick={(e) => {
           e.preventDefault();
           SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
           handleClaim();
@@ -157,7 +157,7 @@ export function ViewItem() {
                 <p>to: {inquiry.receiverName}</p>
                 <p>{inquiry.content}</p>
 
-                <button className="transparent-button" onClick={() => {
+                <button className="transparent-button" aria-label="Allows a user to write a reply to an inquiry" onClick={() => {
                   setTo(inquiry.inquirerId);
                   setToName(inquiry.inquirerName);
                   setPlaceholder(`Write your reply to ${inquiry.inquirerName} here.`);
@@ -179,17 +179,17 @@ export function ViewItem() {
                   onChange={(e) => setBody(e.target.value)}
                   maxLength={500}
                 />
-                <button type="submit">{buttonText}</button>
+                <button aria-label="Submits an inquiry" type="submit">{buttonText}</button>
               </form>
             </div>)
           : (<div className="buttonContainer">
-          <button className="wide-button vsi-button" 
+          <button className="wide-button vsi-button" aria-label="Allows user to choose to write an inquiry"
             onClick={() => {
               setTo(receiver._id);
               setToName(`${receiver.firstName} ${receiver.lastName}`)
               setPlaceholder("Write any questions or concerns regarding this item here.");
               setButtonText("Submit Inquiry")
-            }}>Write an Inquiry</button></div>)
+            }}>Write an Inquirfy</button></div>)
         }
     </div>
     

@@ -8,7 +8,7 @@ export function Landing() {
 
       <div id="landing-text-container">
         <h2 id="landing-subtext">Welcome to</h2>
-        <h1 id="landing-header">UCVTS Lost and Found</h1>
+        <h1 id="landing-header">UCVTS Lost & Found</h1>
       </div>
 
       <div style={{bottom:'0px', position:'fixed', width:'100%'}}>

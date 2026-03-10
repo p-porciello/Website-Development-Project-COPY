@@ -94,8 +94,8 @@ export function Admin() {
             return (
             <div className="itemBox" key={index}>
               <HomepageCard item={item}/>
-              <button onClick={() => handleApproval(item)}>Approve</button>
-              <button onClick={() => {
+              <button aria-label="Approves an item" onClick={() => handleApproval(item)}>Approve</button>
+              <button aria-label="Denies an item" onClick={() => {
                 setFeedback('');
                 setSpecificItem(item);
                 setModalVis(true);}}>Deny</button>
@@ -109,7 +109,7 @@ export function Admin() {
             {/*<form onSubmit={handleFeedbackSubmit}>*/}
                 <h3>Rejection Reason:</h3>
                 <div className="rejectionReason">
-                    <select 
+                    <select aria-label="Select a reason why you denied this item for the original poster"
                       name="reason"
                       id="reason-select"
                       value={reason}
@@ -123,7 +123,7 @@ export function Admin() {
                 </div>
                 <h3>Feedback for Original Reporter</h3>
                 <div className="feedbackContainer">
-                    <textarea id="feedback-box"
+                    <textarea id="feedback-box" aria-label="Give more specific feedback to original poster"
                         name="feedback"
                         value={feedback}
                         placeholder="Write any questions or concerns regarding this item here."
@@ -132,7 +132,7 @@ export function Admin() {
                         required
                     />   
                 </div>   
-                <button onClick={() => handleDenial(specificItem, reason, feedback)}>Send Feedback</button>
+                <button aria-label="Processes rejection and sends feedback to original poster via email." onClick={() => handleDenial(specificItem, reason, feedback)}>Send Feedback</button>
             {/*</form>*/}   
       </Modal>
     </>

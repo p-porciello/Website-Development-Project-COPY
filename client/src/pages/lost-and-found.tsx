@@ -55,7 +55,7 @@ export function LostAndFound() {
 
       <div className="search">
         <i className="fas fa-search"></i>
-        <input id="searchBar"
+        <input id="searchBar" aria-label="Searches for items based on name"
           type="text"
           placeholder="Search for an item..."
           value={searchTerm}

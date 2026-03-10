@@ -43,11 +43,11 @@ export function Settings() {
 
   return (
     <div className="settings-container">
-      <h2>Settings</h2>
-      <button className="settings-button" onClick={() => {
+      <h2 id="settings-header">Settings</h2>
+      <button className="settings-button" aria-label="toggles light and dark mode" onClick={() => {
         changeColorScheme(!colorMode);
         changeButtonText()}}>{buttonText}</button>
-      <button className="settings-button" onClick={handleLogout}>Log Out</button>
+      <button className="settings-button" aria-label="Logs out user" onClick={handleLogout}>Log Out</button>
     </div>
   )
 }

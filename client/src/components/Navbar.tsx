@@ -7,7 +7,7 @@ import { Settings } from './Settings';
 import { Modal } from './Modal';
 
 export function Navbar() {
-  const [data, setData] = useState<{name: string, path: string}[]>([]);
+  const [data, setData] = useState<{name: string, path: string, aria: string}[]>([]);
   const [clicked, setClicked] = useState<boolean>(false);
   const [modalVis, setModalVis] = useState(false);
 
@@ -34,15 +34,15 @@ export function Navbar() {
         {data.map((page) => {
           return (
             <Link to={page.path} className="navItem" key={page.name}>
-              <button className="navbar-button">{page.name}</button>
+              <button className="navbar-button" aria-label={page.aria}>{page.name}</button>
             </Link> 
           );
         })}
-        <button className="navbar-button" onClick={() => setModalVis(true)}><i className="fas fa-gear"></i></button>
+        <button className="navbar-button" onClick={() => setModalVis(true)} aria-label="Settings button.  Opens settings modal where users can toggle light and dark mode or log out."><i className="fas fa-gear"></i></button>
       </div>
     
       
-      <div id="mobile" onClick={() => setClicked(!clicked)}>
+      <div id="mobile" aria-text="Opens navbar on mobile devices" onClick={() => setClicked(!clicked)}>
         {clicked ? 
         <i className="fas fa-times"></i>
         :
