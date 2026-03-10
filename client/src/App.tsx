@@ -41,10 +41,7 @@ function App() {
   }, []);
 
   return (
-    /* <> --> for testing purposes only, delete before final submission
-      {JSON.stringify(data)}
-    </>
-    */
+    
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />

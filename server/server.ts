@@ -22,13 +22,6 @@ app.use('/lost-items', lostItemsRouter);
 app.use('/user', userRouter);
 app.use('/api/uploadthing', createRouteHandler({ router: uploadRouter }));
 
-/* alternate way of connecting to MongoDB (do this only if absolutely needed)
-import mongoose from "mongoose";
-mongoose.connect(process.env.DATABASE_URI);
-const db = mongoose.connection;
-db.on('error', error => console.error(error));
-db.once('open', () => console.log('Connected to Mongoose'));
-*/
 app.get('/api', (req, res) => {
   res.json({ lostInfo: ['lost items', 'poster'] });
 });

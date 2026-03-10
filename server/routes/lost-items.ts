@@ -17,8 +17,7 @@ interface Inquiry {
   content: string;
 }
 
-//Retrieve all items in lostItems collection
-router.get('/',  /*verifyToken,*/ async (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
   let db = database.getDb();
   let lostItemData = await db.collection('lostItem').find({}).toArray();
   if (lostItemData.length > 0) {
@@ -28,8 +27,7 @@ router.get('/',  /*verifyToken,*/ async (req: Request, res: Response) => {
   }
 });
 
-//Retrieves all items with names matching patterns user entered in search bar
-router.get('/search/:q', /*verifyToken,*/ async (req: Request, res: Response) => {
+router.get('/search/:q', async (req: Request, res: Response) => {
   let db = database.getDb();
   const query = req.params.q as string;
   console.log(query);
@@ -47,8 +45,7 @@ router.get('/search/:q', /*verifyToken,*/ async (req: Request, res: Response) =>
   }
 });
 
-//Retrieves all admin-approved items in lostItems collection
-router.get('/admin-approved/:q',  /*verifyToken,*/ async (req: Request, res: Response) => {
+router.get('/admin-approved/:q', async (req: Request, res: Response) => {
     let db = database.getDb();
     const query = req.params.q as string;
     let status: boolean = convertToBoolean(query);
@@ -65,8 +62,7 @@ router.get('/admin-approved/:q',  /*verifyToken,*/ async (req: Request, res: Res
   },
 );
 
-//Retrieve a specific item in lostItems collection
-router.get('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
+router.get('/:id', async (req: Request, res: Response) => {
   let db = database.getDb();
   let lostItemData = await db
     .collection('lostItem')
@@ -78,8 +74,7 @@ router.get('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
   }
 });
 
-//Create a new object in lostItems collection
-router.post('/', /*verifyToken,*/ async (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response) => {
   try {
     let db = database.getDb();
     let newItem = {
@@ -106,8 +101,7 @@ router.post('/', /*verifyToken,*/ async (req: Request, res: Response) => {
   }
 });
 
-//Update an existing object in lostItems collection
-router.put('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
+router.put('/:id', async (req: Request, res: Response) => {
   let db = database.getDb();
   let newItem = {
     $set: {
@@ -150,8 +144,7 @@ router.put('/updateInquiries/:id', async (req: Request, res: Response) => {
   res.json(lostItemData);
 });
 
-//Delete a specific item in lostItems collection
-router.delete('/:id', /*verifyToken,*/ async (req: Request, res: Response) => {
+router.delete('/:id', async (req: Request, res: Response) => {
   let db = database.getDb();
   let lostItemData = await db
     .collection('lostItem')

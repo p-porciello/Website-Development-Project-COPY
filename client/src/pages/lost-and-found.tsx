@@ -1,6 +1,5 @@
-import { getQueriedItems, getApprovedItems } from '../api';
+import { getApprovedItems } from '../api';
 import { useState, useEffect } from 'react';
-import { HomepageCard } from '@/components/item-cards/HomepageCard';
 import type { LostItem } from '../types';
 import { CatalogueCard } from '@/components/item-cards/CatalogueCard';
 
@@ -11,20 +10,26 @@ export function LostAndFound() {
   const [items, setItems] = useState<LostItem[]>([]);
 
   useEffect(() => {
+
     async function loadAllItems() {
       const itemData = await getApprovedItems("true");
       if (!itemData) return;
+
       itemData.sort(
         (d1, d2) =>
           new Date(d2.dateUploaded).getTime() -
           new Date(d1.dateUploaded).getTime(),
-      ); //Orders items by posting date
+      ); 
+
       setItems(itemData);
     }
+
     loadAllItems();
+
   }, []);
 
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+
     setSearchTerm(e.target.value);
     let endpoint = `${URL}/lost-items/admin-approved/true`;
     if (e.target.value) {
@@ -34,11 +39,12 @@ export function LostAndFound() {
 
     const response = await fetch(endpoint);
     const itemData: LostItem[] = await response.json();
+
     itemData.sort(
       (d1, d2) =>
         new Date(d2.dateUploaded).getTime() -
         new Date(d1.dateUploaded).getTime(),
-    ); //Orders items by posting date
+    ); 
 
     setItems(itemData);
   };
@@ -46,6 +52,7 @@ export function LostAndFound() {
   return (
     <>
       <h1>All Lost Items</h1>
+
       <div className="search">
         <i className="fas fa-search"></i>
         <input id="searchBar"
@@ -56,11 +63,13 @@ export function LostAndFound() {
           style ={{ backgroundImage: 'src/assets/search-ui-icon.png.webp', backgroundPosition: 'right', width:'50%'}}
         />
       </div>
+
       <div className="homepageRecentlyLost">
         {items.map((item, index) => {
           return <CatalogueCard item={item} key={index}/>;
         })}
       </div>
+      
     </>
   );
 }

@@ -9,7 +9,6 @@ const router = express();
 
 const SALT_ROUNDS = 8;
 
-//Retrieves all users (for admin use only in frontend)
 router.get('/', async (req, res) => {
   let db = database.getDb();
   let userData = await db.collection('user').find({}).toArray();
@@ -20,7 +19,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-//Retrieve a specific user in user collection
 router.get('/:id', async (req, res) => {
   let db = database.getDb();
   let userData = await db
@@ -33,7 +31,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-//Create a new object in user collection
 router.post('/', async (req, res) => {
   let db = database.getDb();
 
@@ -65,7 +62,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-//Update an existing object in user collection
 router.put('/:id', async (req, res) => {
   let db = database.getDb();
   let updatedUser = {
@@ -89,7 +85,6 @@ router.put('/:id', async (req, res) => {
   res.json(userData);
 });
 
-//Delete a specific user in users collection
 router.delete('/:id', async (req, res) => {
   let db = database.getDb();
   let userData = await db
@@ -102,7 +97,6 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-//login route
 router.post('/login', async (req, res) => {
   let db = database.getDb();
 
