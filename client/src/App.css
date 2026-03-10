@@ -322,9 +322,15 @@ button.transparent-button:hover {
   font-weight: bold;
 }
 
+#video-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #feedback-box {
   width: 100%;
-  
+
 }
 
 #settings-header {
