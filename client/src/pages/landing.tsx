@@ -3,7 +3,7 @@ import { Footer } from '@/components/Footer';
 
 export function Landing() {
   return (
-    <div id="landing" style={{width:"100%", marginLeft:'-8vh'}}>
+    <div id="landing" style={{width:"100%", marginLeft: "-2.5em"}}>
           <LandingNav/>
 
       <div id="landing-text-container">

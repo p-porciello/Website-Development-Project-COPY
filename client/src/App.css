@@ -244,10 +244,13 @@ button.landing-button:hover {
 
 button.vsi-button {
   background-color: var(--light-bg);
+  color: var(--text-color);
 }
 
 button.vsi-button:hover {
   background-color: transparent;
+  border-color: white;
+  color: white;
 }
 
 button.navbar-button {
