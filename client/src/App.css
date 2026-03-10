@@ -517,6 +517,11 @@ button.settings-button:hover {
   gap: 0.5em;
 }
 
+.reportItem {
+  font-weight: bold;
+  font-size: 2.5em;
+}
+
 .locationInfo {
   grid-area: locationInfo;
   display: flex;
