@@ -50,6 +50,7 @@ export function FAQ() {
       <p>
         If you need a video walkthrough for further clarification, you can find them on our youtube channel.
       </p>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/QOeb0_GFRLE?si=Ns3d3vbX2zkNNdL2" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
     </div>
     </>
