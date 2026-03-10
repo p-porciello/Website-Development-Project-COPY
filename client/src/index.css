@@ -12,6 +12,7 @@
   --accent: #5058de;
   --text-color: #020114;
   --light-bg: #fcfdff;
+  --tags-color: #c6c9ee;
 
   color-scheme: light dark;
   color: var(--text-color);
