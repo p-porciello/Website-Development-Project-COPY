@@ -117,6 +117,7 @@ export function ViewItem() {
             <div className="vsi-info-box">
               <h3><b>Found By:</b> {`${receiver.firstName} ${receiver.lastName}`}</h3>
             </div>
+            
             <div className="tagsContainer">
               {tags.map((tag, index) => {
                   if (tag && tag !== "N/A") {
@@ -189,7 +190,7 @@ export function ViewItem() {
               setToName(`${receiver.firstName} ${receiver.lastName}`)
               setPlaceholder("Write any questions or concerns regarding this item here.");
               setButtonText("Submit Inquiry")
-            }}>Write an Inquirfy</button></div>)
+            }}>Write an Inquiry</button></div>)
         }
     </div>
     
