@@ -8,10 +8,9 @@ import { jwtDecode } from 'jwt-decode';
 import { SendAdminFeedbackEmail } from '@/components/email';
 import type { LostItem, User } from '../types';
 
-import { ApprovalButton } from '@/components/AdminButtons';
+import { MasonryLayout } from '@/components/MasonryLayout';
 
 export function Admin() {
-  const [user, setUser] = useState<Partial<User>>({});
   const [items, setItems] = useState<LostItem[]>([]);
   const [modalVis, setModalVis] = useState(false);
   const [feedback, setFeedback] = useState('');
@@ -88,10 +87,10 @@ export function Admin() {
         <header>
           <h1>To Be Reviewed</h1>
         </header>
-        </div>
-        <div className="homepageRecentlyLost">
-          {items.map((item, index) => {
-            return (
+      </div>
+      <MasonryLayout>
+        {items.map((item, index) => {
+          return (
             <div className="itemBox" key={index}>
               <HomepageCard item={item}/>
               <button aria-label="Approves an item" onClick={() => handleApproval(item)}>Approve</button>
@@ -100,13 +99,12 @@ export function Admin() {
                 setSpecificItem(item);
                 setModalVis(true);}}>Deny</button>
             </div>
-            )
-          })}
-      </div>
+          )
+        })}
+      </MasonryLayout>
 
       <Modal open={modalVis} onClose={() => setModalVis(false)}>
         <h2>Send Feedback to Original Poster</h2>
-            {/*<form onSubmit={handleFeedbackSubmit}>*/}
                 <h3>Rejection Reason:</h3>
                 <div className="rejectionReason">
                     <select aria-label="Select a reason why you denied this item for the original poster"
@@ -115,6 +113,7 @@ export function Admin() {
                       value={reason}
                       onChange={(e) => setReason(e.target.value)}
                       required>
+                        <option value="" selected disabled hidden>--Select a reason--</option>
                         <option value="Poor quality/mismatched photo">Poor Quality/Mismatched Photo</option>
                         <option value="Inappropriate/mismatched name">Inappropriate/Mismatched Name</option>
                         <option value="Inappropriate/unhelpful description">Inappropriate/unhelpful description</option>
@@ -133,7 +132,6 @@ export function Admin() {
                     />   
                 </div>   
                 <button aria-label="Processes rejection and sends feedback to original poster via email." onClick={() => handleDenial(specificItem, reason, feedback)}>Send Feedback</button>
-            {/*</form>*/}   
       </Modal>
     </>
   );

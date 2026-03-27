@@ -2,6 +2,7 @@ import { getApprovedItems } from '../api';
 import { useState, useEffect } from 'react';
 import type { LostItem } from '../types';
 import { CatalogueCard } from '@/components/item-cards/CatalogueCard';
+import { MasonryLayout } from '@/components/MasonryLayout';
 
 export function LostAndFound() {
   const URL = 'http://localhost:8080';
@@ -64,11 +65,11 @@ export function LostAndFound() {
         />
       </div>
 
-      <div className="homepageRecentlyLost">
-        {items.map((item, index) => {
-          return <CatalogueCard item={item} key={index}/>;
-        })}
-      </div>
+        <MasonryLayout>
+          {items.map((item, index) => {
+            return <CatalogueCard item={item} key={index}/>
+          })}
+        </MasonryLayout>
       
     </>
   );

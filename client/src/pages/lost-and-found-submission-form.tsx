@@ -5,6 +5,8 @@ import { jwtDecode } from 'jwt-decode';
 import { generateUploadDropzone } from '@uploadthing/react';
 import { useNavigate } from 'react-router-dom';
 import type { User, Inquiry } from '../types';
+import { itemTypes, itemColors, itemBrands } from '@/components/dropdownData';
+
 const UploadDropzone = generateUploadDropzone({
   url: 'http://localhost:8080/api/uploadthing',
 });
@@ -65,12 +67,10 @@ export function SubmitLostItem() {
 
   return (
     <>
-      {/* <head> <link href="filepond.css" rel="stylesheet" /></head> */}
-      {/* <body className="containerBlue vertical"> */}
+
       <h1 className="mb-4">Report a Lost Item</h1>
       <form className="lostItemForm" onSubmit={handleSubmit}>
-        {/*<h1>Report a Lost Item</h1>*/}
-        {/*<h2>Details</h2>*/}
+
         <div className="itemImage">
           {
             image ? (
@@ -81,7 +81,6 @@ export function SubmitLostItem() {
             ) : (
                 <UploadDropzone className="upload-dz"
                 endpoint="imageUploader" 
-                //dropzone={{uploadAfterDrop: true}}
                 onClientUploadComplete={(res) => {
                   if (res && res.length > 0) {
                     const url = res?.[0]?.url;
@@ -91,6 +90,7 @@ export function SubmitLostItem() {
                 }}/>
             )}
         </div>
+
         <div className="itemName">
           <label>Item Name: </label>
           <Input
@@ -103,6 +103,7 @@ export function SubmitLostItem() {
             required
           />
         </div>
+
         <div className="description">
           <textarea
             name="description"
@@ -112,9 +113,7 @@ export function SubmitLostItem() {
             required
           />
         </div>
-        {/*
-        <button className="generateText">Generate Description</button>
-        */}
+
         <div className="locationInfo">
           <div className="buildingFound">
             <label>Building Item was Found In: </label>
@@ -124,6 +123,7 @@ export function SubmitLostItem() {
               required
             />
           </div>
+
           <div className="currentLocation">
             <label>Current Building Item is In: </label>
             <Input
@@ -133,32 +133,64 @@ export function SubmitLostItem() {
             />
           </div>
         </div>
+
         <div className="tagsContent">
+
           <div>
             <label>Item Type: </label>
-            <Input
+            <select aria-label="Select a type that best describes this item"
               name="itemType"
-              onChange={(e) => setItemType(e.target.value)}
-            />
+              className="tags-select"
+              value={type}
+              onChange={(e) => setItemType(e.target.value)}>
+                <option value="" selected disabled hidden></option>
+                {itemTypes.map((typeOption, index) => {
+                  return (
+                    <option value={typeOption} key={index}>{typeOption}</option>
+                  )
+                })}
+            </select>
           </div>
+
           <div>
             <label>Color: </label>
-            <Input name="color" onChange={(e) => setColor(e.target.value)} />
+            <select aria-label="Select a color that best describes this item's appearance"
+              name="itemColor"
+              className="tags-select"
+              value={itemColor}
+              onChange={(e) => setColor(e.target.value)}>
+                <option value="" selected disabled hidden></option>
+                {itemColors.map((colorOption, index) => {
+                  return (
+                    <option value={colorOption} key={index}>{colorOption}</option>
+                  )
+                })}
+            </select>          
           </div>
+
           <div>
             <label>Brand: </label>
-            <Input
-              name="brand"
-              onChange={(e) => setBrand(e.target.value)}
-              maxLength={25}
-            />
+            <select aria-label="If this item is from a recognizable brand, select that brand below"
+              name="itemBrand"
+              className="tags-select"
+              value={itemBrand}
+              onChange={(e) => setBrand(e.target.value)}>
+                <option value="" selected disabled hidden></option>
+                {itemBrands.map((brandOption, index) => {
+                  return (
+                    <option value={brandOption} key={index}>{brandOption}</option>
+                  )
+                })}
+            </select>   
           </div>
+
         </div>
+
         <button type="submit" className="reportItem">
           Report Item
         </button>
+
       </form>
-      {/* </body> */}
     </>
   );
 }

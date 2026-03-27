@@ -2,6 +2,8 @@ import { createNewUser } from '../api';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { schools } from './dropdownData';
+
 export function CreateAccount() {
   const [userFirstName, setFirstName] = useState('');
   const [userLastName, setLastName] = useState('');
@@ -39,6 +41,7 @@ export function CreateAccount() {
   return (
     <div id="create-account" className="flex items-center justify-center">
       <form className="accountForm" onSubmit={handleSubmit}>
+        
         <h2 className="account-form-header">Create Account</h2>
         <div>
           <label>Email Address: </label>
@@ -50,6 +53,7 @@ export function CreateAccount() {
           ></input>
         </div>
         <div>
+
           <label>First Name: </label>
           <input
             name="emailAddress"
@@ -58,6 +62,7 @@ export function CreateAccount() {
             max={50}
           ></input>
         </div>
+
         <div>
           <label>Last Name: </label>
           <input
@@ -67,6 +72,7 @@ export function CreateAccount() {
             max={50}
           ></input>
         </div>
+
         <div>
           <label>Password: </label>
           <input
@@ -77,14 +83,23 @@ export function CreateAccount() {
             max={30}
           ></input>
         </div>
+
         <div>
           <label>School: </label>
-          <input
-            name="school"
-            onChange={(e) => setSchool(e.target.value)}
-            required
-          ></input>
+          <select aria-label="Select the school you go to for UI personalization!"
+            name="itemType"
+            className="tags-select"
+            value={userSchool}
+            onChange={(e) => setSchool(e.target.value)}>
+              <option value="" selected disabled hidden></option>
+              {schools.map((schoolOption, index) => {
+                return (
+                  <option value={schoolOption} key={index}>{schoolOption}</option>
+                )
+              })}
+          </select>
         </div>
+
         <div>
           <label>Grade: </label>
           <input
@@ -93,7 +108,9 @@ export function CreateAccount() {
             required
           ></input>
         </div>
+
         <button type="submit" className="new-acc-button">Create Account</button>
+      
       </form>
     </div>
   );

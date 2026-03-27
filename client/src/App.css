@@ -400,6 +400,15 @@ button.settings-button:hover {
   align-items: center;
 }
 
+.card-masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 0.5em;
+  justify-content: center;
+  align-items: center;
+
+}
+
 .itemBox {
   display: flex;
   flex-direction: column;
@@ -423,6 +432,7 @@ button.settings-button:hover {
   border-width: 1px;
   padding-bottom: 5px;
   position: relative;
+  break-inside: avoid;
 }
 
 .card-item-name {
