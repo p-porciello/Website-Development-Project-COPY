@@ -55,6 +55,7 @@ router.post('/', async (req, res) => {
       joinDate: req.body.joinDate,
       postedItems: req.body.postedItems,
       profileImageName: req.body.profileImageName,
+      darkMode: req.body.darkMode
     };
     let userData = await db.collection('user').insertOne(newUser);
     console.log(hash);
@@ -77,11 +78,22 @@ router.put('/:id', async (req, res) => {
       joinDate: req.body.joinDate,
       postedItems: req.body.postedItems,
       profileImageName: req.body.profileImageName,
+      darkMode: req.body.darkMode
     },
   };
   let userData = await db
     .collection('user')
     .insertOne({ _id: new ObjectId(req.params.id) } as any, updatedUser as any);
+  res.json(userData);
+});
+
+router.put('/change-mode/:id', async (req, res) => {
+  let db = database.getDb();
+  console.log(`req: ${req.body.darkMode}`)
+
+  let userData = await db
+    .collection('user')
+    .updateOne({ _id: new ObjectId(req.params.id as string) }, { $set: {darkMode: req.body.darkMode}})
   res.json(userData);
 });
 

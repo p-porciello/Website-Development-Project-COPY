@@ -13,6 +13,7 @@
   --text-color: #020114;
   --light-bg: #fcfdff;
   --tags-color: #c6c9ee;
+  --landing-primary: #0c033f;
 
   color-scheme: light dark;
   color: var(--text-color);

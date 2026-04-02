@@ -3,7 +3,6 @@ import { getApprovedItems } from '../api';
 import { useState, useEffect } from 'react';
 import { HomepageCard } from '@/components/item-cards/HomepageCard';
 import { Link } from 'react-router-dom';
-import { Input } from '@/components/ui/input';
 import { jwtDecode } from 'jwt-decode';
 import type { LostItem, User } from '../types';
 
@@ -34,7 +33,6 @@ export function Home() {
 
   return (
     <>
-    <body>
       <header>
         <h1>Hi, {user.firstName}!</h1>
       </header>
@@ -44,8 +42,8 @@ export function Home() {
         </h2>
       </div>
         <div className="homepageRecentlyLost">
-          {items.map((item) => {
-            return <HomepageCard item={item} key={item.itemName}/>;
+          {items.map((item, index) => {
+            return <HomepageCard item={item} key={index}/>;
           })}
         </div>
       <div id="see-all-container">
@@ -59,7 +57,6 @@ export function Home() {
       <div id="video-container">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/QOeb0_GFRLE?si=Ns3d3vbX2zkNNdL2" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
       </div>
-     </body>
     </>
   );
 }

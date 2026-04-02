@@ -17,7 +17,7 @@ export function Layout() {
     <>
       <Navbar />
       <Outlet />
-      <Footer />
+      <Footer bgcolor='var(--primary)'/>
     </>
   );
 }

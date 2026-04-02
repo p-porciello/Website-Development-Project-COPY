@@ -32,7 +32,7 @@ body:has(#landing) {
 }
 
 #landing nav {
-  background-color: rgb(12, 3, 63);
+  background-color: var(--landing-primary);
 }
 
 #landing #nav-buttons {
@@ -705,6 +705,16 @@ button.settings-button:hover {
   gap: 3em;
   display: flex;
   flex-direction: column;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5vh;
+  margin-top: 2vh;
+  padding-top: 2vh;
+  width: 100%;
+  bottom: 0;
 }
 
 .modalChildren {

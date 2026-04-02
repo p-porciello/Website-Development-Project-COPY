@@ -1,33 +1,35 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export function Settings() {
+import { changeColorScheme } from "./changeColors";
+import { User } from "@/types";
+import { updateModePref } from "@/api";
+
+interface Props {
+  user: Partial<User>;
+}
+
+export function Settings({user}: Props) {
 
   const navigate = useNavigate();
-  const [colorMode, setMode] = useState<boolean>(false)
+  const [colorMode, setMode] = useState<boolean>(user.darkMode || false)
   const [buttonText, setButtonText] = useState<string>('Enable dark mode');
 
-  function changeColorScheme(darkMode: boolean) {
-    const root = document.documentElement;
-    if (darkMode) {
-      root.style.setProperty('--light-bg', "#140929");
-      root.style.setProperty('--text-color', "#fcfdff");
-      root.style.setProperty('--primary', "#1932A1");
-      root.style.setProperty('--secondary', "#4D59FF");
-      root.style.setProperty('--accent', "#2002BA");
-      root.style.setProperty('--tags-color', "#1b2170")
-    } else {
-      root.style.setProperty('--text-color', "#020114");
-      root.style.setProperty('--primary', "#001448");
-      root.style.setProperty('--secondary', "#7e87ff");
-      root.style.setProperty('--accent', "#5058de");
-      root.style.setProperty('--light-bg', '#fcfdff');
-      root.style.setProperty('--tags-color', "#c6c9ee")
-    }
+  async function handlePrefChange(newMode: boolean) {
+    if (!user._id) return;
+    let submitObject = {
+      darkMode: newMode
+    };
 
-    setMode(darkMode);
+    let response = await updateModePref(user._id, submitObject);
+    if (response.status !== 200) {
+        console.log(response);
+        alert('Mode could not be changed');
+    } 
+
+    console.log("test");
   }
-
+  
   function changeButtonText() {
     if (colorMode) {
       setButtonText('Enable dark mode')
@@ -46,8 +48,11 @@ export function Settings() {
       <h2 id="settings-header">Settings</h2>
       <button className="settings-button" aria-label="toggles light and dark mode" onClick={() => {
         changeColorScheme(!colorMode);
+        handlePrefChange(!colorMode);
+        setMode(!colorMode);
+        console.log(`darkMode after settings change: ${user.darkMode}`)
         changeButtonText()}}>{buttonText}</button>
-      <button className="settings-button" aria-label="Logs out user" onClick={handleLogout}>Log Out</button>
+      <button className="settings-button" aria-label="Logs out user and redirects them to landing page" onClick={handleLogout}>Log Out</button>
     </div>
   )
 }

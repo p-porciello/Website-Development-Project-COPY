@@ -116,6 +116,20 @@ export async function updateUser(id: string, user: Record<string, unknown>) {
   return response;
 }
 
+
+interface Mode {
+  darkMode: boolean;
+}
+
+export async function updateModePref(id: string, mode: Mode) {
+  const response = await axios.put(`${URL}/user/change-mode/${id}`, mode);
+
+  let user = await getSpecificUser(id);
+  console.log(`user's dark mode pref after after updateModePref: ${user?.darkMode}`)
+  return response;
+  
+}
+
 export async function deleteSpecificUser(id: string) {
   const response = await axios.delete(`${URL}/user/${id}`);
 

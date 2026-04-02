@@ -28,6 +28,7 @@ export interface User {
   joinDate: string;
   postedItems: string[];
   profileImageName: string;
+  darkMode: boolean;
 }
 
 export interface Inquiry {

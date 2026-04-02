@@ -28,6 +28,7 @@ export function CreateAccount() {
       joinDate: new Date(),
       postedItems: [],
       profileImageName: 'src/assets/defaultProfilePicture.png',
+      darkMode: false
     };
     let response = await createNewUser(newUser);
     if (response.status !== 200) {
