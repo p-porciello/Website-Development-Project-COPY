@@ -95,6 +95,7 @@ export async function getAllUsers() {
 
 export async function getSpecificUser(id: string | undefined) {
   const response = await axios.get(`${URL}/user/${id}`);
+  console.log(response); //FOR TESTING DARK MODE BOOLEAN ONLY DELETE BEFORE DEPLOYMENT
 
   if (response.status === 200) {
     return response.data;

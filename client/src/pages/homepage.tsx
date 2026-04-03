@@ -1,5 +1,6 @@
 // import { Navbar } from '../components/Navbar'
 import { getApprovedItems } from '../api';
+import { changeColorScheme } from '@/components/changeColors';
 import { useState, useEffect } from 'react';
 import { HomepageCard } from '@/components/item-cards/HomepageCard';
 import { Link } from 'react-router-dom';
@@ -27,6 +28,8 @@ export function Home() {
       if (!token) return;
       const decodedUser = jwtDecode<User>(token);
       setUser(decodedUser);
+      console.log(`Homepage dark mode setting: ${decodedUser.darkMode}`)
+      changeColorScheme(decodedUser.darkMode);
     }
     loadAllItems();
   }, []);

@@ -32,16 +32,17 @@ export function SignIn() {
     <div id="sign-in" className="flex items-center justify-center">
       <form className="accountForm" onSubmit={handleSubmit}>
         <h2 className="account-form-header">Sign Into Your Account</h2>
-        <div>
+        <div className="account-form-input">
           <label>Email Address: </label>
           <input
             name="emailAddress"
+            placeholder="jdoe@ucvts.org"
             onChange={(e) => setEmail(e.target.value)}
             required
             max={50}
           ></input>
         </div>
-        <div>
+        <div className="account-form-input">
           <label>Password: </label>
           <input
             name="password"

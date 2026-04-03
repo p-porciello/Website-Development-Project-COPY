@@ -43,38 +43,41 @@ export function CreateAccount() {
     <div id="create-account" className="flex items-center justify-center">
       <form className="accountForm" onSubmit={handleSubmit}>
         
-        <h2 className="account-form-header">Create Account</h2>
-        <div>
+        <h2 className="account-form-header">Create a New Account</h2>
+        <div className="account-form-input">
           <label>Email Address: </label>
           <input
             name="emailAddress"
+            placeholder="jdoe@ucvts.org"
             onChange={(e) => setEmail(e.target.value)}
             required
             max={50}
           ></input>
         </div>
-        <div>
 
-          <label>First Name: </label>
+        <div className="account-form-input">
+          <label>First Name (or Nickname): </label>
           <input
             name="emailAddress"
+            placeholder="John"
             onChange={(e) => setFirstName(e.target.value)}
             required
             max={50}
           ></input>
         </div>
 
-        <div>
+        <div className="account-form-input">
           <label>Last Name: </label>
           <input
             name="lastName"
+            placeholder="Doe"
             onChange={(e) => setLastName(e.target.value)}
             required
             max={50}
           ></input>
         </div>
 
-        <div>
+        <div className="account-form-input">
           <label>Password: </label>
           <input
             name="password"

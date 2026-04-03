@@ -13,7 +13,15 @@ export function Settings({user}: Props) {
 
   const navigate = useNavigate();
   const [colorMode, setMode] = useState<boolean>(user.darkMode || false)
-  const [buttonText, setButtonText] = useState<string>('Enable dark mode');
+  const [buttonText, setButtonText] = useState<string>(defaultButtonText());
+
+  function defaultButtonText(): string {
+    if (user.darkMode) {
+      return 'Enable light mode'
+    } else {
+      return 'Enable dark mode'
+    }
+  }
 
   async function handlePrefChange(newMode: boolean) {
     if (!user._id) return;
@@ -40,6 +48,7 @@ export function Settings({user}: Props) {
 
   function handleLogout() {
     sessionStorage.removeItem('User');
+    changeColorScheme(false);
     navigate('/');
   }
 

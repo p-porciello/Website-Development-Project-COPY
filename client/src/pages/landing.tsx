@@ -7,8 +7,14 @@ export function Landing() {
       <LandingNav/>
 
       <div id="landing-text-container">
-        <h2 id="landing-subtext">Welcome to</h2>
-        <h1 id="landing-header">UCVTS Lost & Found</h1>
+        <h2 className="landing-subtext" id="welcome-text"><i>Welcome to</i></h2>
+        <h1 id="landing-header">UCVTS<br></br>Lost & Found</h1>
+        <p className="landing-subtext" id="small-text">A website designed & built by UCVTS students<br></br>for UCVTS students.</p>
+      </div>
+
+      <div id="landing-buttons-container">
+        <button className="welcome-button"><b>Login</b><i className="fa-solid fa-arrow-right"></i></button>
+        <button className="welcome-button"><b>Sign Up</b><i className="fa-solid fa-arrow-right"></i></button>
       </div>
 
       <div style={{bottom:'0px', position:'fixed', width:'100%'}}>
