@@ -9,7 +9,7 @@ export function changeColorScheme(darkMode: boolean) {
       root.style.setProperty('--tags-color', "#1b2170")
     } else {
       root.style.setProperty('--text-color', "#020114");
-      root.style.setProperty('--primary', "#001448");
+      root.style.setProperty('--primary', "#130B5C");
       root.style.setProperty('--secondary', "#7e87ff");
       root.style.setProperty('--accent', "#5058de");
       root.style.setProperty('--light-bg', '#fcfdff');
