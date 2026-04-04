@@ -5,12 +5,13 @@ import { useState, useEffect } from 'react';
 import { HomepageCard } from '@/components/item-cards/HomepageCard';
 import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import { MasonryLayout } from '@/components/MasonryLayout';
 import type { LostItem, User } from '../types';
 
 export function Home() {
   const [items, setItems] = useState<LostItem[]>([]);
   const [user, setUser] = useState<Partial<User>>({});
-  const [displayNum, setDisplayNum] = useState<number>(Math.floor(window.innerWidth/325));
+  const [displayNum, setDisplayNum] = useState<number>(Math.floor(window.innerWidth/305));
 
   const initialWidth = window.innerWidth;
 
@@ -28,7 +29,7 @@ export function Home() {
               new Date(d2.dateUploaded).getTime() -
               new Date(d1.dateUploaded).getTime(),
           ); //Orders items by posting date
-          const mostRecent = itemData.slice(0,Math.floor(window.innerWidth/325));
+          const mostRecent = itemData.slice(0,Math.floor(window.innerWidth/305));
           setItems(mostRecent);
           console.log(mostRecent);
 
@@ -51,7 +52,7 @@ export function Home() {
               new Date(d2.dateUploaded).getTime() -
               new Date(d1.dateUploaded).getTime(),
           ); //Orders items by posting date
-          const mostRecent = itemList.slice(0, Math.floor(window.innerWidth/325));
+          const mostRecent = itemList.slice(0, Math.floor(window.innerWidth/305));
           setItems(mostRecent);
         }
 
@@ -78,19 +79,20 @@ export function Home() {
 
   return (
     <>
-      <header>
+      <header className="image-header">
         <h1>Hi, {user.firstName}!</h1>
       </header>
-      <div className="homepage-header">
-        <h2>
+      
+      <h2 className="homepage-header">
           Recently Lost
-        </h2>
-      </div>
-        <div className="homepageRecentlyLost">
+      </h2>
+
+      <MasonryLayout>
           {items.map((item, index) => {
             return <HomepageCard item={item} key={index}/>;
           })}
-        </div>
+      </MasonryLayout>
+
       <div id="see-all-container">
         <Link to={'/lost-and-found'} id="seeAllButton">
           <button className="transparent-button" id="see-all">See all <i className="fas fa-chevron-right"></i></button>

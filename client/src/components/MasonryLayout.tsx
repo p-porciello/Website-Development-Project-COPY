@@ -7,7 +7,7 @@ type masonryProps = {
 
 export function MasonryLayout({ children }: masonryProps) {
     return (
-        <ResponsiveMasonry
+        <ResponsiveMasonry style={{paddingLeft: "1em", paddingRight: "1em"}}
             columnsCountBreakPoints={{300: 1, 
                                     475: 2,
                                     900: 3,

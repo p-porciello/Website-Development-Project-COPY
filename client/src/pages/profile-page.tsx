@@ -4,6 +4,7 @@ import { getAllItems, updateUser } from '@/api';
 import { jwtDecode } from 'jwt-decode';
 import type { LostItem, User } from '@/types';
 import { generateUploadDropzone } from '@uploadthing/react';
+import { MasonryLayout } from '@/components/MasonryLayout';
 
 
 
@@ -63,34 +64,56 @@ export function Profile() {
 
   return (
     <>
-      <h1>User Profile Page</h1>
-      <body>
-      <div style={{ textAlign: 'left', padding: '10px', width: '50%', float: 'left' }}>
-        <img src={user.profileImageName} alt="Profile Image"
-          style={{ height: '150px', width: '150px', borderRadius: '50%', border: '2px solid #001524', objectFit: 'cover' }}
-          />
-       
+      <h1 className="image-header"></h1>
+      
+      <div id="user-info-container">
+        <img src={user.profileImageName} alt="Profile Image" id="profile-img"/>
+
+        <div id="user-text-info">
+          <h2>
+            {user.firstName} {user.lastName}
+          </h2>
+          <p><i className="fa-solid fa-location-dot"></i> {user.school} • {user.grade}</p>
+        </div>
       </div>
 
-      <div style={{ textAlign: 'left', padding: '10px', width: '50%', float: 'right' }}>
-        <h2>
-          {user.firstName} {user.lastName}
-        </h2>
-        <p>{user.email}</p>
-        <p>{user.school}</p>
-        <p>{user.grade}</p>
-        <p>{user.bio}</p>
+      <div id="profile-details">
+        <div className="details-box" id="about-box">
+          <h3>About {user.firstName}</h3>
+          <p>{user.bio || "Paige is a UCVTS Lost & Found user."}</p>
+        </div>
+
+        <div className="details-box" id="stats-box">
+          <div id="stats-nums">
+            <h3>##</h3>
+            <h3>##</h3>
+            <h3>##</h3>
+          </div>
+
+          <div id="stats-text">
+            <p>Item<br></br>Reports</p>
+            <p>Reports Leading<br></br>to a Claim</p>
+            <p>Items<br></br>Claimed</p>
+          </div>
+        </div>
       </div>
 
-      <h3 style = {{textAlign: 'center'}}>Your Reported Items</h3>
-      <div className="homepageRecentlyLost">
+      <h2 className="homepage-header">Report Statuses</h2>
+      <MasonryLayout>
         {postedItems.map((item) => {
           return <HomepageCard item={item} />;
         })}
-      </div>
+      </MasonryLayout>
+     
+
+
+
+
+
+     {/*
      <h1 style={{padding:'2%', marginTop:'2%', marginBottom:'2%'}}>User Settings</h1>
       <div className="profileImage" style={{width: '50%', float: 'left' }}>
-        <form onSubmit={handleProfileUpdate}>
+      <form onSubmit={handleProfileUpdate}>
            {
             image ? (
                     <div className="imgPreview">
@@ -114,7 +137,7 @@ export function Profile() {
           </button>
         </form>
       </div>
-      </body>
+      */}
     </>
   );
 }
