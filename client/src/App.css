@@ -948,10 +948,13 @@ button.settings-button:hover {
 }
 
 #profile-img {
-  border-radius: 100%;
-  width: 15%;
+  border-radius: 50%;
   border-width: 5px;
-  border-color: gray;
+  width: 15%;
+  border-color: var(--light-bg);
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+
 }
 
 #user-text-info {
@@ -967,10 +970,14 @@ button.settings-button:hover {
 }
 
 #user-info-container {
-  background-color: blue;
+  background-color: var(--light-bg);
   display: flex;
   border-radius: 20px;
   box-shadow: 0px 4px 4px gray;
+  width: 60%;
+  position: absolute;
+  top: 25%;
+  overflow: visible;
 }
 
 #profile-details {
@@ -980,6 +987,7 @@ button.settings-button:hover {
   justify-content: center;
   gap: 1em;
   height: 45vh;
+  margin-top: 13%;
 }
 
 .details-box {
@@ -987,7 +995,6 @@ button.settings-button:hover {
   color: var(--light-bg);
   border-radius: 10px;
   width: 50%;
-  height: 100%;
   padding: 0.75em;
   padding-left: 1.5em;
   padding-right: 1.5em;
