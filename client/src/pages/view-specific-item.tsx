@@ -100,50 +100,35 @@ export function ViewItem() {
   return (
     <div id="view-specific-item">
     {/*console.log(`item.inquiries: ${item.inquiries}\nitemInquiries: ${itemInquiries}`)*/}
-        <h1>{item.itemName}</h1>
         <div className="vsi-container">
           <img id="vsi-image" src={item.imgFileName}/>
+          
           <div id="textInfo">
-            <div className="vsi-info-box">
-              <h3><b>Date Uploaded:</b> {item.dateUploaded?.substring(4, 15)}</h3>
-            </div>
-            <div className="vsi-info-box description">
+              <h1 className="no-bg">{item.itemName}</h1>
+              <h3><i className="fas fa-calendar"></i> <b>Date Uploaded:</b> {item.dateUploaded?.substring(4, 15)}</h3>
+              <h3><i className="fas fa-map-marker-alt"></i> <b>Found At:</b> {item.schoolFoundIn}</h3>
+              <h3><i className="fas fa-user-circle"></i> <b>Found By:</b> {`${receiver.firstName} ${receiver.lastName}`}</h3>
               <h3><b>Description:</b></h3>
               <p>{item.description}</p>
-            </div>
-            <div className="vsi-info-box">
-              <h3><b>Found At:</b> {item.schoolFoundIn}</h3>
-            </div>
-            <div className="vsi-info-box">
-              <h3><b>Found By:</b> {`${receiver.firstName} ${receiver.lastName}`}</h3>
-            </div>
-            
-            <div className="tagsContainer">
-              {tags.map((tag, index) => {
-                  if (tag && tag !== "N/A") {
-                    return <div className="tag" key={index}>{tag}</div>
-                  }
-              })}
-            </div>
+
+              {(item.claimedBy) ? 
+              (
+              <div className="vsi-misc">
+              <h2 id="already-claimed"><i><b>This item has already been claimed.</b></i></h2>
+              </div>)
+              : 
+              (<div className="buttonContainer">
+              <button aria-label="Claims an item" onClick={(e) => {
+                e.preventDefault();
+                SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
+                handleClaim();
+              }}>Claim</button></div>)}
           </div>
       </div>
 
-        {(item.claimedBy) ? 
-        (
-        <div className="vsi-misc">
-        <h2 id="already-claimed"><i><b>This item has already been claimed.</b></i></h2>
-        </div>)
-        : 
-        (<div className="buttonContainer">
-        <button className="wide-button vsi-button" aria-label="Claims an item" onClick={(e) => {
-          e.preventDefault();
-          SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
-          handleClaim();
-        }}>Claim this Item</button></div>)}
-
-      <div className="vsi-misc">
-        <h2>Ask for More Information</h2>
-        <p>All additional information you ask from this item's original poster can be found below.  This information will only be visible to you and the poster.</p>
+      <div id="inquiries-header" className="inverted-text-color">
+        <h2 className="no-bg inverted-text-color">Ask for More Information</h2>
+        <p><i>All additional information you ask from this item's original poster can be found below.  This information will only be visible to you and the poster.</i></p>
       </div>
 
       <div className="inquiriesContainer">
@@ -154,11 +139,12 @@ export function ViewItem() {
           if (user._id === inquiry.inquirerId || user._id === inquiry.receiverId) {
             return (
               <div className="inquiry" key={index}>
-                <p><b>{inquiry.inquirerName}</b> <i>{inquiry.dateSent.substring(4)}</i></p>
-                <p>to: {inquiry.receiverName}</p>
+                <p><b>{inquiry.inquirerName}</b></p> 
+                <p><i>{inquiry.dateSent.substring(4)}</i></p>
+                {/*<p>To: {inquiry.receiverName}</p>*/}
                 <p>{inquiry.content}</p>
 
-                <button className="transparent-button" aria-label="Allows a user to write a reply to an inquiry" onClick={() => {
+                <button className="transparent-button" id="reply-button" aria-label="Allows a user to write a reply to an inquiry" onClick={() => {
                   setTo(inquiry.inquirerId);
                   setToName(inquiry.inquirerName);
                   setPlaceholder(`Write your reply to ${inquiry.inquirerName} here.`);
@@ -174,13 +160,14 @@ export function ViewItem() {
               <form onSubmit={(e) => {
                 e.preventDefault();
                 updateInquiries()}}>
-                <textarea
+                <h2 className="no-bg inverted-text-color">Write an Inquiry</h2>
+                <textarea id="vsi-textarea"
                   name="inquiryForm"
                   placeholder={placeholderText}
                   onChange={(e) => setBody(e.target.value)}
                   maxLength={500}
                 />
-                <button aria-label="Submits an inquiry" type="submit">{buttonText}</button>
+                <button className="white-outline-button" id="submit-arrow-button" aria-label="Submits an inquiry" type="submit">{buttonText}</button>
               </form>
             </div>)
           : (<div className="buttonContainer">

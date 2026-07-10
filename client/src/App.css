@@ -161,10 +161,12 @@ button.landing-button:hover {
 
 #vsi-image {
   border-color: var(--light-bg);
-  border-width: 3px;
+  border-width: 5px;
   grid-area: vsi-img;
   width: 100%;
   height: auto;
+
+  box-shadow: 0px 0px 5px black;
 }
 
 #textInfo {
@@ -174,15 +176,44 @@ button.landing-button:hover {
   flex-direction: column;
   height: 100%;
   width: 100%;
-  padding: 2em;
   grid-area: vsi-text;
-  justify-content: space-evenly;
+  align-items: flex-start;
+  box-shadow: 0px 0px 5px black;
+  gap: 1em;
+  padding: 2em;
+
+  text-align: left;
+}
+
+#textInfo h3, p {
+  font-size: 18px;
+}
+
+#textInfo h1 {
+  padding: 0;
+  margin-bottom: 0.25em;
+  font-size: 48px;
+}
+
+#textInfo button {
+  font-weight: bold;
 }
 
 .vsi-info-box {
   display: flex;
   align-items: flex-start;
   font-size: 1.5em;
+}
+
+#inquiries-header {
+  text-align: left;
+  padding-left: 3em;
+  padding-right: 3em;
+  margin-bottom: 1em;
+}
+
+.inverted-text-color {
+  color: var(--light-bg);
 }
 
 .description {
@@ -222,7 +253,8 @@ button.landing-button:hover {
 .vsi-container {
   padding-left: 3em;
   padding-right: 3em;
-  
+  padding-bottom: 2em;
+  padding-top: 5em;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
@@ -232,7 +264,8 @@ button.landing-button:hover {
   margin-bottom: 1em;
 
   grid-template-areas:
-    "vsi-img vsi-text"
+    "vsi-img vsi-text";
+  background-color: var(--light-bg);
 }
 
 @media only screen and (max-width: 768px) {
@@ -971,6 +1004,14 @@ button.settings-button:hover {
   align-items: flex-start;
 }
 
+#reply-button {
+  padding: 0.3em;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+
+  align-self: flex-end;
+}
+
 .wide-button {
   width: 100%;
 }
@@ -984,14 +1025,31 @@ button.settings-button:hover {
 }
 
 .submit-inquiries-container {
-  background-color: var(--light-bg);
   margin-left: 3em;
   margin-right: 3em;
   padding: 1em;
+
   border-radius: 10px;
+  border-width: 1px;
+  border-color: var(--light-bg);
+  color: var(--light-bg);
+
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
+  position: relative;
+}
+
+
+#vsi-textarea {
+  outline-color: var(--light-bg);
+  outline-width: 1px;
+  height: 25vh;
+}
+
+.white-outline-button {
+  border-color: var(--light-bg);
 }
 
 .buttonContainer {
