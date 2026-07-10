@@ -108,7 +108,7 @@ export function ViewItem() {
               <h3><i className="fas fa-calendar"></i> <b>Date Uploaded:</b> {item.dateUploaded?.substring(4, 15)}</h3>
               <h3><i className="fas fa-map-marker-alt"></i> <b>Found At:</b> {item.schoolFoundIn}</h3>
               <h3><i className="fas fa-user-circle"></i> <b>Found By:</b> {`${receiver.firstName} ${receiver.lastName}`}</h3>
-              <h3><b>Description:</b></h3>
+              <h3><i className="fa-solid fa-circle-info"></i> <b>Description:</b></h3>
               <p>{item.description}</p>
 
               {(item.claimedBy) ? 

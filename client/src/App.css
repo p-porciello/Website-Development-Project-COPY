@@ -199,6 +199,11 @@ button.landing-button:hover {
   font-weight: bold;
 }
 
+#textInfo i {
+  color: var(--text-color);
+  font-size: 20px;
+}
+
 .vsi-info-box {
   display: flex;
   align-items: flex-start;
