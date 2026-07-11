@@ -152,7 +152,7 @@ export function ViewItem() {
                 }}>Reply</button>
               </div>
             );
-        }})): <div className="vsi-misc no-inquiries-ms"><p>You haven't written any inquiries about this item.</p></div>}
+        }})): <p></p>}
       </div>
         {
           (toId !== '') ? 

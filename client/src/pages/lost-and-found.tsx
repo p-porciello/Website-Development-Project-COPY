@@ -3,12 +3,18 @@ import { useState, useEffect } from 'react';
 import type { LostItem } from '../types';
 import { CatalogueCard } from '@/components/item-cards/CatalogueCard';
 import { MasonryLayout } from '@/components/MasonryLayout';
+import { Checkbox } from '@/components/checkbox';
+import { itemTypes, itemColors, itemBrands } from '@/components/dropdownData';
 
 export function LostAndFound() {
   const URL = 'http://localhost:8080';
 
   const [searchTerm, setSearchTerm] = useState('');
   const [items, setItems] = useState<LostItem[]>([]);
+  const [colorMenuVisibility, setColorVisibility] = useState(false)
+  const [typeMenuVisibility, setTypeVisibility] = useState(false)
+  const [brandMenuVisibility, setBrandVisibility] = useState(false)
+
 
   useEffect(() => {
 
@@ -57,33 +63,47 @@ export function LostAndFound() {
         <div id="filter-bar">
           <h2 className="no-bg">Filters</h2>
           <div className="filter-menu">
-            <button className="filter-header">Color</button>
-            <div id="colors-menu" className="ops-menu">
-              <label><input type="checkbox" className="filter-option"/> Red</label>
-              <label><input type="checkbox" className="filter-option"/> Orange</label>
-              <label><input type="checkbox" className="filter-option"/> Yellow</label>
-              <label><input type="checkbox" className="filter-option"/> Green</label>
-              <label><input type="checkbox" className="filter-option"/> Blue</label>
-              <label><input type="checkbox" className="filter-option"/> Purple</label>
-              <label><input type="checkbox" className="filter-option"/> Black</label>
-              <label><input type="checkbox" className="filter-option"/> White</label>
-              <label><input type="checkbox" className="filter-option"/> Gray</label>
-              <label><input type="checkbox" className="filter-option"/> Beige/Tan</label>
-            </div>
+            <button className="filter-header" onClick={() => setColorVisibility(!colorMenuVisibility)}>Color {colorMenuVisibility ? <i className="fa-solid fa-angle-down"></i> : <i className="fa-solid fa-angle-right"></i>}</button>
+            {colorMenuVisibility ? 
+              <div id="colors-menu" className="ops-menu">
+                {itemColors.map((colorOption, index) => {
+                  return (
+                    <Checkbox label={colorOption} key={index}/>
+                  )
+                })}
+              </div> 
+              : <p></p>
+            }
           </div>
+
           <div className="filter-menu">
-            <button className="filter-header" >Type</button>
+            <button className="filter-header" onClick={() => setTypeVisibility(!typeMenuVisibility)}>Type {typeMenuVisibility ? <i className="fa-solid fa-angle-down"></i> : <i className="fa-solid fa-angle-right"></i>}</button>
+            {typeMenuVisibility ? 
               <div id="types-menu" className="ops-menu">
-                <label><input type="checkbox" className="filter-option"/> Water bottle</label>
-                <label><input type="checkbox" className="filter-option"/> Clothing</label>
-                <label><input type="checkbox" className="filter-option"/> Technology</label>
-                <label><input type="checkbox" className="filter-option"/> Accessory</label>
-                <label><input type="checkbox" className="filter-option"/> Pencil/Pen</label>
-            </div>
+                {itemTypes.map((typeOption, index) => {
+                  return (
+                    <Checkbox label={typeOption} key={index}/>
+                  )
+                })}
+              </div>
+              : <p></p>
+            }
           </div>
+
           <div className="filter-menu">
-            <button className="filter-header">Brand</button>
+            <button className="filter-header" onClick={() => setBrandVisibility(!brandMenuVisibility)}>Brand {brandMenuVisibility ? <i className="fa-solid fa-angle-down"></i> : <i className="fa-solid fa-angle-right"></i>}</button>
+            {brandMenuVisibility ?
+              <div id="types-menu" className="ops-menu">
+                {itemBrands.map((brandOption, index) => {
+                  return (
+                    <Checkbox label={brandOption} key={index}/>
+                  )
+                })}
+            </div>
+            : <p></p>
+            }
           </div>
+
         </div>
 
         <div>
@@ -104,11 +124,13 @@ export function LostAndFound() {
               <p><b>Applied Filters: </b></p>
             </div>
           
-          <MasonryLayout>
-            {items.map((item, index) => {
-              return <CatalogueCard item={item} key={index}/>
-            })}
-          </MasonryLayout>
+          <div id="catalogue-layout">
+            <MasonryLayout>
+              {items.map((item, index) => {
+                return <CatalogueCard item={item} key={index}/>
+              })}
+            </MasonryLayout>
+          </div>
         </div>
 
       </div>

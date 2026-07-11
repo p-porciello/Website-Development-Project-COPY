@@ -408,19 +408,24 @@ button.vsi-button:hover {
   color: white;
 }
 
-button.navbar-button {
-  background-color: transparent;
+.navbar-button {
   color: white;
+  border-radius: 50px;
+  margin-top: 7px;
   border-color: transparent;
+  font-weight: bold;
 }
-button.navbar-button i {
+.navbar-button i {
   color: white;
 }
 
-button.navbar-button:hover {
-  color: rgb(193, 230, 255);
-  text-decoration: underline;
-  text-underline-offset: 8px;
+.navbar-button:hover, .navbar-button:focus {
+  color: var(--primary);
+  background-color: white;
+}
+
+.navbar-button:hover i, .navbar-button:focus i {
+  color: var(--primary);
 }
 
 button.transparent-button {
@@ -725,6 +730,12 @@ button.settings-button:hover {
   background-color: var(--primary);
 }
 
+.check-selector {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 #search-container {
   text-align: left;
   border-bottom-width: 2px;
@@ -755,11 +766,13 @@ button.settings-button:hover {
 #catalogue-content {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  padding-left: 1em;
-  padding-right: 1em;
 
   border-top-width: 2px;
   border-color: var(--text-color);
+}
+
+#catalogue-layout {
+  margin-top: 1em;
 }
 
 #filter-bar {
@@ -769,6 +782,11 @@ button.settings-button:hover {
   border-color: var(--text-color);
 
   padding-top: 10vh;
+}
+
+#filter-bar h2 {
+  padding-left: 15px;
+  margin-top: 10px;
 }
 
 .ops-menu {
@@ -781,6 +799,14 @@ button.settings-button:hover {
   border-color: var(--text-color);
 
   padding: 10px;
+  padding-left: 15px;
+}
+
+.filter-menu button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .filter-header {
@@ -795,6 +821,11 @@ button.settings-button:hover {
 
 .filter-header:focus {
   color: var(--text-color)
+}
+
+.ops-menu {
+  padding-left: 7px;
+  padding-top: 4px;
 }
 
 .tag {

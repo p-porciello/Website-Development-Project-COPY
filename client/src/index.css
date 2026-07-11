@@ -137,6 +137,53 @@ button:focus-visible {
   }
 }
 
+input[type="checkbox"] {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: var(--text-color);
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  height: 20px;
+  width: 20px;
+  border-radius: 3px;
+
+  border-color: var(--text-color);
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+
+  background-color: var(--text-color);
+  background-image: url(assets\checkmark.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  rotate: -360deg;
+  scale: 0;
+  opacity: 0;
+  transition: 200ms ease;
+  
+}
+
+input[type="checkbox"]:checked::before {
+  rotate: 0deg;
+  scale: 1;
+  opacity: 1;
+}
+
+
+
+
 html,
 body {
   width: 100%;
