@@ -221,10 +221,6 @@ button.landing-button:hover {
   color: var(--light-bg);
 }
 
-.description {
-  flex-direction: column;
-}
-
 .homepage-header {
   text-align: left;
   margin-top: 1em;
@@ -312,9 +308,6 @@ button.landing-button:hover {
   height: auto;
 }
 
-.itemImage {
-  position: relative;
-}
 
 .card {
   padding: 2em;
@@ -840,6 +833,7 @@ button.settings-button:hover {
 
 }
 
+
 .tagsContainer {
   display: flex;
   flex-wrap: wrap;
@@ -850,11 +844,20 @@ button.settings-button:hover {
   justify-content: center;
 }
 
+.tags-select {
+  border-radius: 100px;
+  font-size: 18px;
+  width: 100%;
+  padding-left: 0.75em;
+}
+
 .tagsContent {
-  grid-area: tagsSelect;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
   gap: 0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.25em;
 }
 
 .reportItem {
@@ -867,7 +870,6 @@ button.settings-button:hover {
   display: flex;
   justify-content: center;
   gap: 0.5em;
-  flex-wrap: wrap;
 }
 
 .itemInfo {
@@ -881,82 +883,54 @@ button.settings-button:hover {
   height: 50vh;
 }
 
-.itemImage {
-  grid-area: image;
-}
-
-.itemName {
-  grid-area: name;
-}
-
-.description {
-  grid-area: description;
-}
-
-.generateText {
-  grid-area: generateText;
-}
-
-.buildingFound {
-  grid-area: foundIn;
-}
-
-.currentLocation {
-  grid-area: currentLocation;
-}
-
-.tags {
-  grid-area: tags;
-}
-
-.reportItem {
-  grid-area: submit;
-}
-
 .upload-dz {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
+  border-style: dashed;
+  border-width: 1.5px;
+  padding: 0.25em;
 }
 
 .lostItemForm {
   background-color: var(--light-bg);
   border-radius: 10px;
+  justify-content: center;
   width: 100%;
-  height: 80%;
-  padding: 3em;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 3fr 2fr 4fr 2fr;
-  gap: 1em;
-  grid-template-areas:
-    'image name'
-    'image tagsSelect'
-    'image locationInfo'
-    'image description'
-    'submit submit';
+  padding: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  gap: 10px;
+
+  display: flex;
 }
 
-@media only screen and (max-width: 768px) {
-  .lostItemForm {
-    background-color: var(--light-bg);
-    border-radius: 10px;
-    width: 100%;
-    height: 80%;
-    padding: 3em;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 3fr 1fr 1fr 1fr 1fr;
-    gap: 1em;
-    grid-template-areas:
-      'image'
-      'name'
-      'tagsSelect'
-      'locationInfo'
-      'description'
-      'submit';
-  }
+#submission-form-text-info label {
+  text-decoration: underline;
+  text-underline-offset: 9px;
+  text-decoration-thickness: 2px;
+  text-align: start;
+  margin-bottom: 1em;
+}
+
+
+
+#submission-form-text-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.itemImage {
+  position: relative;
+  width: 50%;
+}
+
+.description {
+  flex-direction: column;
+  height: 30%;
 }
 
 #dropZone {

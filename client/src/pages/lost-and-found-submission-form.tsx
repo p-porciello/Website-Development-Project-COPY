@@ -91,104 +91,106 @@ export function SubmitLostItem() {
             )}
         </div>
 
-        <div className="itemName">
-          <label>Item Name: </label>
-          <Input
-            name="itemName"
-            onChange={(e) => {
-              setName(e.target.value);
-              console.log(lostItemName);
-            }}
-            maxLength={50}
-            required
-          />
-        </div>
+        <div id="submission-form-text-info">
 
-        <div className="description">
-          <textarea
-            name="description"
-            placeholder="Write a description"
-            onChange={(e) => setDescription(e.target.value)}
-            maxLength={250}
-            required
-          />
-        </div>
-
-        <div className="locationInfo">
-          <div className="buildingFound">
-            <label>Building Item was Found In: </label>
+          <div className="itemName">
+            <label>Item Name: </label>
             <Input
-              name="schoolFoundIn"
-              onChange={(e) => setSchoolIn(e.target.value)}
+              name="itemName"
+              onChange={(e) => {
+                setName(e.target.value);
+                console.log(lostItemName);
+              }}
+              maxLength={50}
               required
             />
           </div>
 
-          <div className="currentLocation">
-            <label>Current Building Item is In: </label>
-            <Input
-              name="currentLocation"
-              onChange={(e) => setSchoolFound(e.target.value)}
+          <div className="tagsContent">
+
+            <div>
+              <select aria-label="Select a type that best describes this item"
+                name="itemType"
+                className="tags-select"
+                value={type}
+                onChange={(e) => setItemType(e.target.value)}>
+                  <option value="" selected disabled hidden>Item Type</option>
+                  {itemTypes.map((typeOption, index) => {
+                    return (
+                      <option value={typeOption} key={index}>{typeOption}</option>
+                    )
+                  })}
+              </select>
+            </div>
+
+            <div>
+              <select aria-label="Select a color that best describes this item's appearance"
+                name="itemColor"
+                className="tags-select"
+                value={itemColor}
+                onChange={(e) => setColor(e.target.value)}>
+                  <option value="" selected disabled hidden>Color</option>
+                  {itemColors.map((colorOption, index) => {
+                    return (
+                      <option value={colorOption} key={index}>{colorOption}</option>
+                    )
+                  })}
+              </select>          
+            </div>
+
+            <div>
+              <select aria-label="If this item is from a recognizable brand, select that brand below"
+                name="itemBrand"
+                className="tags-select"
+                value={itemBrand}
+                onChange={(e) => setBrand(e.target.value)}>
+                  <option value="" selected disabled hidden>Brand</option>
+                  {itemBrands.map((brandOption, index) => {
+                    return (
+                      <option value={brandOption} key={index}>{brandOption}</option>
+                    )
+                  })}
+              </select>   
+            </div>
+
+          </div>
+
+          <div className="locationInfo">
+            <div className="buildingFound">
+              <label>Building Found At: </label>
+              <Input
+                name="schoolFoundIn"
+                onChange={(e) => setSchoolIn(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="currentLocation">
+              <label>Current Location: </label>
+              <Input
+                name="currentLocation"
+                onChange={(e) => setSchoolFound(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="description">
+            <textarea
+              name="description"
+              placeholder="Be descriptive!"
+              onChange={(e) => setDescription(e.target.value)}
+              maxLength={250}
               required
             />
           </div>
-        </div>
+          
 
-        <div className="tagsContent">
-
-          <div>
-            <label>Item Type: </label>
-            <select aria-label="Select a type that best describes this item"
-              name="itemType"
-              className="tags-select"
-              value={type}
-              onChange={(e) => setItemType(e.target.value)}>
-                <option value="" selected disabled hidden></option>
-                {itemTypes.map((typeOption, index) => {
-                  return (
-                    <option value={typeOption} key={index}>{typeOption}</option>
-                  )
-                })}
-            </select>
-          </div>
-
-          <div>
-            <label>Color: </label>
-            <select aria-label="Select a color that best describes this item's appearance"
-              name="itemColor"
-              className="tags-select"
-              value={itemColor}
-              onChange={(e) => setColor(e.target.value)}>
-                <option value="" selected disabled hidden></option>
-                {itemColors.map((colorOption, index) => {
-                  return (
-                    <option value={colorOption} key={index}>{colorOption}</option>
-                  )
-                })}
-            </select>          
-          </div>
-
-          <div>
-            <label>Brand: </label>
-            <select aria-label="If this item is from a recognizable brand, select that brand below"
-              name="itemBrand"
-              className="tags-select"
-              value={itemBrand}
-              onChange={(e) => setBrand(e.target.value)}>
-                <option value="" selected disabled hidden></option>
-                {itemBrands.map((brandOption, index) => {
-                  return (
-                    <option value={brandOption} key={index}>{brandOption}</option>
-                  )
-                })}
-            </select>   
-          </div>
+          <button type="submit" className="reportItem">
+            Report Item
+          </button>
 
         </div>
-
-        <button type="submit" className="reportItem">
-          Report Item
-        </button>
 
       </form>
     </>
