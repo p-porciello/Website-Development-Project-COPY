@@ -6,6 +6,7 @@ import { generateUploadDropzone } from '@uploadthing/react';
 import { useNavigate } from 'react-router-dom';
 import type { User, Inquiry } from '../types';
 import { itemTypes, itemColors, itemBrands } from '@/components/dropdownData';
+import { Checkbox } from '@/components/checkbox';
 
 const UploadDropzone = generateUploadDropzone({
   url: 'http://localhost:8080/api/uploadthing',
@@ -94,7 +95,7 @@ export function SubmitLostItem() {
         <div id="submission-form-text-info">
 
           <div className="itemName">
-            <label>Item Name: </label>
+            <h2 className="no-bg">Item Name: </h2>
             <Input
               name="itemName"
               onChange={(e) => {
@@ -106,9 +107,12 @@ export function SubmitLostItem() {
             />
           </div>
 
+          <h2 className="no-bg" id="submission-tags-label">Tags</h2>
+          <p><i>Adding tags based on physical properties of this item may make it easier for someone searching for it to find it on the main catalogue page.</i></p>
+
           <div className="tagsContent">
 
-            <div>
+            <div className="tags-select-container">
               <select aria-label="Select a type that best describes this item"
                 name="itemType"
                 className="tags-select"
@@ -123,7 +127,7 @@ export function SubmitLostItem() {
               </select>
             </div>
 
-            <div>
+            <div className="tags-select-container">
               <select aria-label="Select a color that best describes this item's appearance"
                 name="itemColor"
                 className="tags-select"
@@ -138,7 +142,7 @@ export function SubmitLostItem() {
               </select>          
             </div>
 
-            <div>
+            <div className="tags-select-container">
               <select aria-label="If this item is from a recognizable brand, select that brand below"
                 name="itemBrand"
                 className="tags-select"
@@ -156,8 +160,8 @@ export function SubmitLostItem() {
           </div>
 
           <div className="locationInfo">
-            <div className="buildingFound">
-              <label>Building Found At: </label>
+            <div className="location-info-box">
+              <h2 className="no-bg">Building Found At: </h2>
               <Input
                 name="schoolFoundIn"
                 onChange={(e) => setSchoolIn(e.target.value)}
@@ -165,8 +169,8 @@ export function SubmitLostItem() {
               />
             </div>
 
-            <div className="currentLocation">
-              <label>Current Location: </label>
+            <div className="location-info-box">
+              <h2 className="no-bg">Current Location: </h2>
               <Input
                 name="currentLocation"
                 onChange={(e) => setSchoolFound(e.target.value)}
@@ -185,6 +189,10 @@ export function SubmitLostItem() {
             />
           </div>
           
+          <div id="valuable-checkbox-container">
+            <Checkbox 
+            label="Valuable?"/>
+          </div>
 
           <button type="submit" className="reportItem">
             Report Item

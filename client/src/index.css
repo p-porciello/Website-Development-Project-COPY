@@ -80,6 +80,8 @@ h1 {
   text-decoration-thickness: 2px;
 }
 
+
+
 h2 {
   font-weight:bold;
   font-size: 2.75em;
@@ -94,7 +96,7 @@ select {
 }
 
 label {
-  font-size: 1.25em;
+  font-size: 1.5em;
 }
 
 button {

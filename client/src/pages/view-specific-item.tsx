@@ -104,13 +104,14 @@ export function ViewItem() {
           <img id="vsi-image" src={item.imgFileName}/>
           
           <div id="textInfo">
-              <h1 className="no-bg">{item.itemName}</h1>
-              <h3><i className="fas fa-calendar"></i> <b>Date Uploaded:</b> {item.dateUploaded?.substring(4, 15)}</h3>
-              <h3><i className="fas fa-map-marker-alt"></i> <b>Found At:</b> {item.schoolFoundIn}</h3>
-              <h3><i className="fas fa-user-circle"></i> <b>Found By:</b> {`${receiver.firstName} ${receiver.lastName}`}</h3>
-              <h3><i className="fa-solid fa-circle-info"></i> <b>Description:</b></h3>
-              <p>{item.description}</p>
-
+              <div>
+                <h1 className="no-bg">{item.itemName}</h1>
+                <h3><i className="fas fa-calendar"></i> <b>Date Uploaded:</b> {item.dateUploaded?.substring(4, 15)}</h3>
+                <h3><i className="fas fa-map-marker-alt"></i> <b>Found At:</b> {item.schoolFoundIn}</h3>
+                <h3><i className="fas fa-user-circle"></i> <b>Found By:</b> {`${receiver.firstName} ${receiver.lastName}`}</h3>
+                <h3><i className="fa-solid fa-circle-info"></i> <b>Description:</b></h3>
+                <p>{item.description}</p>
+              </div>
               {(item.claimedBy) ? 
               (
               <div className="vsi-misc">
@@ -118,7 +119,7 @@ export function ViewItem() {
               </div>)
               : 
               (<div className="buttonContainer">
-              <button aria-label="Claims an item" onClick={(e) => {
+              <button id="vsi-claim" aria-label="Claims an item" onClick={(e) => {
                 e.preventDefault();
                 SendClaimEmail(user.email, user.firstName, item.itemName, item.currentLocation);
                 handleClaim();

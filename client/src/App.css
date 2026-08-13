@@ -162,11 +162,16 @@ button.landing-button:hover {
 #vsi-image {
   border-color: var(--light-bg);
   border-width: 5px;
-  grid-area: vsi-img;
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
 
   box-shadow: 0px 0px 5px black;
+}
+
+#vsi-claim {
+  width: 100%;
+  height: 100%;
+  font-size: 50px;
 }
 
 #textInfo {
@@ -178,9 +183,11 @@ button.landing-button:hover {
   width: 100%;
   grid-area: vsi-text;
   align-items: flex-start;
+  justify-content: space-between;
   box-shadow: 0px 0px 5px black;
   gap: 1em;
   padding: 2em;
+  
 
   text-align: left;
 }
@@ -192,7 +199,6 @@ button.landing-button:hover {
 #textInfo h1 {
   padding: 0;
   margin-bottom: 0.25em;
-  font-size: 48px;
 }
 
 #textInfo button {
@@ -860,6 +866,10 @@ button.settings-button:hover {
   margin-bottom: 0.25em;
 }
 
+.tags-select-container {
+  width: 100%;
+}
+
 .reportItem {
   font-weight: bold;
   font-size: 2.5em;
@@ -902,25 +912,35 @@ button.settings-button:hover {
   padding: 1.5em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  gap: 10px;
+  gap: 2em;
 
   display: flex;
 }
 
-#submission-form-text-info label {
-  text-decoration: underline;
-  text-underline-offset: 9px;
-  text-decoration-thickness: 2px;
-  text-align: start;
-  margin-bottom: 1em;
+#submission-form-text-info h2 {
+  font-size: 1.75em;
 }
 
-
+#submission-form-text-info p i {
+  font-size: 16px;
+}
 
 #submission-form-text-info {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  justify-content: center;
+  width: 50%;
+  text-align: left;
+  
+}
+
+.location-info-box {
+  width: 100%;
+}
+
+#valuable-checkbox-container {
+  margin-bottom: 1.5em;
 }
 
 .itemImage {
@@ -1063,8 +1083,9 @@ button.settings-button:hover {
 }
 
 .buttonContainer {
-  padding-left: 3em;
-  padding-right: 3em;
+  width: 100%;
+  height: 20%;
+  align-self: bottom;
 }
 
 #profile-img {
